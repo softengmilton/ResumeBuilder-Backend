@@ -3,9 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -21,11 +21,11 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::get('/home', \App\Livewire\Portal\Home\Index::class)->name('home');
+Route::get('/', \App\Livewire\Portal\Home\Index::class)->name('home');
 Route::get('/pricing', \App\Livewire\Portal\Pricing\Index::class)->name('pricing');
 Route::get('/resume', \App\Livewire\Portal\Resume\Index::class)->name('resume');
 
 
-
+Route::get('builder', \App\Livewire\Portal\Builder\Index::class)->name('builder');
 
 require __DIR__ . '/auth.php';

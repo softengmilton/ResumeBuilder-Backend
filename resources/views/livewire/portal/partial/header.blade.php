@@ -49,13 +49,21 @@
                     <div class="p-right-6"><a href="{{ route('pricing') }}" class="font-weight-500">Pricing</a></div>
 
                 </div>
-                <div class="flex flex-align-center"><a href="{{ route('login') }}" rel="noopener"
-                        data-amplitude-event="homepage - login" data-amplitude-prop-button_location="Navbar"
-                        class="_7d9Ew3rdopoMTEUs4G1Anw== b-xfF8e+JKV13HKT7rqnPg== nGpAi8-ak8xa9URpRfVrDQ== _4ml3hVKgGZdkB-2xJdppSA== sign-in">Sign
-                        in</a><a href="{{ route('register') }}" data-amplitude-event="homepage - sign up"
-                        data-amplitude-prop-button_location="Navbar"
-                        class="_7d9Ew3rdopoMTEUs4G1Anw== nh1o124RBbCY8z2D0sMLjg== nGpAi8-ak8xa9URpRfVrDQ== s6uaHA305IeoqI4xywTdvA== m-left-3 m-right-1">Get
-                        Started</a></div>
+                @if (Auth::check())
+                    <div class="flex flex-align-center"><a href="{{ route('dashboard') }}"
+                            data-amplitude-event="homepage - sign up" data-amplitude-prop-button_location="Navbar"
+                            class="_7d9Ew3rdopoMTEUs4G1Anw== nh1o124RBbCY8z2D0sMLjg== nGpAi8-ak8xa9URpRfVrDQ== s6uaHA305IeoqI4xywTdvA== m-left-3 m-right-1">Get
+                            dashboard</a></div>
+                @else
+                    <div class="flex flex-align-center"><a href="{{ route('login') }}" rel="noopener"
+                            data-amplitude-event="homepage - login" data-amplitude-prop-button_location="Navbar"
+                            class="_7d9Ew3rdopoMTEUs4G1Anw== b-xfF8e+JKV13HKT7rqnPg== nGpAi8-ak8xa9URpRfVrDQ== _4ml3hVKgGZdkB-2xJdppSA== sign-in">Sign
+                            in</a><a href="{{ route('register') }}" data-amplitude-event="homepage - sign up"
+                            data-amplitude-prop-button_location="Navbar"
+                            class="_7d9Ew3rdopoMTEUs4G1Anw== nh1o124RBbCY8z2D0sMLjg== nGpAi8-ak8xa9URpRfVrDQ== s6uaHA305IeoqI4xywTdvA== m-left-3 m-right-1">Get
+                            Started</a></div>
+                @endif
+
             </div>
         </nav>
     </header>
