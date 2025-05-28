@@ -1,63 +1,60 @@
 <div class="min-h-screen bg-gray-50">
     <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="/" class="text-2xl font-bold text-green-600 flex items-center">
-                <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                Enhancv
-            </a>
-            <div class="flex items-center space-x-3">
-                <button
-                    class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors text-sm font-medium">
-                    <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4">
-                        </path>
-                    </svg>
-                    Save & Exit
-                </button>
-                <button
-                    class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-sm font-medium flex items-center">
-                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>
-                    Download PDF
-                </button>
+    <div class="w-64 bg-[#052659] text-white h-[80rem] fixed flex flex-col justify-between">
+        <!-- Header -->
+        <div class="p-6">
+            <div class="flex items-center mb-6">
+                <div class="w-6 h-6 bg-gradient-to-tr from-pink-500 to-purple-600 rounded-md mr-2"></div>
+                <h1 class="text-lg font-bold text-purple-400">Resume Builder</h1>
+            </div>
+
+            <!-- Stepper Navigation -->
+            <ol class="space-y-6 text-sm font-medium">
+                @foreach ($steps as $stepNumber => $stepName)
+                    <li class="flex items-center">
+                        <a href="#" wire:click.prevent="goToStep({{ $stepNumber }})" class="flex items-center">
+                            <div
+                                class="w-6 h-6 rounded-full mr-3 flex items-center justify-center text-xs font-semibold
+                                @if ($currentStep == $stepNumber) bg-orange-500 text-white
+                                @elseif ($currentStep > $stepNumber) bg-white text-black
+                                @else border-2 border-white text-white @endif">
+                                {{ $stepNumber }}
+                            </div>
+                            <span
+                                class="@if ($currentStep == $stepNumber) text-white font-bold @else text-white @endif">
+                                {{ $stepName }}
+                            </span>
+                        </a>
+                    </li>
+                @endforeach
+            </ol>
+
+            <!-- Progress bar -->
+            <div class="mt-8">
+                <p class="text-xs font-semibold mb-1 text-white">RESUME COMPLETENESS:</p>
+                <div class="w-full bg-white bg-opacity-20 rounded-full h-2">
+                    <div class="bg-white h-2 rounded-full transition-all duration-300"
+                        style="width: {{ $resumeCompleteness }}%;"></div>
+                </div>
+                <p class="text-xs mt-1 text-white">{{ $resumeCompleteness }}%</p>
             </div>
         </div>
-    </header>
 
-    <main class="container mx-auto px-4 py-8">
+        <!-- Footer -->
+        <div class="p-4 text-xs text-white space-y-2">
+            <a href="#" class="text-green-400 hover:underline block">Terms & Conditions</a>
+            <a href="#" class="text-green-400 hover:underline block">Privacy Policy</a>
+            <a href="#" class="text-green-400 hover:underline block">Accessibility</a>
+            <a href="#" class="text-green-400 hover:underline block">Contact Us</a>
+            <p class="text-gray-400 mt-2">© 2025, Bold Limited. All rights reserved.</p>
+        </div>
+    </div>
+
+
+    <main class="container mx-auto px-4 py-8 ms-[15rem]">
         <div class="flex">
             <!-- Left Side - Stepper Form -->
             <div class="lg:w-1/2 bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-                <!-- Stepper Header -->
-                <div class="mb-12">
-                    <ol class="flex items-center w-full">
-                        @foreach ($steps as $stepNumber => $stepName)
-                            <li class="flex-1 mb-3">
-                                <div
-                                    class="flex items-center font-medium px-3 py-3 w-full rounded-md {{ $currentStep >= $stepNumber ? 'bg-indigo-50' : 'bg-gray-100' }}">
-                                    <span
-                                        class="w-6 h-6 {{ $currentStep >= $stepNumber ? 'bg-indigo-600 text-white' : 'bg-gray-300 text-gray-600' }} rounded-full flex justify-center items-center mr-2 text-xs lg:w-8 lg:h-8">
-                                        {{ str_pad($stepNumber, 2, '0', STR_PAD_LEFT) }}
-                                    </span>
-                                    <h4
-                                        class="text-sm {{ $currentStep >= $stepNumber ? 'text-indigo-600' : 'text-gray-500' }}">
-                                        {{ $stepName }}
-                                    </h4>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ol>
-                </div>
 
                 <!-- Step Content -->
                 <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm transition-all duration-300">
@@ -711,122 +708,9 @@
 
                     <!-- Selected Template Preview -->
                     <div class="border border-gray-200 rounded-lg overflow-hidden shadow-xs">
-                        <!-- Template Header -->
-                        <div class="bg-gray-800 text-white p-6">
-                            <h1 class="text-2xl font-bold tracking-tight">John Doe</h1>
-                            <p class="text-gray-300 font-medium">Software Engineer</p>
-                        </div>
+                        <livewire:portal.templates.template1 :personal_info="$personal_info" :experiences="$experiences" :educations="$educations"
+                            :skills="$skills" :projects="$projects" :languages="$languages" :certifications="$certifications" />
 
-                        <!-- Template Content -->
-                        <div class="p-6 space-y-6">
-                            <!-- Contact Info -->
-                            <div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-gray-600">
-                                <span class="flex items-center">
-                                    <svg class="w-3 h-3 mr-2 text-gray-500" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                        </path>
-                                    </svg>
-                                    john@example.com
-                                </span>
-                                <span class="flex items-center">
-                                    <svg class="w-3 h-3 mr-2 text-gray-500" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
-                                        </path>
-                                    </svg>
-                                    (123) 456-7890
-                                </span>
-                                <span class="flex items-center">
-                                    <svg class="w-3 h-3 mr-2 text-gray-500" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                        </path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    </svg>
-                                    San Francisco, CA
-                                </span>
-                            </div>
-
-                            <!-- Summary -->
-                            <div>
-                                <h2 class="text-lg font-semibold text-gray-800 border-b border-gray-200 pb-1.5 mb-3">
-                                    Summary</h2>
-                                <p class="text-gray-700 text-sm leading-relaxed">Experienced software engineer with 5+
-                                    years of expertise in full-stack development. Specialized in JavaScript frameworks
-                                    and cloud architecture. Passionate about building scalable web applications that
-                                    deliver exceptional user experiences.</p>
-                            </div>
-
-                            <!-- Experience -->
-                            <div>
-                                <h2 class="text-lg font-semibold text-gray-800 border-b border-gray-200 pb-1.5 mb-3">
-                                    Experience</h2>
-                                <div class="space-y-4">
-                                    <div>
-                                        <h3 class="font-medium text-gray-800">Senior Software Engineer</h3>
-                                        <p class="text-gray-500 text-xs font-medium">Tech Company Inc. • 2020 - Present
-                                            • San Francisco, CA</p>
-                                        <ul class="list-disc list-inside text-gray-700 text-sm mt-2 space-y-1 ml-4">
-                                            <li>Led development of customer portal using React and Node.js, improving
-                                                user engagement by 35%</li>
-                                            <li>Optimized application performance by 40% through code refactoring and
-                                                database improvements</li>
-                                            <li>Mentored 3 junior developers, improving team productivity by 25%</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-medium text-gray-800">Software Engineer</h3>
-                                        <p class="text-gray-500 text-xs font-medium">Startup Solutions • 2018 - 2020 •
-                                            New York, NY</p>
-                                        <ul class="list-disc list-inside text-gray-700 text-sm mt-2 space-y-1 ml-4">
-                                            <li>Developed RESTful APIs that served 10,000+ daily requests</li>
-                                            <li>Implemented CI/CD pipeline reducing deployment time by 60%</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Education -->
-                            <div>
-                                <h2 class="text-lg font-semibold text-gray-800 border-b border-gray-200 pb-1.5 mb-3">
-                                    Education</h2>
-                                <div>
-                                    <h3 class="font-medium text-gray-800">B.S. in Computer Science</h3>
-                                    <p class="text-gray-500 text-xs font-medium">Stanford University • 2015 - 2019 •
-                                        Palo Alto, CA</p>
-                                    <p class="text-gray-700 text-sm mt-1">GPA: 3.8/4.0</p>
-                                </div>
-                            </div>
-
-                            <!-- Skills -->
-                            <div>
-                                <h2 class="text-lg font-semibold text-gray-800 border-b border-gray-200 pb-1.5 mb-3">
-                                    Skills</h2>
-                                <div class="flex flex-wrap gap-2">
-                                    <span
-                                        class="px-2.5 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">JavaScript</span>
-                                    <span
-                                        class="px-2.5 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">React</span>
-                                    <span
-                                        class="px-2.5 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">Node.js</span>
-                                    <span
-                                        class="px-2.5 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">TypeScript</span>
-                                    <span
-                                        class="px-2.5 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">AWS</span>
-                                    <span
-                                        class="px-2.5 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">Docker</span>
-                                    <span
-                                        class="px-2.5 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">Git</span>
-                                    <span
-                                        class="px-2.5 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">Agile</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="mt-4 text-center text-xs text-gray-500">

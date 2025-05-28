@@ -71,7 +71,13 @@ class Index extends Component
     public $slug = '';
     public $is_public = false;
     public $template_id = null;
+    public $resumeCompleteness = 0;
 
+    public function goToStep($step)
+    {
+        // $this->currentStep = $step;
+        // $this->resumeCompleteness = round(($step - 1) / (count($this->steps) - 1) * 100);
+    }
     public function mount()
     {
         $this->slug = Str::slug($this->title);
@@ -85,12 +91,15 @@ class Index extends Component
     public function nextStep()
     {
         $this->validateCurrentStep();
+
         $this->currentStep++;
+        $this->resumeCompleteness = round((($this->currentStep - 1) / (count($this->steps) - 1)) * 100);
     }
 
     public function prevStep()
     {
         $this->currentStep--;
+        $this->resumeCompleteness = round((($this->currentStep - 1) / (count($this->steps) - 1)) * 100);
     }
 
     public function addExperience()
