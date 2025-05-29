@@ -16,6 +16,8 @@ class Template1 extends Component
     public $projects;
     public $languages;
     public $certifications;
+    // currentStep
+    public $currentStep = null;
 
     /**
      * Create a new component instance.
@@ -27,7 +29,8 @@ class Template1 extends Component
         $skills = [],
         $projects = [],
         $languages = [],
-        $certifications = []
+        $certifications = [],
+        $currentStep = null
     ) {
         $this->personal_info = $personalInfo;
         $this->experiences = $experiences;
@@ -36,8 +39,9 @@ class Template1 extends Component
         $this->projects = $projects;
         $this->languages = $languages;
         $this->certifications = $certifications;
+        $this->currentStep = $currentStep;
     }
-    
+
 
     /**
      * Get the view / contents that represent the component.
@@ -52,6 +56,7 @@ class Template1 extends Component
             'projects' => $this->projects,
             'languages' => $this->languages,
             'certifications' => $this->certifications,
+            'currentStep' => $this->currentStep,
         ]);
     }
 }

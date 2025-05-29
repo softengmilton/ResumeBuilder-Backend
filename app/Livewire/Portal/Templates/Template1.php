@@ -14,6 +14,9 @@ class Template1 extends Component
     public $languages;
     public $certifications;
 
+    // currentStep
+    public $currentStep = null;
+
     public function mount(
         $personal_info = [],
         $experiences = [],

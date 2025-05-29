@@ -189,6 +189,28 @@
             height: 100%;
             object-fit: cover;
         }
+
+        /* In your CSS file */
+        .active-section {
+            position: relative;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+            border-radius: 4px;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -196,125 +218,131 @@
 <body>
     <div class="resume-container">
         <div class="sidebar">
-            <div class="name-title">
-                <h1 class="name">{{ $personal_info['name'] ?? 'Your Name' }}</h1>
-                @if (!empty($personal_info['summary']))
-                    <p class="title">{{ $personal_info['summary'] }}</p>
-                @endif
-            </div>
-
-            @if (!empty($personal_info['photo']))
-                <div class="photo-container">
-                    <img src="{{ asset('storage/' . $personal_info['photo']) }}" alt="Profile Photo">
+            <div class="@if ($currentStep == 1) active-section @endif">
+                <div class="name-title">
+                    <h1 class="name">{{ $personal_info['name'] ?? 'Your Name' }}</h1>
+                    @if (!empty($personal_info['summary']))
+                        <p class="title">{{ $personal_info['summary'] }}</p>
+                    @endif
                 </div>
-            @endif
 
-            <div class="section">
-                <h2 class="section-title">CONTACT</h2>
-                @if (!empty($personal_info['phone']))
-                    <div class="contact-info">
-                        <i class="fas fa-phone"></i>
-                        <span>{{ $personal_info['phone'] }}</span>
+                @if (!empty($personal_info['photo']))
+                    <div class="photo-container">
+                        <img src="{{ asset('storage/' . $personal_info['photo']) }}" alt="Profile Photo">
                     </div>
                 @endif
 
-                @if (!empty($personal_info['email']))
-                    <div class="contact-info">
-                        <i class="fas fa-envelope"></i>
-                        <span>{{ $personal_info['email'] }}</span>
-                    </div>
-                @endif
-
-                @if (!empty($personal_info['address']))
-                    <div class="contact-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>{{ $personal_info['address'] }}</span>
-                    </div>
-                @endif
-
-                @if (!empty($personal_info['website']))
-                    <div class="contact-info">
-                        <i class="fas fa-globe"></i>
-                        <span>{{ $personal_info['website'] }}</span>
-                    </div>
-                @endif
-
-                @if (!empty($personal_info['linkedin']))
-                    <div class="contact-info">
-                        <i class="fab fa-linkedin"></i>
-                        <span>{{ $personal_info['linkedin'] }}</span>
-                    </div>
-                @endif
-
-                @if (!empty($personal_info['github']))
-                    <div class="contact-info">
-                        <i class="fab fa-github"></i>
-                        <span>{{ $personal_info['github'] }}</span>
-                    </div>
-                @endif
-            </div>
-
-            @if (!empty($educations))
                 <div class="section">
-                    <h2 class="section-title">EDUCATION</h2>
-                    @foreach ($educations as $education)
-                        <div class="education-item">
-                            @if (!empty($education['start_date']) || !empty($education['end_date']))
-                                <p class="date">
-                                    {{ $education['start_date'] ?? '' }} - {{ $education['end_date'] ?? '' }}
-                                </p>
-                            @endif
-                            @if (!empty($education['degree']))
-                                <p class="degree">{{ $education['degree'] }}</p>
-                            @endif
-                            @if (!empty($education['institution']))
-                                <p class="university">{{ $education['institution'] }}</p>
-                            @endif
-                            @if (!empty($education['field_of_study']))
-                                <p class="description">Field: {{ $education['field_of_study'] }}</p>
-                            @endif
+                    <h2 class="section-title">CONTACT</h2>
+                    @if (!empty($personal_info['phone']))
+                        <div class="contact-info">
+                            <i class="fas fa-phone"></i>
+                            <span>{{ $personal_info['phone'] }}</span>
                         </div>
-                    @endforeach
-                </div>
-            @endif
+                    @endif
 
-            @if (!empty($skills))
-                <div class="section">
-                    <h2 class="section-title">SKILLS</h2>
-                    <ul class="skills-list">
-                        @foreach ($skills as $skill)
-                            @if (!empty($skill['name']))
-                                <li class="skill-item">
-                                    <span class="skill-name">{{ $skill['name'] }}</span>
-                                    @if (!empty($skill['level']))
-                                        <div class="skill-bar">
-                                            {{-- <div class="skill-level"
-                                                style="width: {{ $this->calculateSkillPercentage($skill['level']) }}%;">
-                                            </div> --}}
-                                        </div>
-                                    @endif
-                                </li>
-                            @endif
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+                    @if (!empty($personal_info['email']))
+                        <div class="contact-info">
+                            <i class="fas fa-envelope"></i>
+                            <span>{{ $personal_info['email'] }}</span>
+                        </div>
+                    @endif
 
-            @if (!empty($languages))
-                <div class="section">
-                    <h2 class="section-title">LANGUAGES</h2>
-                    @foreach ($languages as $language)
-                        @if (!empty($language['name']))
-                            <div class="language-item">
-                                <span class="language-name">{{ $language['name'] }}</span>
-                                @if (!empty($language['proficiency']))
-                                    <span class="language-level">({{ $language['proficiency'] }})</span>
+                    @if (!empty($personal_info['address']))
+                        <div class="contact-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ $personal_info['address'] }}</span>
+                        </div>
+                    @endif
+
+                    @if (!empty($personal_info['website']))
+                        <div class="contact-info">
+                            <i class="fas fa-globe"></i>
+                            <span>{{ $personal_info['website'] }}</span>
+                        </div>
+                    @endif
+
+                    @if (!empty($personal_info['linkedin']))
+                        <div class="contact-info">
+                            <i class="fab fa-linkedin"></i>
+                            <span>{{ $personal_info['linkedin'] }}</span>
+                        </div>
+                    @endif
+
+                    @if (!empty($personal_info['github']))
+                        <div class="contact-info">
+                            <i class="fab fa-github"></i>
+                            <span>{{ $personal_info['github'] }}</span>
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+            <div class=" @if ($currentStep == 1) active-section @endif">
+                @if (!empty($educations))
+                    <div class="section">
+                        <h2 class="section-title">EDUCATION</h2>
+                        @foreach ($educations as $education)
+                            <div class="education-item">
+                                @if (!empty($education['start_date']) || !empty($education['end_date']))
+                                    <p class="date">
+                                        {{ $education['start_date'] ?? '' }} - {{ $education['end_date'] ?? '' }}
+                                    </p>
+                                @endif
+                                @if (!empty($education['degree']))
+                                    <p class="degree">{{ $education['degree'] }}</p>
+                                @endif
+                                @if (!empty($education['institution']))
+                                    <p class="university">{{ $education['institution'] }}</p>
+                                @endif
+                                @if (!empty($education['field_of_study']))
+                                    <p class="description">Field: {{ $education['field_of_study'] }}</p>
                                 @endif
                             </div>
-                        @endif
-                    @endforeach
-                </div>
-            @endif
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+            <div class="@if ($currentStep == 1) active-section @endif">
+                @if (!empty($skills))
+                    <div class="section">
+                        <h2 class="section-title">SKILLS</h2>
+                        <ul class="skills-list">
+                            @foreach ($skills as $skill)
+                                @if (!empty($skill['name']))
+                                    <li class="skill-item">
+                                        <span class="skill-name">{{ $skill['name'] }}</span>
+                                        @if (!empty($skill['level']))
+                                            <div class="skill-bar">
+                                                {{-- <div class="skill-level"
+                                                style="width: {{ $this->calculateSkillPercentage($skill['level']) }}%;">
+                                            </div> --}}
+                                            </div>
+                                        @endif
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+            <div class="@if ($currentStep == 1) active-section @endif">
+                @if (!empty($languages))
+                    <div class="section">
+                        <h2 class="section-title">LANGUAGES</h2>
+                        @foreach ($languages as $language)
+                            @if (!empty($language['name']))
+                                <div class="language-item">
+                                    <span class="language-name">{{ $language['name'] }}</span>
+                                    @if (!empty($language['proficiency']))
+                                        <span class="language-level">({{ $language['proficiency'] }})</span>
+                                    @endif
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                @endif
+            </div>
         </div>
 
         <div class="main-content">
@@ -326,74 +354,77 @@
                     </p>
                 </div>
             @endif
-
-            @if (!empty($experiences))
-                <div class="section">
-                    <h2 class="section-title">WORK EXPERIENCE</h2>
-                    @foreach ($experiences as $experience)
-                        <div class="experience-item">
-                            @if (!empty($experience['job_title']))
-                                <p class="job-title">{{ $experience['job_title'] }}</p>
-                            @endif
-                            @if (!empty($experience['employer']))
-                                <p class="company">{{ $experience['employer'] }}</p>
-                            @endif
-                            @if (!empty($experience['start_date']) || !empty($experience['end_date']))
-                                <p class="date">
-                                    {{ $experience['start_date'] ?? '' }} - {{ $experience['end_date'] ?? '' }}
-                                </p>
-                            @endif
-                            @if (!empty($experience['description']))
-                                <div class="description">
-                                    {!! nl2br(e($experience['description'])) !!}
-                                </div>
-                            @endif
-                        </div>
-                    @endforeach
-                </div>
-            @endif
-
-            @if (!empty($projects))
-                <div class="section">
-                    <h2 class="section-title">PROJECTS</h2>
-                    @foreach ($projects as $project)
-                        <div class="experience-item">
-                            @if (!empty($project['name']))
-                                <p class="job-title">{{ $project['name'] }}</p>
-                            @endif
-                            @if (!empty($project['link']))
-                                <p class="company">
-                                    <a href="{{ $project['link'] }}" target="_blank">{{ $project['link'] }}</a>
-                                </p>
-                            @endif
-                            @if (!empty($project['description']))
-                                <div class="description">
-                                    {!! nl2br(e($project['description'])) !!}
-                                </div>
-                            @endif
-                        </div>
-                    @endforeach
-                </div>
-            @endif
-
-            @if (!empty($certifications))
-                <div class="section">
-                    <h2 class="section-title">CERTIFICATIONS</h2>
-                    @foreach ($certifications as $certification)
-                        <div class="education-item">
-                            @if (!empty($certification['date_issued']))
-                                <p class="date">{{ $certification['date_issued'] }}</p>
-                            @endif
-                            @if (!empty($certification['name']))
-                                <p class="degree">{{ $certification['name'] }}</p>
-                            @endif
-                            @if (!empty($certification['issuer']))
-                                <p class="university">{{ $certification['issuer'] }}</p>
-                            @endif
-                        </div>
-                    @endforeach
-                </div>
-            @endif
+            <div class="@if ($currentStep == 1) active-section @endif">
+                @if (!empty($experiences))
+                    <div class="section">
+                        <h2 class="section-title">WORK EXPERIENCE</h2>
+                        @foreach ($experiences as $experience)
+                            <div class="experience-item">
+                                @if (!empty($experience['job_title']))
+                                    <p class="job-title">{{ $experience['job_title'] }}</p>
+                                @endif
+                                @if (!empty($experience['employer']))
+                                    <p class="company">{{ $experience['employer'] }}</p>
+                                @endif
+                                @if (!empty($experience['start_date']) || !empty($experience['end_date']))
+                                    <p class="date">
+                                        {{ $experience['start_date'] ?? '' }} - {{ $experience['end_date'] ?? '' }}
+                                    </p>
+                                @endif
+                                @if (!empty($experience['description']))
+                                    <div class="description">
+                                        {!! nl2br(e($experience['description'])) !!}
+                                    </div>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+            <div class="@if ($currentStep == 1) active-section @endif">
+                @if (!empty($projects))
+                    <div class="section">
+                        <h2 class="section-title">PROJECTS</h2>
+                        @foreach ($projects as $project)
+                            <div class="experience-item">
+                                @if (!empty($project['name']))
+                                    <p class="job-title">{{ $project['name'] }}</p>
+                                @endif
+                                @if (!empty($project['link']))
+                                    <p class="company">
+                                        <a href="{{ $project['link'] }}" target="_blank">{{ $project['link'] }}</a>
+                                    </p>
+                                @endif
+                                @if (!empty($project['description']))
+                                    <div class="description">
+                                        {!! nl2br(e($project['description'])) !!}
+                                    </div>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+            <div class="@if ($currentStep == 1) active-section @endif">
+                @if (!empty($certifications))
+                    <div class="section">
+                        <h2 class="section-title">CERTIFICATIONS</h2>
+                        @foreach ($certifications as $certification)
+                            <div class="education-item">
+                                @if (!empty($certification['date_issued']))
+                                    <p class="date">{{ $certification['date_issued'] }}</p>
+                                @endif
+                                @if (!empty($certification['name']))
+                                    <p class="degree">{{ $certification['name'] }}</p>
+                                @endif
+                                @if (!empty($certification['issuer']))
+                                    <p class="university">{{ $certification['issuer'] }}</p>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 </body>

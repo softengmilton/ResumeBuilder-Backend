@@ -12,6 +12,20 @@ class Index extends Component
     use WithFileUploads;
     public $rules = [];
     public $currentStep = 1;
+    public $toggleModal = false;
+
+
+    public function toggleModal()
+    {
+        dd('hi');
+        $this->toggleModal = !$this->toggleModal;
+    }
+
+    public function toggleClose()
+    {
+        $this->toggleModal = false;
+    }
+
     public $steps = [
         1 => 'Personal Info',
         2 => 'Experience',
@@ -270,7 +284,7 @@ class Index extends Component
     }
     public function newClick()
     {
-        dd('newClick');
+        $this->toggleModal = !$this->toggleModal;
     }
 
     public function render()
