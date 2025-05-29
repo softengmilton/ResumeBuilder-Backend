@@ -23,11 +23,16 @@
         <div class="modal-portal"></div>
         <div id="website" class="font-body">
             <div class="default-layout enhancv-homepage bg-page-alt overflow-x-hidden">
-                <livewire:portal.partial.header />
+                @if (!Route::is('builder'))
+                    <livewire:portal.partial.header />
+                @endif
+
                 <main>
                     {{ $slot }}
                 </main>
-                <livewire:portal.partial.footer />
+                @if (!Route::is('builder'))
+                    <livewire:portal.partial.footer />
+                @endif
             </div>
         </div>
     </div>

@@ -1,11 +1,11 @@
 <div class="min-h-screen bg-gray-50">
     <!-- Header -->
-    <div class="w-64 bg-[#052659] text-white h-[80rem] fixed flex flex-col justify-between">
+    <div class="w-[20rem] bg-[#052659] text-white h-[100vh] fixed flex flex-col justify-between">
         <!-- Header -->
         <div class="p-6">
             <div class="flex items-center mb-6">
                 <div class="w-6 h-6 bg-gradient-to-tr from-pink-500 to-purple-600 rounded-md mr-2"></div>
-                <h1 class="text-lg font-bold text-purple-400">Resume Builder</h1>
+                <h1 class="text-lg font-bold text-purple-400">Enhance CV</h1>
             </div>
 
             <!-- Stepper Navigation -->
@@ -41,29 +41,56 @@
         </div>
 
         <!-- Footer -->
-        <div class="p-4 text-xs text-white space-y-2">
+        <div class="p-4 text-lg text-white space-y-2">
             <a href="#" class="text-green-400 hover:underline block">Terms & Conditions</a>
             <a href="#" class="text-green-400 hover:underline block">Privacy Policy</a>
             <a href="#" class="text-green-400 hover:underline block">Accessibility</a>
             <a href="#" class="text-green-400 hover:underline block">Contact Us</a>
-            <p class="text-gray-400 mt-2">© 2025, Bold Limited. All rights reserved.</p>
+            <p class="text-gray-400 mt-2 text-sm">© 2025, Bold Limited. All rights reserved.</p>
         </div>
     </div>
 
 
-    <main class="container mx-auto px-4 py-8 ms-[15rem]">
+    <main class="container mx-auto px-4 py-8 ms-[15rem] scroll-m-0 overflow-y-auto max-h-screen">
         <div class="flex">
             <!-- Left Side - Stepper Form -->
-            <div class="lg:w-1/2 bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+            <div class="lg:w-1/2  p-8 rounded-xl px-32">
 
                 <!-- Step Content -->
-                <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm transition-all duration-300">
+                <div class=" p-8 rounded-xl  transition-all duration-300">
+                    <!-- Header with back button and step indicator -->
+                    <div class="flex justify-between items-center mb-6">
+                        @if ($currentStep > 1)
+                            <button class="text-blue-600 flex items-center" wire:click.prevent="prevStep">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Go Back
+                            </button>
+                        @else
+                            <a class="text-blue-600 flex items-center" href="{{ route('resume') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Go Back
+                            </a>
+                        @endif
+                        <span class="text-sm text-gray-500">Step 1 of 5</span>
+                    </div>
                     @if ($currentStep == 1)
-                        <div class="space-y-6">
-                            <div class="flex items-center justify-between mb-6">
-                                <h2 class="text-2xl font-semibold text-gray-800">Personal Information</h2>
-                                <span class="text-sm text-gray-500">Step 1 of {{ count($steps) }}</span>
-                            </div>
+
+                        <div class="space-y-6 ">
+                            <!-- Title and description -->
+                            <h1 class="text-6xl font-bold text-gray-800 mb-2">What's the best way for employers to
+                                contact you?</h1>
+                            <p class="text-gray-600 mb-4">We suggest including an email and phone number.</p>
+                            <p class="text-sm text-gray-500 mb-6">* Indicates a required field</p>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <!-- Name -->
@@ -71,7 +98,7 @@
                                     <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full
                                         Name</label>
                                     <input type="text" wire:model="personal_info.name" id="name"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                                        class="w-full px-4 py-2 border border-gray-300  focus:ring-indigo-500 focus:border-indigo-500">
                                     @error('personal_info.name')
                                         <span class="text-red-500 text-xs">{{ $message }}</span>
                                     @enderror
@@ -82,7 +109,7 @@
                                     <label for="email"
                                         class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                                     <input type="email" wire:model="personal_info.email" id="email"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                                        class="w-full px-4 py-2 border border-gray-300  focus:ring-indigo-500 focus:border-indigo-500">
                                     @error('personal_info.email')
                                         <span class="text-red-500 text-xs">{{ $message }}</span>
                                     @enderror
@@ -93,7 +120,7 @@
                                     <label for="phone"
                                         class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
                                     <input type="tel" wire:model="personal_info.phone" id="phone"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                                        class="w-full px-4 py-2 border border-gray-300  focus:ring-indigo-500 focus:border-indigo-500">
                                 </div>
 
                                 <!-- Address -->
@@ -154,10 +181,10 @@
                         </div>
                     @elseif($currentStep == 2)
                         <div class="space-y-8">
-                            <div class="flex items-center justify-between mb-6">
-                                <h2 class="text-2xl font-semibold text-gray-800">Work Experience</h2>
-                                <span class="text-sm text-gray-500">Step 2 of {{ count($steps) }}</span>
-                            </div>
+                            <!-- Title and description -->
+                            <h1 class="text-6xl font-bold text-gray-800 mb-2">Tell us about your experience</h1>
+                            <p class="text-gray-600 mb-4">Start with your most recent experience and work backward.</p>
+                            <p class="text-sm text-gray-500 mb-6">* Indicates a required field</p>
 
                             @foreach ($experiences as $index => $experience)
                                 <div class="border border-gray-200 rounded-lg p-6 mb-6"
@@ -246,10 +273,13 @@
                         </div>
                     @elseif($currentStep == 3)
                         <div class="space-y-8">
-                            <div class="flex items-center justify-between mb-6">
-                                <h2 class="text-2xl font-semibold text-gray-800">Education</h2>
-                                <span class="text-sm text-gray-500">Step 3 of {{ count($steps) }}</span>
-                            </div>
+                            <!-- Title and description -->
+                            <h1 class="text-6xl font-bold text-gray-800 mb-2">Tell us about your education
+                            </h1>
+                            <p class="text-gray-600 mb-4">Enter your education experience so far, even if you are a
+                                current student or did not graduate.
+                            </p>
+                            <p class="text-sm text-gray-500 mb-6">* Indicates a required field</p>
 
                             @foreach ($educations as $index => $education)
                                 <div class="border border-gray-200 rounded-lg p-6 mb-6"
@@ -340,11 +370,12 @@
                         </div>
                     @elseif($currentStep == 4)
                         <div class="space-y-6">
-                            <div class="flex items-center justify-between mb-6">
-                                <h2 class="text-2xl font-semibold text-gray-800">Skills</h2>
-                                <span class="text-sm text-gray-500">Step 4 of {{ count($steps) }}</span>
-                            </div>
-
+                            <!-- Title and description -->
+                            <h1 class="text-6xl font-bold text-gray-800 mb-2">What skills would you like to highlight?
+                            </h1>
+                            <p class="text-gray-600 mb-4">Choose from our pre-written examples below or write your own.
+                            </p>
+                            <p class="text-sm text-gray-500 mb-6">* Indicates a required field</p>
                             @foreach ($skills as $index => $skill)
                                 <div class="border border-gray-200 rounded-lg p-6 mb-6"
                                     wire:key="skill-{{ $index }}">
@@ -404,10 +435,12 @@
                         </div>
                     @elseif($currentStep == 5)
                         <div class="space-y-6">
-                            <div class="flex items-center justify-between mb-6">
-                                <h2 class="text-2xl font-semibold text-gray-800">Projects</h2>
-                                <span class="text-sm text-gray-500">Step 5 of {{ count($steps) }}</span>
-                            </div>
+                            <!-- Title and description -->
+                            <h1 class="text-6xl font-bold text-gray-800 mb-2">What Project would you like to highlight?
+                            </h1>
+                            <p class="text-gray-600 mb-4">Choose from our pre-written examples below or write your own.
+                            </p>
+                            <p class="text-sm text-gray-500 mb-6">* Indicates a required field</p>
 
                             @foreach ($projects as $index => $project)
                                 <div class="border border-gray-200 rounded-lg p-6 mb-6"
@@ -471,10 +504,13 @@
                         </div>
                     @elseif($currentStep == 6)
                         <div class="space-y-6">
-                            <div class="flex items-center justify-between mb-6">
-                                <h2 class="text-2xl font-semibold text-gray-800">Languages</h2>
-                                <span class="text-sm text-gray-500">Step 6 of {{ count($steps) }}</span>
-                            </div>
+                            <!-- Title and description -->
+                            <h1 class="text-6xl font-bold text-gray-800 mb-2">What Language would you like to
+                                highlight?
+                            </h1>
+                            <p class="text-gray-600 mb-4">Choose from our pre-written examples below or write your own.
+                            </p>
+                            <p class="text-sm text-gray-500 mb-6">* Indicates a required field</p>
 
                             @foreach ($languages as $index => $language)
                                 <div class="border border-gray-200 rounded-lg p-6 mb-6"
@@ -536,10 +572,13 @@
                         </div>
                     @elseif($currentStep == 7)
                         <div class="space-y-6">
-                            <div class="flex items-center justify-between mb-6">
-                                <h2 class="text-2xl font-semibold text-gray-800">Certifications</h2>
-                                <span class="text-sm text-gray-500">Step 7 of {{ count($steps) }}</span>
-                            </div>
+                            <!-- Title and description -->
+                            <h1 class="text-6xl font-bold text-gray-800 mb-2">What Certification would you like to
+                                highlight?
+                            </h1>
+                            <p class="text-gray-600 mb-4">Choose from our pre-written examples below or write your own.
+                            </p>
+                            <p class="text-sm text-gray-500 mb-6">* Indicates a required field</p>
 
                             @foreach ($certifications as $index => $certification)
                                 <div class="border border-gray-200 rounded-lg p-6 mb-6"
@@ -607,10 +646,12 @@
                         </div>
                     @elseif($currentStep == 8)
                         <div class="space-y-6">
-                            <div class="flex items-center justify-between mb-6">
-                                <h2 class="text-2xl font-semibold text-gray-800">Confirmation</h2>
-                                <span class="text-sm text-gray-500">Step 8 of {{ count($steps) }}</span>
-                            </div>
+                            <!-- Title and description -->
+                            <h1 class="text-6xl font-bold text-gray-800 mb-2">What skills would you like to highlight?
+                            </h1>
+                            <p class="text-gray-600 mb-4">Choose from our pre-written examples below or write your own.
+                            </p>
+                            <p class="text-sm text-gray-500 mb-6">* Indicates a required field</p>
 
                             <!-- Resume Title -->
                             <div class="mb-6">
@@ -647,19 +688,17 @@
                     @endif
 
                     <!-- Navigation Buttons -->
-                    <div class="flex justify-between mt-12 pt-6 border-t border-gray-200">
-                        @if ($currentStep > 1)
-                            <a href="#" wire:click.prevent="prevStep"
-                                class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors flex items-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 19l-7-7 7-7"></path>
-                                </svg>
-                                Back
-                            </a>
-                        @else
-                            <div></div> <!-- Empty div to maintain space -->
-                        @endif
+                    <div class="flex justify-end mt-12 pt-6 border-t border-gray-200">
+
+                        <a href="{{ route('home') }}"
+                            class="px-6 py-3 border bg-red-400 text-white border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                            Preview
+                        </a>
+
 
                         @if ($currentStep < count($steps))
                             <a href="#" wire:click.prevent="nextStep"
@@ -691,7 +730,7 @@
             @endif
 
             <!-- Right Side - Template Preview -->
-            <div class="lg:w-1/2">
+            <div class="lg:w-1/2 max-w-6xl">
                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 sticky top-4">
                     <div class="flex justify-between items-center mb-5">
                         <h3 class="text-lg font-semibold text-gray-800">Template Preview</h3>
@@ -708,8 +747,8 @@
 
                     <!-- Selected Template Preview -->
                     <div class="border border-gray-200 rounded-lg overflow-hidden shadow-xs">
-                        <livewire:portal.templates.template1 :personal_info="$personal_info" :experiences="$experiences" :educations="$educations"
-                            :skills="$skills" :projects="$projects" :languages="$languages" :certifications="$certifications" />
+                        <x-templates.template1 :personal_info="$personal_info" :experiences="$experiences" :educations="$educations" :skills="$skills"
+                            :projects="$projects" :languages="$languages" :certifications="$certifications" />
 
                     </div>
 
