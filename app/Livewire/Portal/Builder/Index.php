@@ -185,6 +185,10 @@ class Index extends Component
 
     public function submit()
     {
+        $this->validate([
+            'title' => 'required|string|max:255|unique:resumes,title',
+            'slug' => 'required|string|max:255|unique:resumes,slug',
+        ]);
 
         // Handle photo upload if exists
         $photoPath = null;
@@ -208,10 +212,11 @@ class Index extends Component
             'languages' => $this->languages,
             'certifications' => $this->certifications,
         ]);
-        dd('hi');
+        // dd('hi');
+
+        $this->toggleModal = true;
         // Redirect or show success message
         session()->flash('message', 'Resume created successfully!');
-        return redirect()->route('portal.resumes.show', $resume->id);
     }
 
     protected function validateCurrentStep()

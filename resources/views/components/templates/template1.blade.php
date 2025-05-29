@@ -190,26 +190,22 @@
             object-fit: cover;
         }
 
+        .empty-message {
+            font-style: italic;
+            color: #999;
+            font-size: 14px;
+            padding: 0 10px;
+        }
+
         /* In your CSS file */
         .active-section {
             position: relative;
-            animation: pulse 2s infinite;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+            border: 2px solid rgb(105, 23, 23);
             border-radius: 4px;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
-            }
-
-            70% {
-                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
-            }
+            padding: 5px;
+            /* Add some padding so content doesn't touch the border */
+            margin: -5px;
+            /* Compensate for the padding to maintain layout */
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -223,12 +219,18 @@
                     <h1 class="name">{{ $personal_info['name'] ?? 'Your Name' }}</h1>
                     @if (!empty($personal_info['summary']))
                         <p class="title">{{ $personal_info['summary'] }}</p>
+                    @else
+                        <p class="title">Professional Title</p>
                     @endif
                 </div>
 
                 @if (!empty($personal_info['photo']))
                     <div class="photo-container">
                         <img src="{{ asset('storage/' . $personal_info['photo']) }}" alt="Profile Photo">
+                    </div>
+                @else
+                    <div class="photo-container">
+                        <i class="fas fa-user" style="font-size: 40px; color: #7f8c8d;"></i>
                     </div>
                 @endif
 
@@ -239,12 +241,22 @@
                             <i class="fas fa-phone"></i>
                             <span>{{ $personal_info['phone'] }}</span>
                         </div>
+                    @else
+                        <div class="contact-info">
+                            <i class="fas fa-phone"></i>
+                            <span class="empty-message">(123) 456-7890</span>
+                        </div>
                     @endif
 
                     @if (!empty($personal_info['email']))
                         <div class="contact-info">
                             <i class="fas fa-envelope"></i>
                             <span>{{ $personal_info['email'] }}</span>
+                        </div>
+                    @else
+                        <div class="contact-info">
+                            <i class="fas fa-envelope"></i>
+                            <span class="empty-message">your.email@example.com</span>
                         </div>
                     @endif
 
@@ -253,12 +265,22 @@
                             <i class="fas fa-map-marker-alt"></i>
                             <span>{{ $personal_info['address'] }}</span>
                         </div>
+                    @else
+                        <div class="contact-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span class="empty-message">City, Country</span>
+                        </div>
                     @endif
 
                     @if (!empty($personal_info['website']))
                         <div class="contact-info">
                             <i class="fas fa-globe"></i>
                             <span>{{ $personal_info['website'] }}</span>
+                        </div>
+                    @else
+                        <div class="contact-info">
+                            <i class="fas fa-globe"></i>
+                            <span class="empty-message">yourwebsite.com</span>
                         </div>
                     @endif
 
@@ -267,6 +289,11 @@
                             <i class="fab fa-linkedin"></i>
                             <span>{{ $personal_info['linkedin'] }}</span>
                         </div>
+                    @else
+                        <div class="contact-info">
+                            <i class="fab fa-linkedin"></i>
+                            <span class="empty-message">linkedin.com/in/yourprofile</span>
+                        </div>
                     @endif
 
                     @if (!empty($personal_info['github']))
@@ -274,14 +301,19 @@
                             <i class="fab fa-github"></i>
                             <span>{{ $personal_info['github'] }}</span>
                         </div>
+                    @else
+                        <div class="contact-info">
+                            <i class="fab fa-github"></i>
+                            <span class="empty-message">github.com/username</span>
+                        </div>
                     @endif
                 </div>
             </div>
 
-            <div class=" @if ($currentStep == 1) active-section @endif">
-                @if (!empty($educations))
-                    <div class="section">
-                        <h2 class="section-title">EDUCATION</h2>
+            <div class="@if ($currentStep == 3) active-section @endif">
+                <div class="section">
+                    <h2 class="section-title">EDUCATION</h2>
+                    @if (!empty($educations))
                         @foreach ($educations as $education)
                             <div class="education-item">
                                 @if (!empty($education['start_date']) || !empty($education['end_date']))
@@ -300,13 +332,16 @@
                                 @endif
                             </div>
                         @endforeach
-                    </div>
-                @endif
+                    @else
+                        <p class="empty-message">Add your education history</p>
+                    @endif
+                </div>
             </div>
-            <div class="@if ($currentStep == 1) active-section @endif">
-                @if (!empty($skills))
-                    <div class="section">
-                        <h2 class="section-title">SKILLS</h2>
+
+            <div class="@if ($currentStep == 4) active-section @endif">
+                <div class="section">
+                    <h2 class="section-title">SKILLS</h2>
+                    @if (!empty($skills))
                         <ul class="skills-list">
                             @foreach ($skills as $skill)
                                 @if (!empty($skill['name']))
@@ -314,22 +349,23 @@
                                         <span class="skill-name">{{ $skill['name'] }}</span>
                                         @if (!empty($skill['level']))
                                             <div class="skill-bar">
-                                                {{-- <div class="skill-level"
-                                                style="width: {{ $this->calculateSkillPercentage($skill['level']) }}%;">
-                                            </div> --}}
+                                                <div class="skill-level" style="width: {{ $skill['level'] }}%;"></div>
                                             </div>
                                         @endif
                                     </li>
                                 @endif
                             @endforeach
                         </ul>
-                    </div>
-                @endif
+                    @else
+                        <p class="empty-message">Add your skills and proficiency levels</p>
+                    @endif
+                </div>
             </div>
-            <div class="@if ($currentStep == 1) active-section @endif">
-                @if (!empty($languages))
-                    <div class="section">
-                        <h2 class="section-title">LANGUAGES</h2>
+
+            <div class="@if ($currentStep == 6) active-section @endif">
+                <div class="section">
+                    <h2 class="section-title">LANGUAGES</h2>
+                    @if (!empty($languages))
                         @foreach ($languages as $language)
                             @if (!empty($language['name']))
                                 <div class="language-item">
@@ -340,24 +376,29 @@
                                 </div>
                             @endif
                         @endforeach
-                    </div>
-                @endif
+                    @else
+                        <p class="empty-message">Add languages you speak</p>
+                    @endif
+                </div>
             </div>
         </div>
 
         <div class="main-content">
-            @if (!empty($personal_info['summary']))
-                <div class="section">
-                    <h2 class="section-title">PROFILE</h2>
+            <div class="section">
+                <h2 class="section-title">PROFILE</h2>
+                @if (!empty($personal_info['summary']))
                     <p class="profile-text">
                         {{ $personal_info['summary'] }}
                     </p>
-                </div>
-            @endif
-            <div class="@if ($currentStep == 1) active-section @endif">
-                @if (!empty($experiences))
-                    <div class="section">
-                        <h2 class="section-title">WORK EXPERIENCE</h2>
+                @else
+                    <p class="empty-message">Write a brief summary about yourself and your professional background</p>
+                @endif
+            </div>
+
+            <div class="@if ($currentStep == 2) active-section @endif">
+                <div class="section">
+                    <h2 class="section-title">WORK EXPERIENCE</h2>
+                    @if (!empty($experiences))
                         @foreach ($experiences as $experience)
                             <div class="experience-item">
                                 @if (!empty($experience['job_title']))
@@ -378,13 +419,16 @@
                                 @endif
                             </div>
                         @endforeach
-                    </div>
-                @endif
+                    @else
+                        <p class="empty-message">Add your work experience history</p>
+                    @endif
+                </div>
             </div>
-            <div class="@if ($currentStep == 1) active-section @endif">
-                @if (!empty($projects))
-                    <div class="section">
-                        <h2 class="section-title">PROJECTS</h2>
+
+            <div class="@if ($currentStep == 5) active-section @endif">
+                <div class="section">
+                    <h2 class="section-title">PROJECTS</h2>
+                    @if (!empty($projects))
                         @foreach ($projects as $project)
                             <div class="experience-item">
                                 @if (!empty($project['name']))
@@ -402,13 +446,16 @@
                                 @endif
                             </div>
                         @endforeach
-                    </div>
-                @endif
+                    @else
+                        <p class="empty-message">Add projects you've worked on</p>
+                    @endif
+                </div>
             </div>
-            <div class="@if ($currentStep == 1) active-section @endif">
-                @if (!empty($certifications))
-                    <div class="section">
-                        <h2 class="section-title">CERTIFICATIONS</h2>
+
+            <div class="@if ($currentStep == 7) active-section @endif">
+                <div class="section">
+                    <h2 class="section-title">CERTIFICATIONS</h2>
+                    @if (!empty($certifications))
                         @foreach ($certifications as $certification)
                             <div class="education-item">
                                 @if (!empty($certification['date_issued']))
@@ -422,8 +469,10 @@
                                 @endif
                             </div>
                         @endforeach
-                    </div>
-                @endif
+                    @else
+                        <p class="empty-message">Add your professional certifications</p>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

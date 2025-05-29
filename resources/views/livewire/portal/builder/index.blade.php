@@ -731,31 +731,25 @@
 
             <!-- Right Side - Template Preview -->
             <div class="lg:w-1/2 max-w-6xl">
-                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 sticky top-4">
-                    <div class="flex justify-between items-center mb-5">
-                        <h3 class="text-lg font-semibold text-gray-800">Template Preview</h3>
-                        <button class="text-sm text-green-600 hover:text-green-700 font-medium flex items-center">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
-                                </path>
-                            </svg>
-                            Change Template
-                        </button>
-                    </div>
+                <div class="p-6 sticky top-4">
 
-                    <!-- Selected Template Preview -->
-                    <div class="border border-gray-200 rounded-lg overflow-hidden shadow-xs">
-                        <x-templates.template1 :personal_info="$personal_info" :experiences="$experiences" :educations="$educations" :skills="$skills"
-                            :projects="$projects" :languages="$languages" :certifications="$certifications" :currentStep="$currentStep" />
-
+                    <div class="  rounded-lg overflow-hidden h-[50vh] mt-36 p-10 px-[20rem]">
+                        <div class="border border-blue-800 h-[45vh] overflow-hidden relative">
+                            <!-- Fixed scaling (no JS needed) -->
+                            <div class="absolute top-0 left-0 w-full h-full origin-top-left scale-[0.82]">
+                                <!-- Adjust this value -->
+                                <x-templates.template1 :personal_info="$personal_info" :experiences="$experiences" :educations="$educations"
+                                    :skills="$skills" :projects="$projects" :languages="$languages" :certifications="$certifications"
+                                    :currentStep="$currentStep" />
+                            </div>
+                        </div>
                     </div>
 
                     <div class="mt-4 text-center text-xs text-gray-500">
                         Changes update in real-time as you fill the form
                     </div>
                 </div>
+
             </div>
         </div>
     </main>
@@ -805,5 +799,41 @@
             </div>
         </div>
     @endif
+    <script>
+        let observer;
 
+        function initScaling() {
+            const container = document.querySelector('.border-blue-800');
+            if (!container) return;
+
+            // Disconnect previous observer if exists
+            if (observer) observer.disconnect();
+
+            // Apply scaling immediately
+            applyScalingToContainer(container);
+
+            // Watch for future changes
+            observer = new MutationObserver(() => {
+                applyScalingToContainer(container);
+            });
+
+            observer.observe(container, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        }
+
+        function applyScalingToContainer(container) {
+            const content = container.querySelector('div > div');
+            if (!content) return;
+
+            const scale = container.clientHeight / content.scrollHeight * 0.95;
+            content.style.transform = `scale(${scale})`;
+        }
+
+        // Initialize on load and when Livewire finishes updates
+        document.addEventListener('DOMContentLoaded', initScaling);
+        Livewire.hook('message.processed', initScaling);
+    </script>
 </div>
