@@ -5,7 +5,7 @@
         <div class="p-6">
             <div class="flex items-center mb-6">
                 <div class="w-6 h-6 bg-gradient-to-tr from-pink-500 to-purple-600 rounded-md mr-2"></div>
-                <h1 class="text-lg font-bold text-purple-400">Enhance CV</h1>
+                <h1 class="text-lg font-bold text-purple-400"><a href="{{ route('home') }}">Enhance CV</a></h1>
             </div>
 
             <!-- Stepper Navigation -->
@@ -736,11 +736,13 @@
                     <div class="  rounded-lg overflow-hidden h-[50vh] mt-36 p-10 px-[20rem]">
                         <div class="border border-blue-800 h-[45vh] overflow-hidden relative">
                             <!-- Fixed scaling (no JS needed) -->
-                            <div class="absolute top-0 left-0 w-full h-full origin-top-left scale-[0.82]">
+                            <div class="absolute top-0 left-0 w-50 h-50 origin-top-left scale-[0.82] ">
                                 <!-- Adjust this value -->
-                                <x-templates.template1 :personal_info="$personal_info" :experiences="$experiences" :educations="$educations"
-                                    :skills="$skills" :projects="$projects" :languages="$languages" :certifications="$certifications"
-                                    :currentStep="$currentStep" />
+
+                                <x-dynamic-component :component="$template->view_component" :personal_info="$personal_info" :experiences="$experiences"
+                                    :educations="$educations" :skills="$skills" :projects="$projects" :languages="$languages"
+                                    :certifications="$certifications" :currentStep="$currentStep" />
+
                             </div>
                         </div>
                     </div>
@@ -779,17 +781,16 @@
                         </button>
                     </div>
                     <!-- Modal body -->
-                    <div class="p-4 md:p-5 space-y-4 overflow-y-auto max-h-[80vh]">
-                        <x-templates.template1 :personal_info="$personal_info" :experiences="$experiences" :educations="$educations" :skills="$skills"
-                            :projects="$projects" :languages="$languages" :certifications="$certifications" />
+                    <div id="pdf-content" class="p-4 md:p-5 space-y-4 overflow-y-auto max-h-[80vh]">
+                        <x-dynamic-component :component="$template->view_component" :personal_info="$personal_info" :experiences="$experiences" :educations="$educations"
+                            :skills="$skills" :projects="$projects" :languages="$languages" :certifications="$certifications" />
                     </div>
                     <!-- Modal footer -->
                     <div
                         class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button data-modal-hide="extralarge-modal" type="button"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Download PDF
-                        </button>
+                        <button onclick="downloadPDF()" class="px-4 py-2 bg-blue-600 text-white rounded">Download
+                            PDF</button>
+
                         <button data-modal-hide="extralarge-modal" type="button" wire:click="toggleClose"
                             class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                             Close
@@ -836,4 +837,61 @@
         document.addEventListener('DOMContentLoaded', initScaling);
         Livewire.hook('message.processed', initScaling);
     </script>
+
+    <script>
+        async function downloadPDF() {
+            const original = document.getElementById('pdf-content');
+
+            // Clone the component's content to avoid scroll/crop issues
+            const clone = original.cloneNode(true);
+            clone.style.maxHeight = 'none';
+            clone.style.overflow = 'visible';
+            clone.style.position = 'absolute';
+            clone.style.top = '0';
+            clone.style.left = '0';
+            clone.style.zIndex = '-1'; // Hide visually but keep renderable
+            clone.style.width = original.offsetWidth + 'px';
+
+            document.body.appendChild(clone);
+
+            // Wait for DOM reflow and rendering
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            const canvas = await html2canvas(clone, {
+                scale: 2,
+                useCORS: true,
+                windowWidth: clone.scrollWidth,
+            });
+
+            document.body.removeChild(clone); // clean up
+
+            const imgData = canvas.toDataURL('image/png');
+            const {
+                jsPDF
+            } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const imgProps = pdf.getImageProperties(imgData);
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+            // Check if content is taller than one page
+            if (pdfHeight <= pdf.internal.pageSize.getHeight()) {
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            } else {
+                // Paginate
+                let position = 0;
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                while (position < pdfHeight) {
+                    pdf.addImage(imgData, 'PNG', 0, -position, pdfWidth, pdfHeight);
+                    position += pageHeight;
+                    if (position < pdfHeight) pdf.addPage();
+                }
+            }
+
+            pdf.save('resume.pdf');
+        }
+    </script>
+
+
 </div>

@@ -22,8 +22,9 @@
         }
 
         .sidebar {
-            background-color: #f8f9fa;
+            background-color: #052659;
             padding: 30px;
+            color: #fff;
         }
 
         .main-content {
@@ -31,6 +32,7 @@
         }
 
         .name-title {
+            color: #fff;
             margin-bottom: 30px;
             border-bottom: 2px solid #e9ecef;
             padding-bottom: 20px;
@@ -39,7 +41,7 @@
         .name {
             font-size: 28px;
             font-weight: 700;
-            color: #2c3e50;
+            color: #ffff;
             margin-bottom: 5px;
             text-transform: uppercase;
         }
@@ -47,7 +49,7 @@
         .title {
             font-size: 16px;
             font-weight: 500;
-            color: #7f8c8d;
+            color: #ffff;
             text-transform: uppercase;
         }
 
@@ -222,101 +224,85 @@
                     @endif
                 </div>
 
-                <div class="photo-container">
-                    @if (!empty($personal_info['photo_tmp']))
-                        <!-- Debug output (remove after testing) -->
-                        <small style="color:red;display:block;">Debug: {{ gettype($personal_info['photo_tmp']) }} -
-                            {{ substr($personal_info['photo_tmp'], 0, 30) }}...</small>
-
-                        @if (strpos($personal_info['photo_tmp'], 'data:image') === 0)
-                            <!-- Base64 image -->
-                            <img src="{{ $personal_info['photo_tmp'] }}" alt="Preview"
-                                style="width:100%;height:100%;object-fit:cover;">
-                        @elseif(Storage::exists($personal_info['photo_tmp']))
-                            <!-- File in storage -->
-                            <img src="{{ asset('storage/' . $personal_info['photo_tmp']) }}" alt="Preview"
-                                style="width:100%;height:100%;object-fit:cover;">
-                        @else
-                            <!-- Invalid path -->
-                            <small style="color:red;">Error: Image not found at
-                                {{ $personal_info['photo_tmp'] }}</small>
-                            <i class="fas fa-user" style="font-size:40px;color:#7f8c8d;"></i>
-                        @endif
-                    @else
-                        <!-- No photo -->
-                        <i class="fas fa-user" style="font-size:40px;color:#7f8c8d;"></i>
-                    @endif
-                </div>
+                @if (!empty($personal_info['photo']))
+                    <div class="photo-container">
+                        <img src="{{ asset('storage/' . $personal_info['photo']) }}" alt="Profile Photo">
+                    </div>
+                @else
+                    <div class="photo-container">
+                        <i class="fas fa-user" style="font-size: 40px; color: #7f8c8d;"></i>
+                    </div>
+                @endif
 
                 <div class="section">
-                    <h2 class="section-title">CONTACT</h2>
+                    <h2 class="section-title !text-white">CONTACT</h2>
                     @if (!empty($personal_info['phone']))
-                        <div class="contact-info">
+                        <div class="contact-info  !text-white">
                             <i class="fas fa-phone"></i>
                             <span>{{ $personal_info['phone'] }}</span>
                         </div>
                     @else
-                        <div class="contact-info">
+                        <div class="contact-info  !text-white">
                             <i class="fas fa-phone"></i>
                             <span class="empty-message">(123) 456-7890</span>
                         </div>
                     @endif
 
                     @if (!empty($personal_info['email']))
-                        <div class="contact-info">
+                        <div class="contact-info  !text-white">
                             <i class="fas fa-envelope"></i>
                             <span>{{ $personal_info['email'] }}</span>
                         </div>
                     @else
-                        <div class="contact-info">
+                        <div class="contact-info  !text-white">
                             <i class="fas fa-envelope"></i>
                             <span class="empty-message">your.email@example.com</span>
                         </div>
                     @endif
 
                     @if (!empty($personal_info['address']))
-                        <div class="contact-info">
+                        <div class="contact-info  !text-white">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>{{ $personal_info['address'] }}</span>
                         </div>
                     @else
-                        <div class="contact-info">
+                        <div class="contact-info  !text-white">
                             <i class="fas fa-map-marker-alt"></i>
                             <span class="empty-message">City, Country</span>
                         </div>
                     @endif
 
                     @if (!empty($personal_info['website']))
-                        <div class="contact-info">
+                        <div class="contact-info  !text-white">
                             <i class="fas fa-globe"></i>
                             <span>{{ $personal_info['website'] }}</span>
                         </div>
                     @else
-                        <div class="contact-info">
+                        <div class="contact-info  !text-white">
                             <i class="fas fa-globe"></i>
                             <span class="empty-message">yourwebsite.com</span>
                         </div>
                     @endif
 
                     @if (!empty($personal_info['linkedin']))
-                        <div class="contact-info">
+                        <div class="contact-info  !text-white">
                             <i class="fab fa-linkedin"></i>
                             <span>{{ $personal_info['linkedin'] }}</span>
                         </div>
                     @else
-                        <div class="contact-info">
+                        <div class="contact-info  !text-white">
                             <i class="fab fa-linkedin"></i>
                             <span class="empty-message">linkedin.com/in/yourprofile</span>
                         </div>
                     @endif
 
                     @if (!empty($personal_info['github']))
-                        <div class="contact-info">
+                        <div class="contact-info  !text-white">
                             <i class="fab fa-github"></i>
                             <span>{{ $personal_info['github'] }}</span>
                         </div>
                     @else
-                        <div class="contact-info">
+                        <div class="contact-info  !text-white">
                             <i class="fab fa-github"></i>
                             <span class="empty-message">github.com/username</span>
                         </div>
@@ -326,41 +312,41 @@
 
             <div class="@if ($currentStep == 3) active-section @endif">
                 <div class="section">
-                    <h2 class="section-title">EDUCATION</h2>
+                    <h2 class="section-title  !text-white">EDUCATION</h2>
                     @if (!empty($educations))
                         @foreach ($educations as $education)
-                            <div class="education-item">
+                            <div class="education-item  !text-white">
                                 @if (!empty($education['start_date']) || !empty($education['end_date']))
-                                    <p class="date">
+                                    <p class="date  !text-white">
                                         {{ $education['start_date'] ?? '' }} - {{ $education['end_date'] ?? '' }}
                                     </p>
                                 @endif
                                 @if (!empty($education['degree']))
-                                    <p class="degree">{{ $education['degree'] }}</p>
+                                    <p class="degree  !text-white">{{ $education['degree'] }}</p>
                                 @endif
                                 @if (!empty($education['institution']))
-                                    <p class="university">{{ $education['institution'] }}</p>
+                                    <p class="university  !text-white">{{ $education['institution'] }}</p>
                                 @endif
                                 @if (!empty($education['field_of_study']))
-                                    <p class="description">Field: {{ $education['field_of_study'] }}</p>
+                                    <p class="description  !text-white">Field: {{ $education['field_of_study'] }}</p>
                                 @endif
                             </div>
                         @endforeach
                     @else
-                        <p class="empty-message">Add your education history</p>
+                        <p class="empty-message  !text-white">Add your education history</p>
                     @endif
                 </div>
             </div>
 
             <div class="@if ($currentStep == 4) active-section @endif">
                 <div class="section">
-                    <h2 class="section-title">SKILLS</h2>
+                    <h2 class="section-title  !text-white">SKILLS</h2>
                     @if (!empty($skills))
                         <ul class="skills-list">
                             @foreach ($skills as $skill)
                                 @if (!empty($skill['name']))
-                                    <li class="skill-item">
-                                        <span class="skill-name">{{ $skill['name'] }}</span>
+                                    <li class="skill-item  !text-white">
+                                        <span class="skill-name  !text-white">{{ $skill['name'] }}</span>
                                         @if (!empty($skill['level']))
                                             <div class="skill-bar">
                                                 <div class="skill-level" style="width: {{ $skill['level'] }}%;"></div>
@@ -378,12 +364,12 @@
 
             <div class="@if ($currentStep == 6) active-section @endif">
                 <div class="section">
-                    <h2 class="section-title">LANGUAGES</h2>
+                    <h2 class="section-title   !text-white">LANGUAGES</h2>
                     @if (!empty($languages))
                         @foreach ($languages as $language)
                             @if (!empty($language['name']))
-                                <div class="language-item">
-                                    <span class="language-name">{{ $language['name'] }}</span>
+                                <div class="language-item  !text-white">
+                                    <span class="language-name  !text-white">{{ $language['name'] }}</span>
                                     @if (!empty($language['proficiency']))
                                         <span class="language-level">({{ $language['proficiency'] }})</span>
                                     @endif

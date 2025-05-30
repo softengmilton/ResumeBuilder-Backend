@@ -8,29 +8,37 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
         .resume-container {
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 30px;
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: #333;
             max-width: 210mm;
-            margin: 0 auto;
-            padding: 20px;
+            margin: 20px auto;
+            padding: 40px;
             background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
         .sidebar {
-            background-color: #f8f9fa;
+            background-color: #2c3e50;
             padding: 30px;
+            color: #fff;
         }
 
         .main-content {
-            padding: 30px 30px 30px 0;
+            padding: 30px;
         }
 
-        .name-title {
+        .header {
             margin-bottom: 30px;
             border-bottom: 2px solid #e9ecef;
             padding-bottom: 20px;
@@ -55,7 +63,17 @@
             margin-bottom: 30px;
         }
 
-        .section-title {
+        .sidebar .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 5px;
+        }
+
+        .main-content .section-title {
             font-size: 18px;
             font-weight: 700;
             color: #2c3e50;
@@ -66,14 +84,14 @@
         }
 
         .contact-info {
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
         }
 
         .contact-info i {
             margin-right: 10px;
-            color: #7f8c8d;
+            color: #bdc3c7;
             width: 20px;
             text-align: center;
         }
@@ -120,18 +138,19 @@
         .skill-name {
             display: block;
             margin-bottom: 5px;
+            color: #ecf0f1;
         }
 
         .skill-bar {
             height: 6px;
-            background-color: #e9ecef;
+            background-color: rgba(255, 255, 255, 0.2);
             border-radius: 3px;
             overflow: hidden;
         }
 
         .skill-level {
             height: 100%;
-            background-color: #2c3e50;
+            background-color: #ecf0f1;
         }
 
         .language-item {
@@ -140,11 +159,12 @@
 
         .language-name {
             font-weight: 500;
+            color: #ecf0f1;
         }
 
         .language-level {
             font-size: 14px;
-            color: #7f8c8d;
+            color: #bdc3c7;
         }
 
         .profile-text {
@@ -172,24 +192,6 @@
             color: #7f8c8d;
         }
 
-        .photo-container {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-bottom: 20px;
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .photo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         .empty-message {
             font-style: italic;
             color: #999;
@@ -197,7 +199,16 @@
             padding: 0 10px;
         }
 
-        /* In your CSS file */
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Active section highlighting */
         .active-section {
             position: relative;
             border: 2px dashed #3498db;
@@ -213,43 +224,15 @@
     <div class="resume-container">
         <div class="sidebar">
             <div class="@if ($currentStep == 1) active-section @endif">
-                <div class="name-title">
-                    <h1 class="name">{{ $personal_info['name'] ?? 'Your Name' }}</h1>
-                    @if (!empty($personal_info['summary']))
-                        <p class="title">{{ $personal_info['summary'] }}</p>
-                    @else
-                        <p class="title">Professional Title</p>
-                    @endif
-                </div>
-
-                <div class="photo-container">
-                    @if (!empty($personal_info['photo_tmp']))
-                        <!-- Debug output (remove after testing) -->
-                        <small style="color:red;display:block;">Debug: {{ gettype($personal_info['photo_tmp']) }} -
-                            {{ substr($personal_info['photo_tmp'], 0, 30) }}...</small>
-
-                        @if (strpos($personal_info['photo_tmp'], 'data:image') === 0)
-                            <!-- Base64 image -->
-                            <img src="{{ $personal_info['photo_tmp'] }}" alt="Preview"
-                                style="width:100%;height:100%;object-fit:cover;">
-                        @elseif(Storage::exists($personal_info['photo_tmp']))
-                            <!-- File in storage -->
-                            <img src="{{ asset('storage/' . $personal_info['photo_tmp']) }}" alt="Preview"
-                                style="width:100%;height:100%;object-fit:cover;">
-                        @else
-                            <!-- Invalid path -->
-                            <small style="color:red;">Error: Image not found at
-                                {{ $personal_info['photo_tmp'] }}</small>
-                            <i class="fas fa-user" style="font-size:40px;color:#7f8c8d;"></i>
-                        @endif
-                    @else
-                        <!-- No photo -->
-                        <i class="fas fa-user" style="font-size:40px;color:#7f8c8d;"></i>
-                    @endif
-                </div>
-
                 <div class="section">
                     <h2 class="section-title">CONTACT</h2>
+                    @if (!empty($personal_info['name']))
+                        <div class="contact-info">
+                            <i class="fas fa-user"></i>
+                            <span>{{ $personal_info['name'] }}</span>
+                        </div>
+                    @endif
+
                     @if (!empty($personal_info['phone']))
                         <div class="contact-info">
                             <i class="fas fa-phone"></i>
@@ -289,7 +272,8 @@
                     @if (!empty($personal_info['website']))
                         <div class="contact-info">
                             <i class="fas fa-globe"></i>
-                            <span>{{ $personal_info['website'] }}</span>
+                            <span><a href="{{ $personal_info['website'] }}"
+                                    target="_blank">{{ $personal_info['website'] }}</a></span>
                         </div>
                     @else
                         <div class="contact-info">
@@ -301,7 +285,8 @@
                     @if (!empty($personal_info['linkedin']))
                         <div class="contact-info">
                             <i class="fab fa-linkedin"></i>
-                            <span>{{ $personal_info['linkedin'] }}</span>
+                            <span><a href="{{ $personal_info['linkedin'] }}"
+                                    target="_blank">{{ $personal_info['linkedin'] }}</a></span>
                         </div>
                     @else
                         <div class="contact-info">
@@ -313,7 +298,8 @@
                     @if (!empty($personal_info['github']))
                         <div class="contact-info">
                             <i class="fab fa-github"></i>
-                            <span>{{ $personal_info['github'] }}</span>
+                            <span><a href="{{ $personal_info['github'] }}"
+                                    target="_blank">{{ $personal_info['github'] }}</a></span>
                         </div>
                     @else
                         <div class="contact-info">
@@ -330,19 +316,20 @@
                     @if (!empty($educations))
                         @foreach ($educations as $education)
                             <div class="education-item">
+                                @if (!empty($education['degree']))
+                                    <p class="degree" style="color: #ecf0f1;">{{ $education['degree'] }}</p>
+                                @endif
+                                @if (!empty($education['institution']))
+                                    <p class="university" style="color: #bdc3c7;">{{ $education['institution'] }}</p>
+                                @endif
                                 @if (!empty($education['start_date']) || !empty($education['end_date']))
-                                    <p class="date">
+                                    <p class="date" style="color: #bdc3c7;">
                                         {{ $education['start_date'] ?? '' }} - {{ $education['end_date'] ?? '' }}
                                     </p>
                                 @endif
-                                @if (!empty($education['degree']))
-                                    <p class="degree">{{ $education['degree'] }}</p>
-                                @endif
-                                @if (!empty($education['institution']))
-                                    <p class="university">{{ $education['institution'] }}</p>
-                                @endif
                                 @if (!empty($education['field_of_study']))
-                                    <p class="description">Field: {{ $education['field_of_study'] }}</p>
+                                    <p class="description" style="color: #bdc3c7;">Field:
+                                        {{ $education['field_of_study'] }}</p>
                                 @endif
                             </div>
                         @endforeach
@@ -398,14 +385,12 @@
         </div>
 
         <div class="main-content">
-            <div class="section">
-                <h2 class="section-title">PROFILE</h2>
+            <div class="header">
+                <h1 class="name">{{ $personal_info['name'] ?? 'Your Name' }}</h1>
                 @if (!empty($personal_info['summary']))
-                    <p class="profile-text">
-                        {{ $personal_info['summary'] }}
-                    </p>
+                    <p class="title">{{ $personal_info['summary'] }}</p>
                 @else
-                    <p class="empty-message">Write a brief summary about yourself and your professional background</p>
+                    <p class="title">Professional Title</p>
                 @endif
             </div>
 
@@ -472,14 +457,14 @@
                     @if (!empty($certifications))
                         @foreach ($certifications as $certification)
                             <div class="education-item">
-                                @if (!empty($certification['date_issued']))
-                                    <p class="date">{{ $certification['date_issued'] }}</p>
-                                @endif
                                 @if (!empty($certification['name']))
                                     <p class="degree">{{ $certification['name'] }}</p>
                                 @endif
                                 @if (!empty($certification['issuer']))
                                     <p class="university">{{ $certification['issuer'] }}</p>
+                                @endif
+                                @if (!empty($certification['date_issued']))
+                                    <p class="date">{{ $certification['date_issued'] }}</p>
                                 @endif
                             </div>
                         @endforeach

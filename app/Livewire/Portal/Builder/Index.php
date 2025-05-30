@@ -4,6 +4,7 @@ namespace App\Livewire\Portal\Builder;
 
 use Livewire\Component;
 use App\Models\Resume;
+use App\Models\Template;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 
@@ -14,10 +15,48 @@ class Index extends Component
     public $currentStep = 1;
     public $toggleModal = false;
 
+    public $template = null;
+
+    public $resume = null;
+    public $isEditing   = false;
+
+
+    public function mount($template = null, $resume = null)
+    {
+        if ($resume) {
+            // dd($resume);
+            $this->resume = Resume::where('uuid', $resume)
+                ->where('user_id', auth()->id())
+                ->firstOrFail();
+            // dd($this->resume);
+            $this->isEditing = true;
+            $this->loadData($this->resume);
+        } else {
+            $this->slug = Str::slug($this->title);
+            $this->template = Template::where('uuid', $template)->firstOrFail();
+        }
+    }
+
+    public function loadData($resume)
+    {
+        $this->template = Template::where('id', $resume->template_id)->firstOrFail();
+        $this->title = $resume->title;
+        $this->slug = $resume->slug;
+        $this->personal_info = $resume->personal_info ?? [];
+        $this->experiences = $resume->experiences ?? [];
+
+        $this->educations = $resume->educations ?? [];
+        $this->skills = $resume->skills ?? [];
+        $this->projects = $resume->projects ?? [];
+        $this->languages = $resume->languages ?? [];
+        $this->certifications = $resume->certifications ?? [];
+        $this->is_public = $resume->is_public;
+    }
+
 
     public function toggleModal()
     {
-        dd('hi');
+        // dd('hi');
         $this->toggleModal = !$this->toggleModal;
     }
 
@@ -92,10 +131,7 @@ class Index extends Component
         // $this->currentStep = $step;
         // $this->resumeCompleteness = round(($step - 1) / (count($this->steps) - 1) * 100);
     }
-    public function mount()
-    {
-        $this->slug = Str::slug($this->title);
-    }
+
 
     public function updatedTitle()
     {
@@ -186,21 +222,19 @@ class Index extends Component
     public function submit()
     {
         $this->validate([
-            'title' => 'required|string|max:255|unique:resumes,title',
-            'slug' => 'required|string|max:255|unique:resumes,slug',
+            'title' => 'required|string|max:255|unique:resumes,title,' . ($this->isEditing ? $this->resume->id : 'NULL') . ',id',
+            'slug' => 'required|string|max:255|unique:resumes,slug,' . ($this->isEditing ? $this->resume->id : 'NULL') . ',id',
         ]);
 
         // Handle photo upload if exists
-        $photoPath = null;
-        if ($this->personal_info['photo']) {
+        if (is_object($this->personal_info['photo'])) {
             $photoPath = $this->personal_info['photo']->store('resume-photos', 'public');
             $this->personal_info['photo'] = $photoPath;
         }
 
-        // Create the resume
-        $resume = Resume::create([
-            'user_id' => 1,
-            'template_id' => $this->template_id,
+        $data = [
+            'user_id' => auth()->id(),
+            'template_id' => $this->template->id,
             'title' => $this->title,
             'slug' => $this->slug,
             'is_public' => $this->is_public,
@@ -211,13 +245,23 @@ class Index extends Component
             'projects' => $this->projects,
             'languages' => $this->languages,
             'certifications' => $this->certifications,
-        ]);
-        // dd('hi');
+        ];
+
+        if ($this->isEditing) {
+            // Update existing resume
+            $this->resume->update($data);
+            session()->flash('message', 'Resume updated successfully!');
+        } else {
+            // Create new resume
+            $data['uuid'] = Str::uuid();
+            $this->resume = Resume::create($data);
+            session()->flash('message', 'Resume created successfully!');
+            $this->isEditing = true;
+        }
 
         $this->toggleModal = true;
-        // Redirect or show success message
-        session()->flash('message', 'Resume created successfully!');
     }
+
 
     protected function validateCurrentStep()
     {
@@ -274,9 +318,8 @@ class Index extends Component
                 }
                 break;
             case 8:
-                $rules['title'] = 'required|string|max:255';
-                $rules['slug'] = 'required|string|unique:resumes,slug';
-                break;
+                $rules['title'] = 'required|string|max:255|unique:resumes,title,' . ($this->isEditing ? $this->resume->id : '');
+                $rules['slug'] = 'required|string|unique:resumes,slug,' . ($this->isEditing ? $this->resume->id : '');
                 break;
             default:
                 // Handle other steps if needed

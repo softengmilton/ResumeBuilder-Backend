@@ -4,7 +4,8 @@
         <nav id="nav-default container "
             class="navbar-default navbar-sticky navbar-static-top flex flex-align-center p-inline-4 Header_navbar__tJ2tN Header_navbarSticky__9FK4v Header_navbarFull__vQlWt">
             <div class="flex flex-align-center flex-justify-space-between Header_logoContainer__Yn3b3">
-                <a href="index.html" aria-label="Enhancv Logo" class="Header_logo__Forr8 navbar-logo-wrapper mobile-logo">
+                <a href="{{ route('home') }}" aria-label="Enhancv Logo"
+                    class="Header_logo__Forr8 navbar-logo-wrapper mobile-logo">
                     <svg id="logo" class="navbar-logo" xmlns="https://www.w3.org/2000/svg" width="143px"
                         height="22px" viewBox="0 0 143 22">
                         <g fill="#2DC08D">

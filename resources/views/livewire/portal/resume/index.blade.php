@@ -27,259 +27,35 @@
         <section class="py-12 bg-white">
             <div class="container mx-auto px-4">
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-[130rem] mx-auto">
-                    <!-- Template 1 - Contemporary -->
-                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                        <!-- Image -->
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwm7N7QxVqSHeNyONdm_fq-lO-l8VF_JrG1Q&s"
-                            alt="Contemporary Resume Template" class="w-full h-full object-cover">
+                    @foreach ($templates as $template)
+                        <!-- Template 1 - Contemporary -->
+                        <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
+                            <!-- Image -->
+                            <img src="{{ $template->preview_image }}" class="w-full h-full object-cover">
 
-                        <!-- Hover Overlay with Button -->
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="/resume-builder?template=contemporary"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                Use Template
-                            </a>
+                            <!-- Hover Overlay with Button -->
+                            <div
+                                class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                @auth
+                                    <a href="{{ route('builder', ['template' => $template->uuid]) }}"
+                                        class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
+                                        Use Template
+                                    </a>
+                                @else
+                                    <a href="{{ route('login') }}"
+                                        class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
+                                        Use Template
+                                    </a>
+                                @endauth
+                            </div>
+
+                            <!-- Popular Badge -->
+                            <div
+                                class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                {{ $template->rating }}
+                            </div>
                         </div>
-
-                        <!-- Popular Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Popular
-                        </div>
-                    </div>
-                    <!-- Template 1 - Contemporary -->
-                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                        <!-- Image -->
-                        <img src="https://img.pikbest.com/origin/08/96/99/61ZpIkbEsTAc4.jpg!w700wp"
-                            alt="Contemporary Resume Template" class="w-full h-full object-cover">
-
-                        <!-- Hover Overlay with Button -->
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="/resume-builder?template=contemporary"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                Use Template
-                            </a>
-                        </div>
-
-                        <!-- Popular Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Popular
-                        </div>
-                    </div>
-                    <!-- Template 1 - Contemporary -->
-                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                        <!-- Image -->
-                        <img src="https://images.template.net/wp-content/uploads/2017/07/Free-IT-Professional-Resume-Template.jpg"
-                            alt="Contemporary Resume Template" class="w-full h-full object-cover">
-
-                        <!-- Hover Overlay with Button -->
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="/resume-builder?template=contemporary"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                Use Template
-                            </a>
-                        </div>
-
-                        <!-- Popular Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Popular
-                        </div>
-                    </div>
-                    <!-- Template 1 - Contemporary -->
-                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                        <!-- Image -->
-                        <img src="https://techguruplus.com/wp-content/uploads/2024/09/Web-Developer-Editable-Resume-Template-Download-in-docx-19.jpg"
-                            alt="Contemporary Resume Template" class="w-full h-full object-cover">
-
-                        <!-- Hover Overlay with Button -->
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="/resume-builder?template=contemporary"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                Use Template
-                            </a>
-                        </div>
-
-                        <!-- Popular Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Popular
-                        </div>
-                    </div>
-
-                    <!-- Template 1 - Contemporary -->
-                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                        <!-- Image -->
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcDW_MS4WK7_FkyVyHJBgKuojQHcF7QGFKQ&s"
-                            alt="Contemporary Resume Template" class="w-full h-full object-cover">
-
-                        <!-- Hover Overlay with Button -->
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="/resume-builder?template=contemporary"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                Use Template
-                            </a>
-                        </div>
-
-                        <!-- Popular Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Popular
-                        </div>
-                    </div>
-                    <!-- Template 1 - Contemporary -->
-                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                        <!-- Image -->
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcDW_MS4WK7_FkyVyHJBgKuojQHcF7QGFKQ&s"
-                            alt="Contemporary Resume Template" class="w-full h-full object-cover">
-
-                        <!-- Hover Overlay with Button -->
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="/resume-builder?template=contemporary"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                Use Template
-                            </a>
-                        </div>
-
-                        <!-- Popular Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Popular
-                        </div>
-                    </div>
-                    <!-- Template 1 - Contemporary -->
-                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                        <!-- Image -->
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcDW_MS4WK7_FkyVyHJBgKuojQHcF7QGFKQ&s"
-                            alt="Contemporary Resume Template" class="w-full h-full object-cover">
-
-                        <!-- Hover Overlay with Button -->
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="/resume-builder?template=contemporary"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                Use Template
-                            </a>
-                        </div>
-
-                        <!-- Popular Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Popular
-                        </div>
-                    </div>
-                    <!-- Template 1 - Contemporary -->
-                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                        <!-- Image -->
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcDW_MS4WK7_FkyVyHJBgKuojQHcF7QGFKQ&s"
-                            alt="Contemporary Resume Template" class="w-full h-full object-cover">
-
-                        <!-- Hover Overlay with Button -->
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="/resume-builder?template=contemporary"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                Use Template
-                            </a>
-                        </div>
-
-                        <!-- Popular Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Popular
-                        </div>
-                    </div>
-                    <!-- Template 1 - Contemporary -->
-                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                        <!-- Image -->
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcDW_MS4WK7_FkyVyHJBgKuojQHcF7QGFKQ&s"
-                            alt="Contemporary Resume Template" class="w-full h-full object-cover">
-
-                        <!-- Hover Overlay with Button -->
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="/resume-builder?template=contemporary"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                Use Template
-                            </a>
-                        </div>
-
-                        <!-- Popular Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Popular
-                        </div>
-                    </div>
-                    <!-- Template 1 - Contemporary -->
-                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                        <!-- Image -->
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcDW_MS4WK7_FkyVyHJBgKuojQHcF7QGFKQ&s"
-                            alt="Contemporary Resume Template" class="w-full h-full object-cover">
-
-                        <!-- Hover Overlay with Button -->
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="/resume-builder?template=contemporary"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                Use Template
-                            </a>
-                        </div>
-
-                        <!-- Popular Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Popular
-                        </div>
-                    </div>
-                    <!-- Template 1 - Contemporary -->
-                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                        <!-- Image -->
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcDW_MS4WK7_FkyVyHJBgKuojQHcF7QGFKQ&s"
-                            alt="Contemporary Resume Template" class="w-full h-full object-cover">
-
-                        <!-- Hover Overlay with Button -->
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="/resume-builder?template=contemporary"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                Use Template
-                            </a>
-                        </div>
-
-                        <!-- Popular Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Popular
-                        </div>
-                    </div>
-                    <!-- Template 1 - Contemporary -->
-                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                        <!-- Image -->
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcDW_MS4WK7_FkyVyHJBgKuojQHcF7QGFKQ&s"
-                            alt="Contemporary Resume Template" class="w-full h-full object-cover">
-
-                        <!-- Hover Overlay with Button -->
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="/resume-builder?template=contemporary"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                Use Template
-                            </a>
-                        </div>
-
-                        <!-- Popular Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Popular
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>

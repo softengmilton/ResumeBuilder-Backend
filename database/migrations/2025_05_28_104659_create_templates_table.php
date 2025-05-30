@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('templates', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->string('name');
             $table->string('preview_image');
             $table->string('category');
+            $table->enum('rating', ['popular', 'new', 'trending', 'most used'])->default('new');
             $table->boolean('is_premium')->default(false);
             $table->string('view_component'); // Livewire component name
-            $table->json('config_schema'); // JSON schema for template configuration
+            // $table->json('config_schema')->nullable(); // JSON schema for template configuration
             $table->timestamps();
         });
     }

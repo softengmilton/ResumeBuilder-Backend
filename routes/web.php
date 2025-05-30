@@ -7,9 +7,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', \App\Livewire\Portal\Profile\Index::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -26,6 +24,6 @@ Route::get('/pricing', \App\Livewire\Portal\Pricing\Index::class)->name('pricing
 Route::get('/resume', \App\Livewire\Portal\Resume\Index::class)->name('resume');
 
 
-Route::get('builder', \App\Livewire\Portal\Builder\Index::class)->name('builder');
+Route::get('builder/{template}/template/{resume?}', \App\Livewire\Portal\Builder\Index::class)->name('builder');
 
 require __DIR__ . '/auth.php';

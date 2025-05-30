@@ -33,6 +33,13 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function resumes()
+    {
+        return $this->hasMany(Resume::class);
+    }
+
+
+
     /**
      * Get the attributes that should be cast.
      *

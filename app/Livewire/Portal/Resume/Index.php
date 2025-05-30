@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Portal\Resume;
 
+use App\Models\Template;
 use Livewire\Component;
 
 class Index extends Component
 {
     public function render()
     {
-        return view('livewire.portal.resume.index');
+        $templates = Template::all();
+
+        return view('livewire.portal.resume.index', compact('templates'));
     }
 }
