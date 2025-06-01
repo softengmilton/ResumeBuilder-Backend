@@ -19,6 +19,8 @@ Route::middleware('auth')->group(function () {
 
 
 
+
+
 Route::get('/', \App\Livewire\Portal\Home\Index::class)->name('home');
 Route::get('/pricing', \App\Livewire\Portal\Pricing\Index::class)->name('pricing');
 Route::get('/resume', \App\Livewire\Portal\Resume\Index::class)->name('resume');

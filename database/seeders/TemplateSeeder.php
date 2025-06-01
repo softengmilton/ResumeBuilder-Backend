@@ -19,7 +19,7 @@ class TemplateSeeder extends Seeder
             [
                 'uuid' => Str::uuid()->toString(),
                 'name' => 'Modern',
-                'preview_image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwm7N7QxVqSHeNyONdm_fq-lO-l8VF_JrG1Q&s',
+                'preview_image' => 'assets/img/templates/template1.png',
                 'category' => 'Modern',
                 'is_premium' => false,
                 'view_component' => 'templates.template1',
@@ -31,7 +31,7 @@ class TemplateSeeder extends Seeder
             [
                 'uuid' =>  Str::uuid()->toString(),
                 'name' => 'Classic',
-                'preview_image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwm7N7QxVqSHeNyONdm_fq-lO-l8VF_JrG1Q&s',
+                'preview_image' => 'assets/img/templates/template2.png',
                 'category' => 'Classic',
                 'is_premium' => false,
                 'view_component' => 'templates.template2',
@@ -43,7 +43,7 @@ class TemplateSeeder extends Seeder
             [
                 'uuid' => Str::uuid()->toString(),
                 'name' => 'Professional',
-                'preview_image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwm7N7QxVqSHeNyONdm_fq-lO-l8VF_JrG1Q&s',
+                'preview_image' => 'assets/img/templates/template3.png',
                 'category' => 'Professional',
                 'is_premium' => true,
                 'view_component' => 'templates.template3',

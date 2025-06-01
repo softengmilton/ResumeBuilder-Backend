@@ -31,7 +31,7 @@
                         <!-- Template 1 - Contemporary -->
                         <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
                             <!-- Image -->
-                            <img src="{{ $template->preview_image }}" class="w-full h-full object-cover">
+                            <img src="{{ asset($template->preview_image) }}" class="w-full h-full object-cover">
 
                             <!-- Hover Overlay with Button -->
                             <div

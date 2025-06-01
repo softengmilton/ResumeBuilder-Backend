@@ -217,11 +217,11 @@
             <div class="@if ($currentStep == 1) active-section @endif">
                 <div class="name-title">
                     <h1 class="name">{{ $personal_info['name'] ?? 'Your Name' }}</h1>
-                    @if (!empty($personal_info['summary']))
+                    <!-- @if (!empty($personal_info['summary']))
                         <p class="title">{{ $personal_info['summary'] }}</p>
                     @else
                         <p class="title">Professional Title</p>
-                    @endif
+                    @endif -->
                 </div>
 
                 @if (!empty($personal_info['photo']))

@@ -236,7 +236,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="Carousel_prevArrow__rhAxT icon-fi-chevron-left"></div>
+                        <!-- <div class="Carousel_prevArrow__rhAxT icon-fi-chevron-left"></div>
                         <div class="Carousel_nextArrow__d7Bzl icon-fi-chevron-right"></div>
                         <div class="Carousel_dots__uhyys flex flex-justify-center flex-align-end p-1 m-top-2">
                             <div class="Carousel_dot__NPDUG Carousel_surround__MlPnZ"></div>
@@ -254,11 +254,46 @@
                             <div class="Carousel_dot__NPDUG"></div>
                             <div class="Carousel_dot__NPDUG"></div>
                             <div class="Carousel_dot__NPDUG"></div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
+<style>
+  .Carousel_carouselSlider___lkzz > div {
+    display: flex;
+    width: fit-content; /* will be set dynamically */
+    animation: slideLoop 20s linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes slideLoop {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const slider = document.querySelector('.Carousel_carouselSlider___lkzz > div');
+    if (!slider) return;
+
+    // Duplicate all slides
+    const slides = Array.from(slider.children);
+    slides.forEach(slide => {
+      slider.appendChild(slide.cloneNode(true));
+    });
+
+    // Set width dynamically: total slides * 20% width each (20% per slide)
+    const totalSlides = slider.children.length;
+    slider.style.width = `${totalSlides * 20}%`;
+  });
+</script>
+
     </section>
     <section class="container p-bottom-12 p-bottom-5-xs">
         <div class="flex flex-justify-center text-center text-lg text-label">
