@@ -24,8 +24,15 @@ Route::middleware('auth')->group(function () {
 Route::get('/', \App\Livewire\Portal\Home\Index::class)->name('home');
 Route::get('/pricing', \App\Livewire\Portal\Pricing\Index::class)->name('pricing');
 Route::get('/resume', \App\Livewire\Portal\Resume\Index::class)->name('resume');
+Route::get('builder/{template}/template/{resume?}', \App\Livewire\Portal\Builder\Index::class)->name('builder')->middleware(['auth', 'subscription']);
 
 
-Route::get('builder/{template}/template/{resume?}', \App\Livewire\Portal\Builder\Index::class)->name('builder');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('checkout/{plan}', [\App\Http\Controllers\Payment\CheckoutController::class, 'checkout'])->name('checkout');
+    Route::get('payment/success', [\App\Http\Controllers\Payment\CheckoutController::class, 'success'])->name('payment.success');
+    Route::get('payment/cancel', [\App\Http\Controllers\Payment\CheckoutController::class, 'cancel'])->name('payment.cancel');
+});
+
+
 
 require __DIR__ . '/auth.php';

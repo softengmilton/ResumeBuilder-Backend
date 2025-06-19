@@ -8,6 +8,7 @@ class Index extends Component
 {
     public function render()
     {
-        return view('livewire.portal.pricing.index');
+        $pricings = \App\Models\Pricing::all();
+        return view('livewire.portal.pricing.index', compact('pricings'));
     }
 }

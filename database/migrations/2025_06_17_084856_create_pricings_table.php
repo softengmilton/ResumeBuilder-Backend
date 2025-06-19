@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('pricings', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('slug');
+            $table->string('price');
+            $table->string('plan_duration');
+            $table->string('stripe_plan_id');
+            $table->string('stripe_price_id');
             $table->timestamps();
         });
     }

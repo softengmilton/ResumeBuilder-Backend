@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Pricing extends Model
 {
     /** @use HasFactory<\Database\Factories\PricingFactory> */
-    use HasFactory;
+    // use HasFactory;
 }

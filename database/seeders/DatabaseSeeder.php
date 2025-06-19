@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TemplateSeeder::class,
             // ResumeSeeder::class,
+            PricingSeeder::class,
         ]);
     }
 }

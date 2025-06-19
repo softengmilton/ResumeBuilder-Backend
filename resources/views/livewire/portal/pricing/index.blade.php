@@ -29,7 +29,7 @@
                         <span class="text-4xl font-bold">$0</span>
                         <span class="text-gray-500">/month</span>
                     </div>
-                    <a href="https://app.enhancv.com"
+                    <a href="{{route('checkout', ['plan' => 'Basic'])}}"
                         class="block w-full py-3 px-4 border border-green-500 text-green-500 text-center font-medium rounded-md hover:bg-green-50 transition-colors mb-6">Get
                         Started</a>
 
@@ -65,13 +65,13 @@
                 <div
                     class="relative border-2 border-green-400 rounded-lg p-8 bg-white shadow-lg pricing-card transition-all">
                     <div class="popular-badge">MOST POPULAR</div>
-                    <h3 class="text-2xl font-bold mb-4">Premium</h3>
+                    <h3 class="text-2xl font-bold mb-4">Pro</h3>
                     <p class="text-gray-600 mb-6">Everything you need for job search</p>
                     <div class="mb-8">
                         <span class="text-4xl font-bold">$19</span>
                         <span class="text-gray-500">/month</span>
                     </div>
-                    <a href="https://app.enhancv.com"
+                    <a href="{{route('checkout', ['plan' => 'Pro'])}}"
                         class="block w-full py-3 px-4 bg-green-500 text-white text-center font-medium rounded-md hover:bg-green-600 transition-colors mb-6">Start
                         Free Trial</a>
 
@@ -111,7 +111,7 @@
                         <span class="text-4xl font-bold">$49</span>
                         <span class="text-gray-500">/month</span>
                     </div>
-                    <a href="https://app.enhancv.com"
+                    <a href="{{route('checkout', ['plan' => 'Enterprise'])}}"
                         class="block w-full py-3 px-4 border border-green-500 text-green-500 text-center font-medium rounded-md hover:bg-green-50 transition-colors mb-6">Start
                         Free Trial</a>
 
