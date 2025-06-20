@@ -1,8 +1,9 @@
 <div class="min-h-screen bg-gray-50">
+    <!-- Mobile Header -->
     <div class="lg:hidden bg-[#052659] text-white p-4 flex justify-between items-center sticky top-0 z-40">
         <div class="flex items-center">
             <div class="w-6 h-6 bg-gradient-to-tr from-pink-500 to-purple-600 rounded-md mr-2"></div>
-            <h1 class="text-lg font-bold text-purple-400">Enhance CV</h1>
+            <h1 class="text-base sm:text-lg font-bold text-purple-400">Enhance CV</h1>
         </div>
         <button id="mobile-menu-button" class="text-white focus:outline-none">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -11,17 +12,14 @@
         </button>
     </div>
 
-    <!-- Sidebar - Hidden on mobile by default, shown when toggled -->
-    <div id="sidebar" class="w-[20rem] bg-[#052659] text-white h-[100vh] fixed flex flex-col justify-between -translate-x-full lg:translate-x-0 transition-transform duration-300 z-30">
-        <!-- Header -->
-        <div class="p-6">
+    <!-- Sidebar -->
+    <div id="sidebar" class="w-64 md:w-72 lg:w-80 bg-[#052659] text-white h-screen fixed flex flex-col justify-between -translate-x-full lg:translate-x-0 transition-transform duration-300 z-30">
+        <div class="p-4 md:p-6">
             <div class="flex items-center mb-6">
                 <div class="w-6 h-6 bg-gradient-to-tr from-pink-500 to-purple-600 rounded-md mr-2"></div>
                 <h1 class="text-lg font-bold text-purple-400"><a href="{{ route('home') }}">Enhance CV</a></h1>
             </div>
-
-            <!-- Stepper Navigation -->
-            <ol class="space-y-6 text-sm font-medium">
+            <ol class="space-y-4 md:space-y-6 text-sm font-medium">
                 @foreach ($steps as $stepNumber => $stepName)
                 <li class="flex items-center">
                     <a href="#" wire:click.prevent="goToStep({{ $stepNumber }})" class="flex items-center">
@@ -32,8 +30,7 @@
                                 @else border-2 border-white text-white @endif">
                             {{ $stepNumber }}
                         </div>
-                        <span
-                            class="@if ($currentStep == $stepNumber) text-white font-bold @else text-white @endif">
+                        <span class="@if ($currentStep == $stepNumber) font-bold @endif">
                             {{ $stepName }}
                         </span>
                     </a>
@@ -41,40 +38,38 @@
                 @endforeach
             </ol>
 
-            <!-- Progress bar -->
-            <div class="mt-8">
-                <p class="text-xs font-semibold mb-1 text-white">RESUME COMPLETENESS:</p>
+            <div class="mt-6 md:mt-8">
+                <p class="text-xs font-semibold mb-1">RESUME COMPLETENESS:</p>
                 <div class="w-full bg-white bg-opacity-20 rounded-full h-2">
                     <div class="bg-white h-2 rounded-full transition-all duration-300"
                         style="width: {{ $resumeCompleteness }}%;"></div>
                 </div>
-                <p class="text-xs mt-1 text-white">{{ $resumeCompleteness }}%</p>
+                <p class="text-xs mt-1">{{ $resumeCompleteness }}%</p>
             </div>
         </div>
-
-        <!-- Footer -->
-        <div class="p-4 text-lg text-white space-y-2">
+        <div class="p-4 text-sm space-y-2">
             <a href="#" class="text-green-400 hover:underline block">Terms & Conditions</a>
             <a href="#" class="text-green-400 hover:underline block">Privacy Policy</a>
             <a href="#" class="text-green-400 hover:underline block">Accessibility</a>
             <a href="#" class="text-green-400 hover:underline block">Contact Us</a>
-            <p class="text-gray-400 mt-2 text-sm">© 2025, Bold Limited. All rights reserved.</p>
+            <p class="text-gray-400 mt-2 text-xs">© 2025, Bold Limited. All rights reserved.</p>
         </div>
     </div>
 
-    <!-- Overlay - Only shown when sidebar is open on mobile -->
+    <!-- Overlay -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden lg:hidden"></div>
-    <main class="container mx-auto px-4 py-8 lg:ms-[20rem] transition-all duration-300">
-        <div class="flex">
-            <!-- Left Side - Stepper Form -->
-            <div class="lg:w-1/2  p-8 rounded-xl md:px-32">
 
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6 lg:ml-64 md:lg:ml-72 lg:ml-80 transition-all duration-300">
+        <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Left Section - Form Content -->
+            <div class="w-full lg:w-[45%] xl:w-[39%] p-4 sm:p-6">
                 <!-- Step Content -->
-                <div class=" p-8 rounded-xl  transition-all duration-300">
+                <div class="p-6 sm:p-8 rounded-xl transition-all duration-300">
                     <!-- Header with back button and step indicator -->
                     <div class="flex justify-between items-center mb-6">
                         @if ($currentStep > 1)
-                        <button class="text-blue-600 flex items-center" wire:click.prevent="prevStep">
+                        <button class="text-blue-600 flex items-center text-sm sm:text-base" wire:click.prevent="prevStep">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
                                 fill="currentColor">
                                 <path fill-rule="evenodd"
@@ -84,7 +79,7 @@
                             Go Back
                         </button>
                         @else
-                        <a class="text-blue-600 flex items-center" href="{{ route('resume') }}">
+                        <a class="text-blue-600 flex items-center text-sm sm:text-base" href="{{ route('resume') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20"
                                 fill="currentColor">
                                 <path fill-rule="evenodd"
@@ -94,8 +89,9 @@
                             Go Back
                         </a>
                         @endif
-                        <span class="text-sm text-gray-500">Step 1 of 5</span>
+                        <span class="text-xs sm:text-sm text-gray-500">Step {{ $currentStep }} of {{ count($steps) }}</span>
                     </div>
+
                     @if ($currentStep == 1)
 
                     <div class="space-y-6 ">
@@ -113,6 +109,15 @@
                                 <input type="text" wire:model="personal_info.name" id="name"
                                     class="w-full px-4 py-2 border border-gray-300  focus:ring-indigo-500 focus:border-indigo-500">
                                 @error('personal_info.name')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <!-- Name -->
+                            <div>
+                                <label for="occupation" class="block text-sm font-medium text-gray-700 mb-1">Enter your occupation</label>
+                                <input type="text" wire:model="personal_info.occupation" id="occupation"
+                                    class="w-full px-4 py-2 border border-gray-300  focus:ring-indigo-500 focus:border-indigo-500">
+                                @error('personal_info.occupation')
                                 <span class="text-red-500 text-xs">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -180,15 +185,33 @@
                             </div>
 
                             <!-- Summary -->
-                            <div class="md:col-span-2">
-                                <label for="summary"
-                                    class="block text-sm font-medium text-gray-700 mb-1">Professional
-                                    Summary</label>
-                                <textarea wire:model="personal_info.summary" id="summary" rows="4"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"></textarea>
-                                @error('personal_info.summary')
-                                <span class="text-red-500 text-xs">{{ $message }}</span>
-                                @enderror
+                            <div class="mb-4">
+                                <label for="summary" class="block text-sm font-medium text-gray-700">Professional Summary</label>
+                                <div class="mt-1 flex rounded-md shadow-sm">
+                                    <textarea
+                                        wire:model="personal_info.summary"
+                                        id="summary"
+                                        rows="4"
+                                        class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                        placeholder="Write a brief summary of your professional background and key skills"></textarea>
+                                </div>
+                                <div class="mt-2">
+                                    <button
+                                        type="button"
+                                        wire:click="generateSummary"
+                                        wire:loading.attr="disabled"
+                                        class="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition ease-in-out duration-150">
+                                        <span wire:loading.remove>Generate AI Summary</span>
+                                        <span wire:loading>
+                                            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            Generating...
+                                        </span>
+                                    </button>
+                                    @error('summary') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -701,31 +724,29 @@
                     @endif
 
                     <!-- Navigation Buttons -->
-                    <div class="flex justify-end mt-12 pt-6 border-t border-gray-200">
-
+                    <div class="flex flex-col sm:flex-row justify-end gap-3 mt-8 pt-6 border-t border-gray-200">
                         <a href="#" wire:click="newClick"
-                            class="px-6 py-3 border bg-red-400 text-white border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="px-4 sm:px-6 py-2 sm:py-3 border bg-red-400 text-white border-gray-300 rounded-lg font-medium hover:bg-red-500 transition-colors flex items-center justify-center">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M15 19l-7-7 7-7"></path>
                             </svg>
                             Preview
                         </a>
 
-
                         @if ($currentStep < count($steps))
                             <a href="#" wire:click.prevent="nextStep"
-                            class="px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors flex items-center">
+                            class="px-4 sm:px-6 py-2 sm:py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center">
                             Continue
-                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7"></path>
                             </svg>
                             </a>
                             @else
                             <button type="button" wire:click="submit"
-                                class="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                class="px-4 sm:px-6 py-2 sm:py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
@@ -736,83 +757,65 @@
                 </div>
             </div>
 
-            @if (session()->has('message'))
-            <div class="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg">
-                {{ session('message') }}
-            </div>
-            @endif
-
-            <!-- Right Side - Template Preview -->
-            <div class="lg:w-1/2 max-w-6xl">
-                <div class="p-6 sticky top-4">
-
-                    <div class="  rounded-lg overflow-hidden h-[50vh] mt-36 p-10 px-[20rem]">
-                        <div class="border border-blue-800 h-[45vh] overflow-hidden relative">
-                            <!-- Fixed scaling (no JS needed) -->
-                            <div class="absolute top-0 left-0 w-50 h-50 origin-top-left scale-[0.82] ">
-                                <!-- Adjust this value -->
-
-                                <x-dynamic-component :component="$template->view_component" :personal_info="$personal_info" :experiences="$experiences"
-                                    :educations="$educations" :skills="$skills" :projects="$projects" :languages="$languages"
-                                    :certifications="$certifications" :currentStep="$currentStep" />
-
-                            </div>
+            <!-- Right Section - Resume Preview -->
+            <!-- Right Section - Resume Preview -->
+            <div class="w-full lg:w-[55%] xl:w-1/2 p-4 sm:p-6">
+                <div class="sticky top-4">
+                    <div class="overflow-x-auto pb-2"> <!-- Added horizontal scrolling container -->
+                        <div class="min-w-[800px] md:min-w-[900px] border border-gray-200 rounded-lg overflow-hidden shadow-sm"> <!-- Set minimum width -->
+                            <x-dynamic-component
+                                :component="$template->view_component"
+                                :personal_info="$personal_info"
+                                :experiences="$experiences"
+                                :educations="$educations"
+                                :skills="$skills"
+                                :projects="$projects"
+                                :languages="$languages"
+                                :certifications="$certifications"
+                                :currentStep="$currentStep" />
                         </div>
                     </div>
 
-                    <div class="mt-4 text-center text-xs text-gray-500">
+                    <div class="mt-3 text-center text-xs text-gray-500">
                         Changes update in real-time as you fill the form
                     </div>
                 </div>
-
             </div>
         </div>
     </main>
 
-    <!-- Extra Large Modal -->
+    <!-- Modal -->
     @if ($toggleModal)
-    <div id="extralarge-modal" tabindex="-1"
-        class="fixed inset-0 z-50 flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto bg-[#052659] bg-opacity-50">
-        <div class="relative w-full max-w-7xl max-h-full">
-            <!-- Modal content -->
+    <div id="extralarge-modal" class="fixed inset-0 z-50 flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto bg-[#052659]/50">
+        <div class="relative w-full max-w-4xl xl:max-w-7xl max-h-full">
             <div class="relative rounded-lg shadow-sm bg-[#052659]">
-                <!-- Modal header -->
-                <div
-                    class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                    <h3 class="text-xl font-medium text-gray-900 dark:text-white">
-                        Resume Preview
-                    </h3>
-                    <button type="button" wire:click="toggleClose"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                        data-modal-hide="extralarge-modal">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                        <span class="sr-only">Close modal</span>
+                <div class="flex items-center justify-between p-4 md:p-5 border-b border-gray-200">
+                    <h3 class="text-lg md:text-xl font-medium text-white">Resume Preview</h3>
+                    <button type="button" wire:click="toggleClose" class="text-gray-400 hover:bg-gray-600 hover:text-white rounded-lg w-8 h-8 flex items-center justify-center">
+                        ✕
                     </button>
                 </div>
-                <!-- Modal body -->
-                <div id="pdf-content" class="p-4 md:p-5 space-y-4 overflow-y-auto max-h-[80vh]">
-                    <x-dynamic-component :component="$template->view_component" :personal_info="$personal_info" :experiences="$experiences" :educations="$educations"
-                        :skills="$skills" :projects="$projects" :languages="$languages" :certifications="$certifications" />
+                <div id="pdf-content" class="p-2 md:p-4 space-y-4 overflow-y-auto max-h-[70vh] md:max-h-[80vh] w-full overflow-x-auto">
+                    <div class="min-w-[210mm]"> <!-- A4 paper width -->
+                        <x-dynamic-component :component="$template->view_component"
+                            :personal_info="$personal_info"
+                            :experiences="$experiences"
+                            :educations="$educations"
+                            :skills="$skills"
+                            :projects="$projects"
+                            :languages="$languages"
+                            :certifications="$certifications" />
+                    </div>
                 </div>
-                <!-- Modal footer -->
-                <div
-                    class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button onclick="downloadPDF()" class="px-4 py-2 bg-blue-600 text-white rounded">Download
-                        PDF</button>
-
-                    <button data-modal-hide="extralarge-modal" type="button" wire:click="toggleClose"
-                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                        Close
-                    </button>
+                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 gap-3">
+                    <button onclick="downloadPDF()" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">Download PDF</button>
+                    <button type="button" wire:click="toggleClose" class="px-4 py-2 border rounded hover:bg-gray-100 text-white border-white hover:text-gray-800 transition-colors">Close</button>
                 </div>
             </div>
         </div>
     </div>
     @endif
+
     <script>
         // Mobile menu toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -947,6 +950,4 @@
             pdf.save('resume.pdf');
         }
     </script>
-
-
 </div>

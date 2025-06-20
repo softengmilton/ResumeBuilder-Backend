@@ -7,6 +7,7 @@ use App\Models\Resume;
 use App\Models\Template;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
+use OpenAI\Laravel\Facades\OpenAI;
 
 class Index extends Component
 {
@@ -86,7 +87,8 @@ class Index extends Component
         'github' => '',
         'website' => '',
         'summary' => '',
-        'photo' => null
+        'photo' => null,
+        'occupation' => '',
     ];
 
     // Experience (array of experiences)
@@ -132,7 +134,66 @@ class Index extends Component
         // $this->resumeCompleteness = round(($step - 1) / (count($this->steps) - 1) * 100);
     }
 
+    public $isGeneratingSummary = false;
 
+    // ... existing methods ...
+
+    public function generateSummary()
+    {
+        $this->isGeneratingSummary = true;
+
+        try {
+            // Use the occupation from personal_info if available, otherwise fall back to first job title
+            $occupation = $this->personal_info['occupation'] ?? null;
+
+            // Prepare the prompt with occupation-focused context
+            $prompt = "Generate a professional resume summary for a {$occupation} based on the following information:\n\n";
+
+            // Include skills if available
+            if (!empty($this->skills)) {
+                $prompt .= "Key Skills: " . implode(', ', array_column($this->skills, 'name')) . "\n";
+            }
+
+            // Include experience highlights if available
+            if (!empty($this->experiences)) {
+                $prompt .= "Professional Experience Highlights:\n";
+                foreach ($this->experiences as $exp) {
+                    $prompt .= "- As {$exp['job_title']} at {$exp['employer']}: {$exp['description']}\n";
+                }
+            }
+
+            // Include education if available
+            if (!empty($this->educations)) {
+                $prompt .= "Education Background:\n";
+                foreach ($this->educations as $edu) {
+                    $prompt .= "- {$edu['degree']} in {$edu['field_of_study']} from {$edu['institution']}\n";
+                }
+            }
+
+            $prompt .= "\nWrite a compelling 3-4 sentence professional summary specifically tailored for a {$occupation}. ";
+            $prompt .= "Highlight relevant skills, experience, and achievements. ";
+            $prompt .= "Use industry-specific terminology and active voice. ";
+            $prompt .= "Make it sound professional but not overly formal.";
+
+            $response = OpenAI::chat()->create([
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                    ['role' => 'user', 'content' => $prompt]
+                ],
+                'temperature' => 0.7,
+            ]);
+
+            $this->personal_info['summary'] = trim($response->choices[0]->message->content);
+        } catch (\Exception $e) {
+            $this->addError('summary', 'Failed to generate summary. Please try again or write your own.');
+            // Fallback to a generic summary
+            $this->personal_info['summary'] = "Experienced {$occupation} with a proven track record in the field. " .
+                "Skilled in " . implode(', ', array_slice(array_column($this->skills, 'name'), 0, 3)) . ". " .
+                "Committed to delivering high-quality results and continuous professional development.";
+        } finally {
+            $this->isGeneratingSummary = false;
+        }
+    }
     public function updatedTitle()
     {
         $this->slug = Str::slug($this->title);

@@ -18,7 +18,7 @@
                                     href="https://app.enhancv.com" data-amplitude-event="homepage - sign up"
                                     data-amplitude-prop-button_location="Fold"
                                     class="_7d9Ew3rdopoMTEUs4G1Anw== nh1o124RBbCY8z2D0sMLjg== VBydUq+aZiAcG1CHXLDDPw== s6uaHA305IeoqI4xywTdvA== col-12-xsm full-width-xsm">Build
-                                    Your Resume</a><a href="https://enhancv.com/resources/resume-checker/"
+                                    Your Resume</a><a href="javascript:void(0)"
                                     data-amplitude-event="homepage - resume checker clicked"
                                     data-amplitude-prop-button_location="Fold"
                                     class="_7d9Ew3rdopoMTEUs4G1Anw== b-xfF8e+JKV13HKT7rqnPg== VBydUq+aZiAcG1CHXLDDPw== _4ml3hVKgGZdkB-2xJdppSA== col-12-xsm full-width-xsm">Get
@@ -126,7 +126,7 @@
                         <div class="Carousel_carouselSlider___lkzz">
                             <div style="transform:translateX(-20%);transition:transform 0.6s ease-in-out">
                                 <div class="Carousel_slide__Cv1YG" style="width:20%">
-                                    <a href="https://app.enhancv.com/resume-templates-landing?template=predefined-iIsbZDqNzGJHVResw9mB8avU9Nr1qmP8auhb3awI"
+                                    <a href="{{route('resume')}}"
                                         class="FoldExamplesCarousel_sliderCard__TAfwb"
                                         data-amplitude-event="homepage - resume carousel click"
                                         data-amplitude-prop-button_location="Double Column">
@@ -144,7 +144,7 @@
                                     </a>
                                 </div>
                                 <div class="Carousel_slide__Cv1YG" style="width:20%">
-                                    <a href="https://app.enhancv.com/resume-templates-landing?template=predefined-DuL0GzrjhjZHr0mwbwgPitMJ3Z20hVmYHQciz6rm"
+                                    <a href="{{route('resume')}}"
                                         class="FoldExamplesCarousel_sliderCard__TAfwb"
                                         data-amplitude-event="homepage - resume carousel click"
                                         data-amplitude-prop-button_location="Ivy League">
@@ -162,7 +162,7 @@
                                     </a>
                                 </div>
                                 <div class="Carousel_slide__Cv1YG" style="width:20%">
-                                    <a href="https://app.enhancv.com/resume-templates-landing?template=predefined-0jFzdx8NrQm7U4r7a9wydqVuuJDFO86132NG9iPz"
+                                    <a href="{{route('resume')}}"
                                         class="FoldExamplesCarousel_sliderCard__TAfwb"
                                         data-amplitude-event="homepage - resume carousel click"
                                         data-amplitude-prop-button_location="Elegant">
@@ -180,7 +180,7 @@
                                     </a>
                                 </div>
                                 <div class="Carousel_slide__Cv1YG" style="width:20%">
-                                    <a href="https://app.enhancv.com/resume-templates-landing?template=predefined-u0gMYZTsRdv5jP58SyUwt2dA12XOVKmqI4ax4dwT"
+                                    <a href="{{route('resume')}}"
                                         class="FoldExamplesCarousel_sliderCard__TAfwb"
                                         data-amplitude-event="homepage - resume carousel click"
                                         data-amplitude-prop-button_location="Contemporary">
@@ -198,7 +198,7 @@
                                     </a>
                                 </div>
                                 <div class="Carousel_slide__Cv1YG" style="width:20%">
-                                    <a href="https://app.enhancv.com/resume-templates-landing?template=predefined-sUb4oq7059QBi30L2zjkFq9o0tWgRBkjkcpqb2Ia"
+                                    <a href="{{route('resume')}}"
                                         class="FoldExamplesCarousel_sliderCard__TAfwb"
                                         data-amplitude-event="homepage - resume carousel click"
                                         data-amplitude-prop-button_location="Modern">
@@ -217,7 +217,7 @@
                                 </div>
 
                                 <div class="Carousel_slide__Cv1YG" style="width:20%">
-                                    <a href="https://app.enhancv.com/resume-templates-landing?template=predefined-L5zFIsHLSTq1xUOq7XIPfB9XfgAwsaFHm9QewhF1"
+                                    <a href="{{route('resume')}}"
                                         class="FoldExamplesCarousel_sliderCard__TAfwb"
                                         data-amplitude-event="homepage - resume carousel click"
                                         data-amplitude-prop-button_location="Minimal">
@@ -259,40 +259,42 @@
                 </div>
             </div>
         </div>
-<style>
-  .Carousel_carouselSlider___lkzz > div {
-    display: flex;
-    width: fit-content; /* will be set dynamically */
-    animation: slideLoop 20s linear infinite;
-    will-change: transform;
-  }
+        <style>
+            .Carousel_carouselSlider___lkzz>div {
+                display: flex;
+                width: fit-content;
+                /* will be set dynamically */
+                animation: slideLoop 20s linear infinite;
+                will-change: transform;
+            }
 
-  @keyframes slideLoop {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-</style>
+            @keyframes slideLoop {
+                0% {
+                    transform: translateX(0);
+                }
 
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const slider = document.querySelector('.Carousel_carouselSlider___lkzz > div');
-    if (!slider) return;
+                100% {
+                    transform: translateX(-50%);
+                }
+            }
+        </style>
 
-    // Duplicate all slides
-    const slides = Array.from(slider.children);
-    slides.forEach(slide => {
-      slider.appendChild(slide.cloneNode(true));
-    });
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                const slider = document.querySelector('.Carousel_carouselSlider___lkzz > div');
+                if (!slider) return;
 
-    // Set width dynamically: total slides * 20% width each (20% per slide)
-    const totalSlides = slider.children.length;
-    slider.style.width = `${totalSlides * 20}%`;
-  });
-</script>
+                // Duplicate all slides
+                const slides = Array.from(slider.children);
+                slides.forEach(slide => {
+                    slider.appendChild(slide.cloneNode(true));
+                });
+
+                // Set width dynamically: total slides * 20% width each (20% per slide)
+                const totalSlides = slider.children.length;
+                slider.style.width = `${totalSlides * 20}%`;
+            });
+        </script>
 
     </section>
     <section class="container p-bottom-12 p-bottom-5-xs">
@@ -312,7 +314,7 @@
                     style="font-size:26px"></i>
                 <div>Two-column, single-column, <br /> and multi-page layouts</div>
             </div>
-            <a href="https://enhancv.com/resume-templates/"
+            <a href="{{route('resume')}}"
                 class="lbDsKPVYdwKjE90OIGvw8g== RRxe1M+sUxFTRkUeo96NlQ=="><span
                     class="EPEsshdJ5YWK9NnTS-vQ0g==">Browse
                     Resume Templates</span><i
@@ -344,7 +346,7 @@
                         <p class="text-surface text-md m-top-4 m-bottom-8 m-top-2-xsm m-bottom-3-xsm">
                             Enhancv resumes and cover letters are vigorously tested against major ATS
                             systems to ensure complete parsability</p>
-                        <div class="flex"><a href="https://app.enhancv.com"
+                        <div class="flex"><a href="{{route('home')}}"
                                 data-amplitude-event="homepage - sign up"
                                 data-amplitude-prop-button_location="ATS Section"
                                 class="_7d9Ew3rdopoMTEUs4G1Anw== nh1o124RBbCY8z2D0sMLjg== VBydUq+aZiAcG1CHXLDDPw== s6uaHA305IeoqI4xywTdvA== m-auto-xsm">Build
@@ -395,7 +397,7 @@
         <div class="container p-block-12 p-block-6-xsm text-center relative" style="z-index:1">
             <h2 class="h2 text-center m-bottom-5 p-inline-6-xl">The resume builder that’s right for your
                 job and experience</h2>
-            <a href="https://enhancv.com/resume-examples/"
+            <a href="{{route('resume')}}"
                 class="lbDsKPVYdwKjE90OIGvw8g== RRxe1M+sUxFTRkUeo96NlQ=="><span class="EPEsshdJ5YWK9NnTS-vQ0g==">View
                     All Resume Examples</span><i
                     class="icon icon-fi-arrow-right m-left-0 GqvX1-mq-WlbEFJ8tt+kHg== ugyeXRyVp1Kg8kYay3xMiA=="></i></a>
@@ -415,7 +417,7 @@
                     </div>
                 </div>
                 <div class="col-6 col-12-xsm">
-                    <a href="https://enhancv.com/resume-examples/business-analyst/">
+                    <a href="{{route('resume')}}">
                         <div class="ResumePickerSection_exampleImageContainer__ihjtR m-auto">
                             <img alt="Business Analyst resume" sizes="100vw"
                                 src="https://cdn.enhancv.com/images/1098/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vcHJlZGVmaW5lZC1leGFtcGxlcy9CamhWdnRPN25DRnBRZUlVODM0VzA3UDlaS2NvZENKNFNtSHRVQUVjL2ltYWdlLnBuZw~~.png"
@@ -438,7 +440,7 @@
             </div>
             <div class="hidden-md hidden-lg hidden-xl m-block-5">
                 <div class="flex flex-align-center flex-justify-center link-underline-container"><a
-                        href="https://enhancv.com/resume-examples/"
+                        href="{{route('resume')}}"
                         class="lbDsKPVYdwKjE90OIGvw8g== RRxe1M+sUxFTRkUeo96NlQ=="><span
                             class="EPEsshdJ5YWK9NnTS-vQ0g==">View All Resume Examples</span><i
                             class="icon icon-fi-arrow-right m-left-0 GqvX1-mq-WlbEFJ8tt+kHg== ugyeXRyVp1Kg8kYay3xMiA=="></i></a>
@@ -475,7 +477,7 @@
                         <h3 class="h3 m-top-10-xsm">A feature-packed resume builder</h3>
                         <p class="m-bottom-4">Easily edit your resume with Enhancv’s drag-and-drop resume
                             builder. Choose from different templates, various backgrounds and sections.</p>
-                        <a href="https://app.enhancv.com" data-amplitude-event="homepage - sign up"
+                        <a href="{{route('home')}}" data-amplitude-event="homepage - sign up"
                             data-amplitude-prop-button_location="CTAs section"
                             class="lbDsKPVYdwKjE90OIGvw8g== RRxe1M+sUxFTRkUeo96NlQ=="><span
                                 class="EPEsshdJ5YWK9NnTS-vQ0g==">Build Your Resume</span><i
@@ -526,7 +528,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div
+                        <!-- <div
                             class="flex flex-align-center flex-justify-center QuoteCarouselSection_dotContainer__uiiDc">
                             <div class="m-1 cursor-pointer QuoteCarouselSection_dot__1NR8B bg-surface">
                             </div>
@@ -534,18 +536,18 @@
                             </div>
                             <div class="m-1 cursor-pointer QuoteCarouselSection_dot__1NR8B bg-caption">
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div
                         class="col-7 col-12-xsm col-12-md order-first-xsm order-first-md text-center-xsm p-bottom-4 p-left-2-lg p-left-2-md">
                         <h2 class="h2 m-top-no m-bottom-4 m-bottom-2 text-surface">Your resume is an
                             extension of yourself – make one that’s truly you</h2>
-                        <div class="flex"><a href="https://app.enhancv.com"
+                        <div class="flex"><a href="{{route('home')}}"
                                 data-amplitude-event="homepage - sign up"
                                 data-amplitude-prop-button_location="Quotes Carousel Section"
                                 class="_7d9Ew3rdopoMTEUs4G1Anw== nh1o124RBbCY8z2D0sMLjg== VBydUq+aZiAcG1CHXLDDPw== s6uaHA305IeoqI4xywTdvA== m-bottom-4 m-auto-xsm">Build
                                 Your Resume</a></div>
-                        <a href="https://www.reviews.io/company-reviews/store/enhancv-com/" target="_blank"
+                        <a href="{{route('home')}}" target="_blank"
                             rel="noopener noreferrer"><img alt="rating" src="./assets/img/review.webp"
                                 width="553" height="73" decoding="async" data-nimg="1"
                                 style="color:transparent;max-width:276px;height:auto" /></a>
