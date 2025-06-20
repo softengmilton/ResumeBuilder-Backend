@@ -143,30 +143,42 @@ class Index extends Component
         $this->isGeneratingSummary = true;
 
         try {
-            // Use the occupation from personal_info if available, otherwise fall back to first job title
+            // Occupation fallback: try personal_info, then first job title, else generic
             $occupation = $this->personal_info['occupation'] ?? null;
 
-            // Prepare the prompt with occupation-focused context
-            $prompt = "Generate a professional resume summary for a {$occupation} based on the following information:\n\n";
-
-            // Include skills if available
-            if (!empty($this->skills)) {
-                $prompt .= "Key Skills: " . implode(', ', array_column($this->skills, 'name')) . "\n";
+            if (!$occupation && !empty($this->experiences)) {
+                $occupation = $this->experiences[0]['job_title'] ?? null;
             }
 
-            // Include experience highlights if available
+            if (!$occupation) {
+                $occupation = 'professional';
+            }
+
+            // Start building the prompt
+            $prompt = "Generate a professional resume summary for a {$occupation} based on the following information:\n\n";
+
+            if (!empty($this->skills)) {
+                $skillsList = implode(', ', array_column($this->skills, 'name'));
+                $prompt .= "Key Skills: {$skillsList}\n";
+            }
+
             if (!empty($this->experiences)) {
                 $prompt .= "Professional Experience Highlights:\n";
                 foreach ($this->experiences as $exp) {
-                    $prompt .= "- As {$exp['job_title']} at {$exp['employer']}: {$exp['description']}\n";
+                    $jobTitle = $exp['job_title'] ?? 'Role';
+                    $employer = $exp['employer'] ?? 'Employer';
+                    $description = $exp['description'] ?? '';
+                    $prompt .= "- As {$jobTitle} at {$employer}: {$description}\n";
                 }
             }
 
-            // Include education if available
             if (!empty($this->educations)) {
                 $prompt .= "Education Background:\n";
                 foreach ($this->educations as $edu) {
-                    $prompt .= "- {$edu['degree']} in {$edu['field_of_study']} from {$edu['institution']}\n";
+                    $degree = $edu['degree'] ?? '';
+                    $field = $edu['field_of_study'] ?? '';
+                    $institution = $edu['institution'] ?? '';
+                    $prompt .= "- {$degree} in {$field} from {$institution}\n";
                 }
             }
 
@@ -175,25 +187,29 @@ class Index extends Component
             $prompt .= "Use industry-specific terminology and active voice. ";
             $prompt .= "Make it sound professional but not overly formal.";
 
+            // Call OpenAI chat completion API
             $response = OpenAI::chat()->create([
-                'model' => 'gpt-3.5-turbo',
+                'model' => 'gpt-4o-mini',
                 'messages' => [
-                    ['role' => 'user', 'content' => $prompt]
+                    ['role' => 'user', 'content' => $prompt],
                 ],
-                'temperature' => 0.7,
+                'temperature' => 0.7,  // add some creativity if you want
             ]);
 
+            // Assign the summary from API response
             $this->personal_info['summary'] = trim($response->choices[0]->message->content);
         } catch (\Exception $e) {
             $this->addError('summary', 'Failed to generate summary. Please try again or write your own.');
-            // Fallback to a generic summary
+            // Fallback summary with some safety checks
+            $skillsSample = implode(', ', array_slice(array_column($this->skills ?? [], 'name'), 0, 3));
             $this->personal_info['summary'] = "Experienced {$occupation} with a proven track record in the field. " .
-                "Skilled in " . implode(', ', array_slice(array_column($this->skills, 'name'), 0, 3)) . ". " .
+                (!empty($skillsSample) ? "Skilled in {$skillsSample}. " : "") .
                 "Committed to delivering high-quality results and continuous professional development.";
         } finally {
             $this->isGeneratingSummary = false;
         }
     }
+
     public function updatedTitle()
     {
         $this->slug = Str::slug($this->title);

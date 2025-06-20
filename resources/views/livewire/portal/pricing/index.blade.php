@@ -23,10 +23,10 @@
             <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
                 <!-- Free Plan -->
                 <div class="border border-gray-200 rounded-lg p-8 hover:border-green-400 transition-all">
-                    <h3 class="text-2xl font-bold mb-4">Free</h3>
+                    <h3 class="text-2xl font-bold mb-4">Basic</h3>
                     <p class="text-gray-600 mb-6">Basic features to get started</p>
                     <div class="mb-8">
-                        <span class="text-4xl font-bold">$0</span>
+                        <span class="text-4xl font-bold">$20</span>
                         <span class="text-gray-500">/month</span>
                     </div>
                     <a href="{{route('checkout', ['plan' => 'Basic'])}}"
@@ -68,12 +68,11 @@
                     <h3 class="text-2xl font-bold mb-4">Pro</h3>
                     <p class="text-gray-600 mb-6">Everything you need for job search</p>
                     <div class="mb-8">
-                        <span class="text-4xl font-bold">$19</span>
-                        <span class="text-gray-500">/month</span>
+                        <span class="text-4xl font-bold">$59</span>
+                        <span class="text-gray-500">/6 Months</span>
                     </div>
                     <a href="{{route('checkout', ['plan' => 'Pro'])}}"
-                        class="block w-full py-3 px-4 bg-green-500 text-white text-center font-medium rounded-md hover:bg-green-600 transition-colors mb-6">Start
-                        Free Trial</a>
+                        class="block w-full py-3 px-4 bg-green-500 text-white text-center font-medium rounded-md hover:bg-green-600 transition-colors mb-6">Get Started</a>
 
                     <ul class="space-y-3">
                         <li class="flex items-start">
@@ -106,10 +105,10 @@
                 <!-- Executive Plan -->
                 <div class="border border-gray-200 rounded-lg p-8 hover:border-green-400 transition-all">
                     <h3 class="text-2xl font-bold mb-4">Executive</h3>
-                    <p class="text-gray-600 mb-6">For professionals & executives</p>
+                    <p class="text-gray-600 mb-6">Enterprise</p>
                     <div class="mb-8">
-                        <span class="text-4xl font-bold">$49</span>
-                        <span class="text-gray-500">/month</span>
+                        <span class="text-4xl font-bold">$99</span>
+                        <span class="text-gray-500">/Yearly</span>
                     </div>
                     <a href="{{route('checkout', ['plan' => 'Enterprise'])}}"
                         class="block w-full py-3 px-4 border border-green-500 text-green-500 text-center font-medium rounded-md hover:bg-green-50 transition-colors mb-6">Start

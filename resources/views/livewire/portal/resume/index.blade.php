@@ -8,18 +8,23 @@
                     professionally designed templates to create your perfect resume.</p>
 
                 <!-- Filter Options -->
+                <!-- Filter Options -->
                 <div class="flex flex-wrap justify-center gap-4 mb-12">
-                    <button class="px-6 py-2 rounded-full font-medium bg-green-500 text-white shadow-sm">All
-                        Templates</button>
                     <button
-                        class="px-6 py-2 rounded-full font-medium bg-white border border-gray-300 hover:bg-gray-50">Contemporary</button>
+                        wire:click="selectCategory('all')"
+                        class="px-6 py-2 rounded-full font-medium {{ $selectedCategory === 'all' ? 'bg-green-500 text-white' : 'bg-white border border-gray-300 hover:bg-gray-50' }}">
+                        All Templates
+                    </button>
+
+                    @foreach ($categories as $category)
                     <button
-                        class="px-6 py-2 rounded-full font-medium bg-white border border-gray-300 hover:bg-gray-50">Innovative</button>
-                    <button
-                        class="px-6 py-2 rounded-full font-medium bg-white border border-gray-300 hover:bg-gray-50">Polished</button>
-                    <button
-                        class="px-6 py-2 rounded-full font-medium bg-white border border-gray-300 hover:bg-gray-50">Basic</button>
+                        wire:click="selectCategory('{{ $category }}')"
+                        class="px-6 py-2 rounded-full font-medium {{ $selectedCategory === $category ? 'bg-green-500 text-white' : 'bg-white border border-gray-300 hover:bg-gray-50' }}">
+                        {{ $category }}
+                    </button>
+                    @endforeach
                 </div>
+
             </div>
         </section>
 
@@ -28,33 +33,33 @@
             <div class="container mx-auto px-4">
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-[130rem] mx-auto">
                     @foreach ($templates as $template)
-                        <!-- Template 1 - Contemporary -->
-                        <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                            <!-- Image -->
-                            <img src="{{ asset($template->preview_image) }}" class="w-full h-full object-cover">
+                    <!-- Template 1 - Contemporary -->
+                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
+                        <!-- Image -->
+                        <img src="{{ asset($template->preview_image) }}" class="w-full h-full object-cover">
 
-                            <!-- Hover Overlay with Button -->
-                            <div
-                                class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                @auth
-                                    <a href="{{ route('builder', ['template' => $template->uuid]) }}"
-                                        class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                        Use Template
-                                    </a>
-                                @else
-                                    <a href="{{ route('login') }}"
-                                        class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
-                                        Use Template
-                                    </a>
-                                @endauth
-                            </div>
-
-                            <!-- Popular Badge -->
-                            <div
-                                class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                                {{ $template->rating }}
-                            </div>
+                        <!-- Hover Overlay with Button -->
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            @auth
+                            <a href="{{ route('builder', ['template' => $template->uuid]) }}"
+                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
+                                Use Template
+                            </a>
+                            @else
+                            <a href="{{ route('login') }}"
+                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
+                                Use Template
+                            </a>
+                            @endauth
                         </div>
+
+                        <!-- Popular Badge -->
+                        <div
+                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            {{ $template->rating }}
+                        </div>
+                    </div>
                     @endforeach
                 </div>
             </div>
@@ -62,7 +67,7 @@
 
         <!-- Template Features Section -->
         <section class="py-16 bg-gray-50">
-            <div class="container mx-auto px-[29rem] max-w-5xl">
+            <div class="container mx-auto lg:px-[29rem] max-w-5xl">
                 <h2 class="text-3xl font-bold text-center mb-12">Why Our Resume Templates Stand Out</h2>
 
                 <div class="grid md:grid-cols-3 gap-8">

@@ -8,49 +8,51 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-        .resume-container {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
+        body {
+            background: #f4f6f8;
             font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 210mm;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-        }
-
-        .sidebar {
-            background-color: #052659;
+            margin: 0;
             padding: 30px;
-            color: #fff;
+            color: #333;
         }
 
-        .main-content {
-            padding: 30px 30px 30px 0;
+        .resume-container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .name-title {
-            color: #fff;
+        .header {
+            text-align: center;
             margin-bottom: 30px;
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 20px;
+        }
+
+        .photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            overflow: hidden;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .name {
             font-size: 28px;
             font-weight: 700;
-            color: #ffff;
-            margin-bottom: 5px;
             text-transform: uppercase;
+            margin: 0;
         }
 
         .title {
             font-size: 16px;
-            font-weight: 500;
-            color: #ffff;
-            text-transform: uppercase;
+            color: #555;
         }
 
         .section {
@@ -58,154 +60,112 @@
         }
 
         .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #2c3e50;
-            text-transform: uppercase;
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e1e1e;
             margin-bottom: 15px;
-            border-bottom: 2px solid #e9ecef;
+            border-bottom: 2px solid #eee;
             padding-bottom: 5px;
         }
 
         .contact-info {
-            margin-bottom: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .contact-info div {
             display: flex;
             align-items: center;
         }
 
         .contact-info i {
-            margin-right: 10px;
-            color: #7f8c8d;
-            width: 20px;
-            text-align: center;
-        }
-
-        .education-item,
-        .experience-item {
-            margin-bottom: 20px;
+            margin-right: 8px;
+            color: #999;
         }
 
         .date {
             font-size: 14px;
-            color: #7f8c8d;
-            margin-bottom: 5px;
+            color: #888;
         }
 
-        .degree,
-        .job-title {
-            font-weight: 500;
+        .job-title,
+        .degree {
+            font-weight: 600;
             color: #2c3e50;
-            margin-bottom: 5px;
         }
 
-        .university,
-        .company {
-            font-weight: 400;
-            color: #34495e;
-            margin-bottom: 5px;
+        .company,
+        .university {
+            font-weight: 500;
+            color: #555;
         }
 
         .description {
             font-size: 14px;
-            color: #555;
+            color: #444;
+            margin-top: 5px;
         }
 
-        .skills-list {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .skill-item {
+        .skills-list,
+        .language-item {
             margin-bottom: 10px;
-        }
-
-        .skill-name {
-            display: block;
-            margin-bottom: 5px;
         }
 
         .skill-bar {
             height: 6px;
             background-color: #e9ecef;
             border-radius: 3px;
+            margin-top: 4px;
             overflow: hidden;
         }
 
         .skill-level {
             height: 100%;
-            background-color: #2c3e50;
-        }
-
-        .language-item {
-            margin-bottom: 10px;
-        }
-
-        .language-name {
-            font-weight: 500;
-        }
-
-        .language-level {
-            font-size: 14px;
-            color: #7f8c8d;
-        }
-
-        .profile-text {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .reference-item {
-            margin-bottom: 15px;
-        }
-
-        .reference-name {
-            font-weight: 500;
-            color: #2c3e50;
-        }
-
-        .reference-position {
-            font-size: 14px;
-            color: #34495e;
-        }
-
-        .reference-contact {
-            font-size: 13px;
-            color: #7f8c8d;
-        }
-
-        .photo-container {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-bottom: 20px;
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .photo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            background-color: #3498db;
         }
 
         .empty-message {
+            color: #aaa;
             font-style: italic;
-            color: #999;
-            font-size: 14px;
-            padding: 0 10px;
         }
 
-        /* In your CSS file */
-        .active-section {
-            position: relative;
-            border: 2px dashed #3498db;
-            border-radius: 4px;
-            padding: 5px;
-            margin: -5px;
+        .main-content {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .left-column {
+            flex: 1 1 35%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .right-column {
+            flex: 1 1 60%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .left-column,
+            .right-column {
+                flex: 1 1 100%;
+            }
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -213,264 +173,134 @@
 
 <body>
     <div class="resume-container">
-        <div class="sidebar">
-            <div class="@if ($currentStep == 1) active-section @endif">
-                <div class="name-title">
-                    <h1 class="name">{{ $personal_info['name'] ?? 'Your Name' }}</h1>
-                    <!-- @if (!empty($personal_info['summary']))
-                        <p class="title">{{ $personal_info['summary'] }}</p>
-                    @else
-                        <p class="title">Professional Title</p>
-                    @endif -->
-                </div>
-
-                @if (!empty($personal_info['photo']))
-                    <div class="photo-container">
-                        <img src="{{ asset('storage/' . $personal_info['photo']) }}" alt="Profile Photo">
-                    </div>
-                @else
-                    <div class="photo-container">
-                        <i class="fas fa-user" style="font-size: 40px; color: #7f8c8d;"></i>
-                    </div>
-                @endif
-
-                <div class="section">
-                    <h2 class="section-title !text-white">CONTACT</h2>
-                    @if (!empty($personal_info['phone']))
-                        <div class="contact-info  !text-white">
-                            <i class="fas fa-phone"></i>
-                            <span>{{ $personal_info['phone'] }}</span>
-                        </div>
-                    @else
-                        <div class="contact-info  !text-white">
-                            <i class="fas fa-phone"></i>
-                            <span class="empty-message">(123) 456-7890</span>
-                        </div>
-                    @endif
-
-                    @if (!empty($personal_info['email']))
-                        <div class="contact-info  !text-white">
-                            <i class="fas fa-envelope"></i>
-                            <span>{{ $personal_info['email'] }}</span>
-                        </div>
-                    @else
-                        <div class="contact-info  !text-white">
-                            <i class="fas fa-envelope"></i>
-                            <span class="empty-message">your.email@example.com</span>
-                        </div>
-                    @endif
-
-                    @if (!empty($personal_info['address']))
-                        <div class="contact-info  !text-white">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>{{ $personal_info['address'] }}</span>
-                        </div>
-                    @else
-                        <div class="contact-info  !text-white">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span class="empty-message">City, Country</span>
-                        </div>
-                    @endif
-
-                    @if (!empty($personal_info['website']))
-                        <div class="contact-info  !text-white">
-                            <i class="fas fa-globe"></i>
-                            <span>{{ $personal_info['website'] }}</span>
-                        </div>
-                    @else
-                        <div class="contact-info  !text-white">
-                            <i class="fas fa-globe"></i>
-                            <span class="empty-message">yourwebsite.com</span>
-                        </div>
-                    @endif
-
-                    @if (!empty($personal_info['linkedin']))
-                        <div class="contact-info  !text-white">
-                            <i class="fab fa-linkedin"></i>
-                            <span>{{ $personal_info['linkedin'] }}</span>
-                        </div>
-                    @else
-                        <div class="contact-info  !text-white">
-                            <i class="fab fa-linkedin"></i>
-                            <span class="empty-message">linkedin.com/in/yourprofile</span>
-                        </div>
-                    @endif
-
-                    @if (!empty($personal_info['github']))
-                        <div class="contact-info  !text-white">
-                            <i class="fab fa-github"></i>
-                            <span>{{ $personal_info['github'] }}</span>
-                        </div>
-                    @else
-                        <div class="contact-info  !text-white">
-                            <i class="fab fa-github"></i>
-                            <span class="empty-message">github.com/username</span>
-                        </div>
-                    @endif
-                </div>
+        <div class="header">
+            @if (!empty($personal_info['photo']))
+            <div class="photo">
+                <img src="{{ asset('storage/' . $personal_info['photo']) }}" alt="Profile Photo">
             </div>
-
-            <div class="@if ($currentStep == 3) active-section @endif">
-                <div class="section">
-                    <h2 class="section-title  !text-white">EDUCATION</h2>
-                    @if (!empty($educations))
-                        @foreach ($educations as $education)
-                            <div class="education-item  !text-white">
-                                @if (!empty($education['start_date']) || !empty($education['end_date']))
-                                    <p class="date  !text-white">
-                                        {{ $education['start_date'] ?? '' }} - {{ $education['end_date'] ?? '' }}
-                                    </p>
-                                @endif
-                                @if (!empty($education['degree']))
-                                    <p class="degree  !text-white">{{ $education['degree'] }}</p>
-                                @endif
-                                @if (!empty($education['institution']))
-                                    <p class="university  !text-white">{{ $education['institution'] }}</p>
-                                @endif
-                                @if (!empty($education['field_of_study']))
-                                    <p class="description  !text-white">Field: {{ $education['field_of_study'] }}</p>
-                                @endif
-                            </div>
-                        @endforeach
-                    @else
-                        <p class="empty-message  !text-white">Add your education history</p>
-                    @endif
-                </div>
+            @else
+            <div class="photo" style="background-color:#ddd; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-user" style="font-size: 40px; color: #999;"></i>
             </div>
+            @endif
+            <h1 class="name">{{ $personal_info['name'] ?? 'Your Name' }}</h1>
+            <p class="title">{{ $personal_info['summary'] ?? 'Professional Title' }}</p>
+        </div>
 
-            <div class="@if ($currentStep == 4) active-section @endif">
-                <div class="section">
-                    <h2 class="section-title  !text-white">SKILLS</h2>
-                    @if (!empty($skills))
-                        <ul class="skills-list">
-                            @foreach ($skills as $skill)
-                                @if (!empty($skill['name']))
-                                    <li class="skill-item  !text-white">
-                                        <span class="skill-name  !text-white">{{ $skill['name'] }}</span>
-                                        @if (!empty($skill['level']))
-                                            <div class="skill-bar">
-                                                <div class="skill-level" style="width: {{ $skill['level'] }}%;"></div>
-                                            </div>
-                                        @endif
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
-                    @else
-                        <p class="empty-message">Add your skills and proficiency levels</p>
-                    @endif
-                </div>
-            </div>
-
-            <div class="@if ($currentStep == 6) active-section @endif">
-                <div class="section">
-                    <h2 class="section-title   !text-white">LANGUAGES</h2>
-                    @if (!empty($languages))
-                        @foreach ($languages as $language)
-                            @if (!empty($language['name']))
-                                <div class="language-item  !text-white">
-                                    <span class="language-name  !text-white">{{ $language['name'] }}</span>
-                                    @if (!empty($language['proficiency']))
-                                        <span class="language-level">({{ $language['proficiency'] }})</span>
-                                    @endif
-                                </div>
-                            @endif
-                        @endforeach
-                    @else
-                        <p class="empty-message">Add languages you speak</p>
-                    @endif
-                </div>
-            </div>
+        <div class="section">
+            <h2 class="section-title">Profile</h2>
+            <p class="description">{{ $personal_info['summary'] ?? 'Write a brief summary about yourself and your professional background' }}</p>
         </div>
 
         <div class="main-content">
-            <div class="section">
-                <h2 class="section-title">PROFILE</h2>
-                @if (!empty($personal_info['summary']))
-                    <p class="profile-text">
-                        {{ $personal_info['summary'] }}
-                    </p>
-                @else
-                    <p class="empty-message">Write a brief summary about yourself and your professional background</p>
-                @endif
-            </div>
-
-            <div class="@if ($currentStep == 2) active-section @endif">
+            <!-- Left Column -->
+            <div class="left-column">
                 <div class="section">
-                    <h2 class="section-title">WORK EXPERIENCE</h2>
-                    @if (!empty($experiences))
-                        @foreach ($experiences as $experience)
-                            <div class="experience-item">
-                                @if (!empty($experience['job_title']))
-                                    <p class="job-title">{{ $experience['job_title'] }}</p>
-                                @endif
-                                @if (!empty($experience['employer']))
-                                    <p class="company">{{ $experience['employer'] }}</p>
-                                @endif
-                                @if (!empty($experience['start_date']) || !empty($experience['end_date']))
-                                    <p class="date">
-                                        {{ $experience['start_date'] ?? '' }} - {{ $experience['end_date'] ?? '' }}
-                                    </p>
-                                @endif
-                                @if (!empty($experience['description']))
-                                    <div class="description">
-                                        {!! nl2br(e($experience['description'])) !!}
-                                    </div>
-                                @endif
-                            </div>
-                        @endforeach
+                    <h2 class="section-title">Contact</h2>
+                    <div class="contact-info">
+                        <div><i class="fas fa-phone"></i> {{ $personal_info['phone'] ?? '(123) 456-7890' }}</div>
+                        <div><i class="fas fa-envelope"></i> {{ $personal_info['email'] ?? 'your.email@example.com' }}</div>
+                        <div><i class="fas fa-map-marker-alt"></i> {{ $personal_info['address'] ?? 'City, Country' }}</div>
+                        <div><i class="fas fa-globe"></i> {{ $personal_info['website'] ?? 'yourwebsite.com' }}</div>
+                        <div><i class="fab fa-linkedin"></i> {{ $personal_info['linkedin'] ?? 'linkedin.com/in/yourprofile' }}</div>
+                        <div><i class="fab fa-github"></i> {{ $personal_info['github'] ?? 'github.com/username' }}</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Skills</h2>
+                    @if (!empty($skills))
+                    @foreach ($skills as $skill)
+                    <div class="skills-list">
+                        <span>{{ $skill['name'] }}</span>
+                        @if (!empty($skill['level']))
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: {{ $skill['level'] }}%;"></div>
+                        </div>
+                        @endif
+                    </div>
+                    @endforeach
                     @else
-                        <p class="empty-message">Add your work experience history</p>
+                    <p class="empty-message">Add your skills and proficiency levels</p>
                     @endif
                 </div>
-            </div>
 
-            <div class="@if ($currentStep == 5) active-section @endif">
                 <div class="section">
-                    <h2 class="section-title">PROJECTS</h2>
-                    @if (!empty($projects))
-                        @foreach ($projects as $project)
-                            <div class="experience-item">
-                                @if (!empty($project['name']))
-                                    <p class="job-title">{{ $project['name'] }}</p>
-                                @endif
-                                @if (!empty($project['link']))
-                                    <p class="company">
-                                        <a href="{{ $project['link'] }}" target="_blank">{{ $project['link'] }}</a>
-                                    </p>
-                                @endif
-                                @if (!empty($project['description']))
-                                    <div class="description">
-                                        {!! nl2br(e($project['description'])) !!}
-                                    </div>
-                                @endif
-                            </div>
-                        @endforeach
+                    <h2 class="section-title">Languages</h2>
+                    @if (!empty($languages))
+                    @foreach ($languages as $language)
+                    <div class="language-item">
+                        <strong>{{ $language['name'] }}</strong>
+                        <span>({{ $language['proficiency'] }})</span>
+                    </div>
+                    @endforeach
                     @else
-                        <p class="empty-message">Add projects you've worked on</p>
+                    <p class="empty-message">Add languages you speak</p>
                     @endif
                 </div>
-            </div>
 
-            <div class="@if ($currentStep == 7) active-section @endif">
                 <div class="section">
-                    <h2 class="section-title">CERTIFICATIONS</h2>
+                    <h2 class="section-title">Certifications</h2>
                     @if (!empty($certifications))
-                        @foreach ($certifications as $certification)
-                            <div class="education-item">
-                                @if (!empty($certification['date_issued']))
-                                    <p class="date">{{ $certification['date_issued'] }}</p>
-                                @endif
-                                @if (!empty($certification['name']))
-                                    <p class="degree">{{ $certification['name'] }}</p>
-                                @endif
-                                @if (!empty($certification['issuer']))
-                                    <p class="university">{{ $certification['issuer'] }}</p>
-                                @endif
-                            </div>
-                        @endforeach
+                    @foreach ($certifications as $certification)
+                    <div class="education-item">
+                        <p class="date">{{ $certification['date_issued'] }}</p>
+                        <p class="degree">{{ $certification['name'] }}</p>
+                        <p class="university">{{ $certification['issuer'] }}</p>
+                    </div>
+                    @endforeach
                     @else
-                        <p class="empty-message">Add your professional certifications</p>
+                    <p class="empty-message">Add your professional certifications</p>
+                    @endif
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <div class="section">
+                    <h2 class="section-title">Work Experience</h2>
+                    @if (!empty($experiences))
+                    @foreach ($experiences as $experience)
+                    <div class="experience-item">
+                        <p class="job-title">{{ $experience['job_title'] ?? '' }}</p>
+                        <p class="company">{{ $experience['employer'] ?? '' }}</p>
+                        <p class="date">{{ $experience['start_date'] ?? '' }} - {{ $experience['end_date'] ?? '' }}</p>
+                        <p class="description">{!! nl2br(e($experience['description'] ?? '')) !!}</p>
+                    </div>
+                    @endforeach
+                    @else
+                    <p class="empty-message">Add your work experience history</p>
+                    @endif
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Education</h2>
+                    @if (!empty($educations))
+                    @foreach ($educations as $education)
+                    <div class="education-item">
+                        <p class="date">{{ $education['start_date'] ?? '' }} - {{ $education['end_date'] ?? '' }}</p>
+                        <p class="degree">{{ $education['degree'] ?? '' }}</p>
+                        <p class="university">{{ $education['institution'] ?? '' }}</p>
+                        <p class="description">Field: {{ $education['field_of_study'] ?? '' }}</p>
+                    </div>
+                    @endforeach
+                    @else
+                    <p class="empty-message">Add your education history</p>
+                    @endif
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Projects</h2>
+                    @if (!empty($projects))
+                    @foreach ($projects as $project)
+                    <div class="experience-item">
+                        <p class="job-title">{{ $project['name'] }}</p>
+                        <p class="company"><a href="{{ $project['link'] }}" target="_blank">{{ $project['link'] }}</a></p>
+                        <p class="description">{!! nl2br(e($project['description'])) !!}</p>
+                    </div>
+                    @endforeach
+                    @else
+                    <p class="empty-message">Add projects you've worked on</p>
                     @endif
                 </div>
             </div>

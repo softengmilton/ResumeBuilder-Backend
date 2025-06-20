@@ -7,10 +7,24 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    public string $selectedCategory = 'all';
+
+    public function selectCategory($category)
+    {
+        $this->selectedCategory = $category;
+    }
+
     public function render()
     {
-        $templates = Template::all();
+        $categories = Template::pluck('category')->unique()->values()->toArray();
 
-        return view('livewire.portal.resume.index', compact('templates'));
+        $templates = $this->selectedCategory === 'all'
+            ? Template::all()
+            : Template::where('category', $this->selectedCategory)->get();
+
+        return view('livewire.portal.resume.index', [
+            'templates' => $templates,
+            'categories' => $categories,
+        ]);
     }
 }
