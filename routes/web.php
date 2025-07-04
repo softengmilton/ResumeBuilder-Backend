@@ -34,5 +34,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
-
+Route::post('/webhook/stripe', [\App\Http\Controllers\Payment\WebhookController::class, 'handleWebhook'])->name('webhook.stripe');
 require __DIR__ . '/auth.php';
