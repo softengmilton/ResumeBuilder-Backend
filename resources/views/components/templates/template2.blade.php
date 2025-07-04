@@ -6,169 +6,333 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $personal_info['name'] ?? 'Professional Resume' }}</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary: #2a4365;
+            --primary-light: #4299e1;
+            --secondary: #c05621;
+            --accent: #9f7aea;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --gray: #718096;
+            --light-gray: #e2e8f0;
+        }
 
         body {
-            background: #f4f6f8;
-            font-family: 'Roboto', sans-serif;
+            background: #f8f5f2;
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
-            padding: 30px;
-            color: #333;
+            padding: 40px;
+            color: var(--dark);
         }
 
         .resume-container {
             max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 40px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resume-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
         }
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 30px;
         }
 
-        .photo {
-            width: 120px;
-            height: 120px;
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .photo-container {
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            margin: 0 auto 15px;
+            margin: 0 auto 20px;
             overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .photo img {
+        .photo-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
+        .photo-container i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background-color: var(--light-gray);
+            color: var(--gray);
+            font-size: 50px;
+        }
+
         .name {
-            font-size: 28px;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
             font-weight: 700;
-            text-transform: uppercase;
-            margin: 0;
+            color: var(--primary);
+            margin: 10px 0 5px;
+            letter-spacing: 0.5px;
         }
 
         .title {
-            font-size: 16px;
-            color: #555;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--secondary);
+            letter-spacing: 1px;
         }
 
         .section {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .section-title {
-            font-size: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
             font-weight: 600;
-            color: #1e1e1e;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 5px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
         }
 
         .contact-info {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            font-size: 14px;
-            color: #555;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .contact-info div {
+        .contact-item {
             display: flex;
             align-items: center;
+            font-size: 15px;
         }
 
-        .contact-info i {
-            margin-right: 8px;
-            color: #999;
+        .contact-item i {
+            margin-right: 12px;
+            color: var(--primary-light);
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .main-content {
+            display: flex;
+            gap: 50px;
+        }
+
+        .left-column {
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .right-column {
+            flex: 2;
+        }
+
+        .experience-item,
+        .education-item {
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .experience-item::before,
+        .education-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+
+        .experience-item::after,
+        .education-item::after {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 15px;
+            bottom: -25px;
+            width: 2px;
+            background-color: var(--light-gray);
+        }
+
+        .experience-item:last-child::after,
+        .education-item:last-child::after {
+            display: none;
         }
 
         .date {
             font-size: 14px;
-            color: #888;
+            color: var(--secondary);
+            margin-bottom: 5px;
+            font-weight: 500;
         }
 
         .job-title,
         .degree {
             font-weight: 600;
-            color: #2c3e50;
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 16px;
         }
 
         .company,
         .university {
             font-weight: 500;
-            color: #555;
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 15px;
         }
 
         .description {
-            font-size: 14px;
-            color: #444;
-            margin-top: 5px;
+            font-size: 15px;
+            color: var(--gray);
+            line-height: 1.7;
         }
 
-        .skills-list,
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-item {
+            background-color: var(--primary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-item i {
+            margin-right: 5px;
+            font-size: 12px;
+            color: var(--primary-light);
+        }
+
         .language-item {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
         }
 
-        .skill-bar {
-            height: 6px;
-            background-color: #e9ecef;
-            border-radius: 3px;
-            margin-top: 4px;
-            overflow: hidden;
+        .language-name {
+            font-weight: 500;
+            font-size: 15px;
         }
 
-        .skill-level {
-            height: 100%;
-            background-color: #3498db;
+        .language-level {
+            font-size: 14px;
+            color: var(--secondary);
         }
 
         .empty-message {
-            color: #aaa;
+            color: var(--gray);
             font-style: italic;
+            font-size: 14px;
         }
 
-        .main-content {
-            display: flex;
-            gap: 40px;
-            flex-wrap: wrap;
+        a {
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
-        .left-column {
-            flex: 1 1 35%;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
+        a:hover {
+            color: var(--accent);
+            text-decoration: underline;
         }
 
-        .right-column {
-            flex: 1 1 60%;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .project-link i {
+            margin-right: 5px;
+            font-size: 12px;
+        }
+
+        .watermark {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 12px;
+            color: var(--gray);
+            opacity: 0.5;
         }
 
         @media screen and (max-width: 768px) {
+            .resume-container {
+                padding: 30px;
+            }
+
             .main-content {
                 flex-direction: column;
             }
 
-            .left-column,
-            .right-column {
-                flex: 1 1 100%;
+            .left-column {
+                max-width: 100%;
             }
         }
 
-        a {
-            color: #3498db;
-            text-decoration: none;
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+
+            .resume-container {
+                box-shadow: none;
+                padding: 20px;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -176,29 +340,15 @@
         <div class="header">
             <div class="photo-container">
                 @if($photoPreview)
-                <!-- New photo preview (temporary upload) -->
-                <img
-                    src="{{ $photoPreview }}"
-                    alt="Profile Preview"
-                    class="w-full h-full object-cover">
+                <img src="{{ $photoPreview }}" alt="Profile Preview">
                 @elseif(!empty($personal_info['photo']))
-                <!-- Existing stored photo -->
-                <img
-                    src="{{ asset('storage/' . $personal_info['photo']) }}"
-                    alt="Profile Photo"
-                    class="w-full h-full object-cover">
+                <img src="{{ asset('storage/' . $personal_info['photo']) }}" alt="Profile Photo">
                 @else
-                <!-- Default placeholder when no photo exists -->
-                <i class="fas fa-user" style="font-size:40px;color:#7f8c8d;"></i>
+                <i class="fas fa-user"></i>
                 @endif
             </div>
             <h1 class="name">{{ $personal_info['name'] ?? 'Your Name' }}</h1>
-            <p class="title">{{ $personal_info['summary'] ?? 'Professional Title' }}</p>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">Profile</h2>
-            <p class="description">{{ $personal_info['summary'] ?? 'Write a brief summary about yourself and your professional background' }}</p>
+            <p class="title">{{ $personal_info['occupation'] ?? 'Professional Title' }}</p>
         </div>
 
         <div class="main-content">
@@ -207,30 +357,57 @@
                 <div class="section">
                     <h2 class="section-title">Contact</h2>
                     <div class="contact-info">
-                        <div><i class="fas fa-phone"></i> {{ $personal_info['phone'] ?? '(123) 456-7890' }}</div>
-                        <div><i class="fas fa-envelope"></i> {{ $personal_info['email'] ?? 'your.email@example.com' }}</div>
-                        <div><i class="fas fa-map-marker-alt"></i> {{ $personal_info['address'] ?? 'City, Country' }}</div>
-                        <div><i class="fas fa-globe"></i> {{ $personal_info['website'] ?? 'yourwebsite.com' }}</div>
-                        <div><i class="fab fa-linkedin"></i> {{ $personal_info['linkedin'] ?? 'linkedin.com/in/yourprofile' }}</div>
-                        <div><i class="fab fa-github"></i> {{ $personal_info['github'] ?? 'github.com/username' }}</div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>{{ $personal_info['phone'] ?? '(123) 456-7890' }}</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>{{ $personal_info['email'] ?? 'your.email@example.com' }}</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ $personal_info['address'] ?? 'City, Country' }}</span>
+                        </div>
+                        @if (!empty($personal_info['website']))
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <a href="{{ $personal_info['website'] }}" target="_blank">{{ $personal_info['website'] }}</a>
+                        </div>
+                        @endif
+                        @if (!empty($personal_info['linkedin']))
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <a href="{{ $personal_info['linkedin'] }}" target="_blank">{{ $personal_info['linkedin'] }}</a>
+                        </div>
+                        @endif
+                        @if (!empty($personal_info['github']))
+                        <div class="contact-item">
+                            <i class="fab fa-github"></i>
+                            <a href="{{ $personal_info['github'] }}" target="_blank">{{ $personal_info['github'] }}</a>
+                        </div>
+                        @endif
                     </div>
                 </div>
 
                 <div class="section">
                     <h2 class="section-title">Skills</h2>
                     @if (!empty($skills))
-                    @foreach ($skills as $skill)
                     <div class="skills-list">
-                        <span>{{ $skill['name'] }}</span>
-                        @if (!empty($skill['level']))
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: {{ $skill['level'] }}%;"></div>
+                        @foreach ($skills as $skill)
+                        @if (!empty($skill['name']))
+                        <div class="skill-item">
+                            <i class="fas fa-check-circle"></i>
+                            {{ $skill['name'] }}
+                            @if (!empty($skill['level']))
+                            <span style="margin-left: 5px;">{{ $skill['level'] }}%</span>
+                            @endif
                         </div>
                         @endif
+                        @endforeach
                     </div>
-                    @endforeach
                     @else
-                    <p class="empty-message">Add your skills and proficiency levels</p>
+                    <p class="empty-message">Add your skills</p>
                     @endif
                 </div>
 
@@ -239,8 +416,8 @@
                     @if (!empty($languages))
                     @foreach ($languages as $language)
                     <div class="language-item">
-                        <strong>{{ $language['name'] }}</strong>
-                        <span>({{ $language['proficiency'] }})</span>
+                        <span class="language-name">{{ $language['name'] }}</span>
+                        <span class="language-level">{{ $language['proficiency'] }}</span>
                     </div>
                     @endforeach
                     @else
@@ -259,26 +436,39 @@
                     </div>
                     @endforeach
                     @else
-                    <p class="empty-message">Add your professional certifications</p>
+                    <p class="empty-message">Add your certifications</p>
                     @endif
                 </div>
             </div>
 
             <!-- Right Column -->
             <div class="right-column">
+                @if (!empty($personal_info['summary']))
                 <div class="section">
-                    <h2 class="section-title">Work Experience</h2>
+                    <h2 class="section-title">Profile</h2>
+                    <p class="description">{{ $personal_info['summary'] }}</p>
+                </div>
+                @endif
+
+                <div class="section">
+                    <h2 class="section-title">Experience</h2>
                     @if (!empty($experiences))
                     @foreach ($experiences as $experience)
                     <div class="experience-item">
-                        <p class="job-title">{{ $experience['job_title'] ?? '' }}</p>
-                        <p class="company">{{ $experience['employer'] ?? '' }}</p>
-                        <p class="date">{{ $experience['start_date'] ?? '' }} - {{ $experience['end_date'] ?? '' }}</p>
-                        <p class="description">{!! nl2br(e($experience['description'] ?? '')) !!}</p>
+                        <p class="job-title">{{ $experience['job_title'] }}</p>
+                        <p class="company">{{ $experience['employer'] }}</p>
+                        <p class="date">
+                            {{ $experience['start_date'] ?? '' }} - {{ $experience['end_date'] ?? 'Present' }}
+                        </p>
+                        @if (!empty($experience['description']))
+                        <div class="description">
+                            {!! nl2br(e($experience['description'])) !!}
+                        </div>
+                        @endif
                     </div>
                     @endforeach
                     @else
-                    <p class="empty-message">Add your work experience history</p>
+                    <p class="empty-message">Add your work experience</p>
                     @endif
                 </div>
 
@@ -287,10 +477,14 @@
                     @if (!empty($educations))
                     @foreach ($educations as $education)
                     <div class="education-item">
-                        <p class="date">{{ $education['start_date'] ?? '' }} - {{ $education['end_date'] ?? '' }}</p>
-                        <p class="degree">{{ $education['degree'] ?? '' }}</p>
-                        <p class="university">{{ $education['institution'] ?? '' }}</p>
-                        <p class="description">Field: {{ $education['field_of_study'] ?? '' }}</p>
+                        <p class="degree">{{ $education['degree'] }}</p>
+                        <p class="university">{{ $education['institution'] }}</p>
+                        <p class="date">
+                            {{ $education['start_date'] ?? '' }} - {{ $education['end_date'] ?? '' }}
+                        </p>
+                        @if (!empty($education['field_of_study']))
+                        <p class="description">Field: {{ $education['field_of_study'] }}</p>
+                        @endif
                     </div>
                     @endforeach
                     @else
@@ -304,8 +498,17 @@
                     @foreach ($projects as $project)
                     <div class="experience-item">
                         <p class="job-title">{{ $project['name'] }}</p>
-                        <p class="company"><a href="{{ $project['link'] }}" target="_blank">{{ $project['link'] }}</a></p>
-                        <p class="description">{!! nl2br(e($project['description'])) !!}</p>
+                        @if (!empty($project['link']))
+                        <div class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            <a href="{{ $project['link'] }}" target="_blank">View Project</a>
+                        </div>
+                        @endif
+                        @if (!empty($project['description']))
+                        <div class="description">
+                            {!! nl2br(e($project['description'])) !!}
+                        </div>
+                        @endif
                     </div>
                     @endforeach
                     @else
@@ -313,6 +516,10 @@
                     @endif
                 </div>
             </div>
+        </div>
+
+        <div class="watermark">
+            Created with Enhance CV
         </div>
     </div>
 </body>

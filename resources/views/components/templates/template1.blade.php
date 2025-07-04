@@ -4,161 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $personal_info['name'] ?? 'Professional Resume' }}</title>
+    <title>{{ $personal_info['name'] ?? 'Professional CV' }}</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
+        :root {
+            --primary: #2b579a;
+            --dark: #323130;
+            --gray: #605e5c;
+            --light-gray: #f3f2f1;
+            --white: #ffffff;
+        }
+
         body {
-            background-color: #f0f2f5;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
             margin: 0;
             padding: 0;
-            font-family: 'Roboto', sans-serif;
+            background-color: var(--light-gray);
         }
 
-        .resume-container {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-            max-width: 960px;
-            /* margin: 40px auto; */
-            background: #ffffff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
-            border-radius: 8px;
-            overflow: hidden;
+        .cv-container {
+            max-width: 210mm;
+            margin: 20px auto;
+            background: var(--white);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .sidebar {
-            background-color: #f7f9fb;
-            padding: 40px 30px;
-            border-right: 1px solid #e0e0e0;
-        }
-
-        .main-content {
-            padding: 40px 30px;
-        }
-
-        .name-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .name {
-            font-size: 26px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .title {
-            font-size: 14px;
-            color: #7f8c8d;
-            font-weight: 500;
-        }
-
-        .section {
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #34495e;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-        }
-
-        .contact-info {
-            margin-bottom: 10px;
-            font-size: 14px;
-            color: #2c3e50;
+        .header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 30px 40px;
             display: flex;
             align-items: center;
-        }
-
-        .contact-info i {
-            margin-right: 10px;
-            color: #3498db;
-            width: 18px;
-            text-align: center;
-        }
-
-        .education-item,
-        .experience-item,
-        .language-item,
-        .reference-item {
-            margin-bottom: 20px;
-        }
-
-        .date {
-            font-size: 13px;
-            color: #999;
-            margin-bottom: 3px;
-        }
-
-        .degree,
-        .job-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .university,
-        .company {
-            font-size: 14px;
-            color: #34495e;
-            margin-bottom: 5px;
-        }
-
-        .description {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .skills-list {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .skill-item {
-            margin-bottom: 15px;
-        }
-
-        .skill-name {
-            font-weight: 500;
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: #2c3e50;
-        }
-
-        .skill-bar {
-            height: 8px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .skill-level {
-            height: 100%;
-            background-color: #3498db;
-        }
-
-        .language-name {
-            font-weight: 500;
-            color: #2c3e50;
-        }
-
-        .language-level {
-            font-size: 13px;
-            color: #7f8c8d;
-        }
-
-        .profile-text {
-            font-size: 14px;
-            color: #444;
-            line-height: 1.7;
         }
 
         .photo-container {
@@ -166,12 +45,9 @@
             height: 120px;
             border-radius: 50%;
             overflow: hidden;
-            margin: 0 auto 20px;
-            border: 3px solid #3498db;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #e9ecef;
+            border: 3px solid var(--white);
+            margin-right: 30px;
+            flex-shrink: 0;
         }
 
         .photo-container img {
@@ -180,172 +56,293 @@
             object-fit: cover;
         }
 
-        .empty-message {
-            font-style: italic;
-            color: #aaa;
-            font-size: 13px;
+        .photo-container i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background-color: var(--light-gray);
+            color: var(--gray);
+            font-size: 40px;
         }
 
-        .active-section {
-            position: relative;
-            border: 2px dashed #3498db;
-            border-radius: 6px;
-            padding: 10px;
-            background-color: #eef6fb;
-            margin: -10px 0 20px;
+        .header-text {
+            flex-grow: 1;
         }
 
-        a {
-            color: #2980b9;
+        .name {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 400;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-item i {
+            margin-right: 8px;
+        }
+
+        .main-content {
+            padding: 30px 40px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+
+        .sidebar {
+            border-right: 1px solid var(--light-gray);
+            padding-right: 20px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--primary);
+            text-transform: uppercase;
+        }
+
+        .skills-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .skill-item {
+            margin-bottom: 10px;
+        }
+
+        .skill-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .skill-bar {
+            height: 6px;
+            background-color: var(--light-gray);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background-color: var(--primary);
+        }
+
+        .language-item {
+            margin-bottom: 10px;
+        }
+
+        .language-name {
+            font-weight: 500;
+        }
+
+        .language-level {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .education-item,
+        .certification-item {
+            margin-bottom: 20px;
+        }
+
+        .date {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 3px;
+        }
+
+        .degree,
+        .certification-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .institution,
+        .certification-issuer {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .experience-item {
+            margin-bottom: 25px;
+        }
+
+        .job-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+
+        .company {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .job-description {
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        .project-item {
+            margin-bottom: 20px;
+        }
+
+        .project-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .project-link {
+            font-size: 14px;
+            color: var(--primary);
             text-decoration: none;
         }
 
-        a:hover {
+        .project-link:hover {
             text-decoration: underline;
         }
-    </style>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        .project-description {
+            font-size: 14px;
+            color: var(--dark);
+            margin-top: 5px;
+        }
+
+        @media print {
+            body {
+                background: none;
+            }
+
+            .cv-container {
+                box-shadow: none;
+                margin: 0;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .photo-container {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .sidebar {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 1px solid var(--light-gray);
+                padding-bottom: 20px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <div class="resume-container">
-        <div class="sidebar">
-            <div class="@if ($currentStep == 1) active-section @endif">
-                <div class="name-title">
-                    <h1 class="name">{{ $personal_info['name'] ?? 'Your Name' }}</h1>
-                    <p class="occupation">{{ $personal_info['occupation'] ?? null }}</p>
-                </div>
-                <div class="photo-container">
-                    @if($photoPreview)
-                    <!-- New photo preview (temporary upload) -->
-                    <img
-                        src="{{ $photoPreview }}"
-                        alt="Profile Preview"
-                        class="w-full h-full object-cover">
-                    @elseif(!empty($personal_info['photo']))
-                    <!-- Existing stored photo -->
-                    <img
-                        src="{{ asset('storage/' . $personal_info['photo']) }}"
-                        alt="Profile Photo"
-                        class="w-full h-full object-cover">
-                    @else
-                    <!-- Default placeholder when no photo exists -->
-                    <i class="fas fa-user" style="font-size:40px;color:#7f8c8d;"></i>
-                    @endif
-                </div>
-
-                <div class="section">
-                    <h2 class="section-title">CONTACT</h2>
+    <div class="cv-container">
+        <div class="header">
+            <div class="photo-container">
+                @if($photoPreview)
+                <img src="{{ $photoPreview }}" alt="Profile Photo">
+                @elseif(!empty($personal_info['photo']))
+                <img src="{{ asset('storage/' . $personal_info['photo']) }}" alt="Profile Photo">
+                @else
+                <i class="fas fa-user"></i>
+                @endif
+            </div>
+            <div class="header-text">
+                <h1 class="name">{{ $personal_info['name'] ?? 'Your Name' }}</h1>
+                <p class="title">{{ $personal_info['occupation'] ?? 'Professional Title' }}</p>
+                <div class="contact-info">
                     @if (!empty($personal_info['phone']))
-                    <div class="contact-info">
+                    <div class="contact-item">
                         <i class="fas fa-phone"></i>
                         <span>{{ $personal_info['phone'] }}</span>
                     </div>
-                    @else
-                    <div class="contact-info">
-                        <i class="fas fa-phone"></i>
-                        <span class="empty-message">(123) 456-7890</span>
-                    </div>
                     @endif
-
                     @if (!empty($personal_info['email']))
-                    <div class="contact-info">
+                    <div class="contact-item">
                         <i class="fas fa-envelope"></i>
                         <span>{{ $personal_info['email'] }}</span>
                     </div>
-                    @else
-                    <div class="contact-info">
-                        <i class="fas fa-envelope"></i>
-                        <span class="empty-message">your.email@example.com</span>
-                    </div>
                     @endif
-
                     @if (!empty($personal_info['address']))
-                    <div class="contact-info">
+                    <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>{{ $personal_info['address'] }}</span>
                     </div>
-                    @else
-                    <div class="contact-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span class="empty-message">City, Country</span>
-                    </div>
                     @endif
-
-                    @if (!empty($personal_info['website']))
-                    <div class="contact-info">
-                        <i class="fas fa-globe"></i>
-                        <span>{{ $personal_info['website'] }}</span>
-                    </div>
-                    @else
-                    <div class="contact-info">
-                        <i class="fas fa-globe"></i>
-                        <span class="empty-message">yourwebsite.com</span>
-                    </div>
-                    @endif
-
                     @if (!empty($personal_info['linkedin']))
-                    <div class="contact-info">
+                    <div class="contact-item">
                         <i class="fab fa-linkedin"></i>
                         <span>{{ $personal_info['linkedin'] }}</span>
                     </div>
-                    @else
-                    <div class="contact-info">
-                        <i class="fab fa-linkedin"></i>
-                        <span class="empty-message">linkedin.com/in/yourprofile</span>
-                    </div>
                     @endif
-
-                    @if (!empty($personal_info['github']))
-                    <div class="contact-info">
-                        <i class="fab fa-github"></i>
-                        <span>{{ $personal_info['github'] }}</span>
-                    </div>
-                    @else
-                    <div class="contact-info">
-                        <i class="fab fa-github"></i>
-                        <span class="empty-message">github.com/username</span>
+                    @if (!empty($personal_info['website']))
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <span>{{ $personal_info['website'] }}</span>
                     </div>
                     @endif
                 </div>
             </div>
+        </div>
 
-            <div class="@if ($currentStep == 3) active-section @endif">
+        <div class="main-content">
+            <div class="sidebar">
                 <div class="section">
-                    <h2 class="section-title">EDUCATION</h2>
-                    @if (!empty($educations))
-                    @foreach ($educations as $education)
-                    <div class="education-item">
-                        @if (!empty($education['start_date']) || !empty($education['end_date']))
-                        <p class="date">
-                            {{ $education['start_date'] ?? '' }} - {{ $education['end_date'] ?? '' }}
-                        </p>
-                        @endif
-                        @if (!empty($education['degree']))
-                        <p class="degree">{{ $education['degree'] }}</p>
-                        @endif
-                        @if (!empty($education['institution']))
-                        <p class="university">{{ $education['institution'] }}</p>
-                        @endif
-                        @if (!empty($education['field_of_study']))
-                        <p class="description">Field: {{ $education['field_of_study'] }}</p>
-                        @endif
-                    </div>
-                    @endforeach
+                    <h2 class="section-title">Profile</h2>
+                    @if (!empty($personal_info['summary']))
+                    <p>{{ $personal_info['summary'] }}</p>
                     @else
-                    <p class="empty-message">Add your education history</p>
+                    <p>Professional summary highlighting key qualifications and career objectives.</p>
                     @endif
                 </div>
-            </div>
 
-            <div class="@if ($currentStep == 4) active-section @endif">
                 <div class="section">
-                    <h2 class="section-title">SKILLS</h2>
+                    <h2 class="section-title">Skills</h2>
                     @if (!empty($skills))
                     <ul class="skills-list">
                         @foreach ($skills as $skill)
-                        @if (!empty($skill['name']))
                         <li class="skill-item">
                             <span class="skill-name">{{ $skill['name'] }}</span>
                             @if (!empty($skill['level']))
@@ -354,124 +351,106 @@
                             </div>
                             @endif
                         </li>
-                        @endif
                         @endforeach
                     </ul>
                     @else
-                    <p class="empty-message">Add your skills and proficiency levels</p>
+                    <p>Add your key skills and competencies</p>
                     @endif
                 </div>
-            </div>
 
-            <div class="@if ($currentStep == 6) active-section @endif">
                 <div class="section">
-                    <h2 class="section-title">LANGUAGES</h2>
+                    <h2 class="section-title">Languages</h2>
                     @if (!empty($languages))
                     @foreach ($languages as $language)
-                    @if (!empty($language['name']))
                     <div class="language-item">
                         <span class="language-name">{{ $language['name'] }}</span>
-                        @if (!empty($language['proficiency']))
                         <span class="language-level">({{ $language['proficiency'] }})</span>
-                        @endif
                     </div>
-                    @endif
                     @endforeach
                     @else
-                    <p class="empty-message">Add languages you speak</p>
+                    <p>Add languages you speak</p>
                     @endif
                 </div>
-            </div>
-        </div>
 
-        <div class="main-content">
-            <div class="section">
-                <h2 class="section-title">PROFILE</h2>
-                @if (!empty($personal_info['summary']))
-                <p class="profile-text">
-                    {{ $personal_info['summary'] }}
-                </p>
-                @else
-                <p class="empty-message">Write a brief summary about yourself and your professional background</p>
-                @endif
-            </div>
-
-            <div class="@if ($currentStep == 2) active-section @endif">
                 <div class="section">
-                    <h2 class="section-title">WORK EXPERIENCE</h2>
+                    <h2 class="section-title">Education</h2>
+                    @if (!empty($educations))
+                    @foreach ($educations as $education)
+                    <div class="education-item">
+                        <div class="date">
+                            {{ $education['start_date'] ?? '' }} - {{ $education['end_date'] ?? '' }}
+                        </div>
+                        <div class="degree">{{ $education['degree'] }}</div>
+                        <div class="institution">{{ $education['institution'] }}</div>
+                        @if (!empty($education['field_of_study']))
+                        <div class="institution">Field: {{ $education['field_of_study'] }}</div>
+                        @endif
+                    </div>
+                    @endforeach
+                    @else
+                    <p>Add your education history</p>
+                    @endif
+                </div>
+
+
+            </div>
+
+            <div class="content">
+                <div class="section">
+                    <h2 class="section-title">Professional Experience</h2>
                     @if (!empty($experiences))
                     @foreach ($experiences as $experience)
                     <div class="experience-item">
-                        @if (!empty($experience['job_title']))
-                        <p class="job-title">{{ $experience['job_title'] }}</p>
-                        @endif
-                        @if (!empty($experience['employer']))
-                        <p class="company">{{ $experience['employer'] }}</p>
-                        @endif
-                        @if (!empty($experience['start_date']) || !empty($experience['end_date']))
-                        <p class="date">
-                            {{ $experience['start_date'] ?? '' }} - {{ $experience['end_date'] ?? '' }}
-                        </p>
-                        @endif
+                        <div class="date">
+                            {{ $experience['start_date'] ?? '' }} - {{ $experience['end_date'] ?? 'Present' }}
+                        </div>
+                        <div class="job-title">{{ $experience['job_title'] }}</div>
+                        <div class="company">{{ $experience['employer'] }}</div>
                         @if (!empty($experience['description']))
-                        <div class="description">
+                        <div class="job-description">
                             {!! nl2br(e($experience['description'])) !!}
                         </div>
                         @endif
                     </div>
                     @endforeach
                     @else
-                    <p class="empty-message">Add your work experience history</p>
+                    <p>Add your professional work experience</p>
                     @endif
                 </div>
-            </div>
 
-            <div class="@if ($currentStep == 5) active-section @endif">
                 <div class="section">
-                    <h2 class="section-title">PROJECTS</h2>
+                    <h2 class="section-title">Projects</h2>
                     @if (!empty($projects))
                     @foreach ($projects as $project)
-                    <div class="experience-item">
-                        @if (!empty($project['name']))
-                        <p class="job-title">{{ $project['name'] }}</p>
-                        @endif
+                    <div class="project-item">
+                        <div class="project-name">{{ $project['name'] }}</div>
                         @if (!empty($project['link']))
-                        <p class="company">
-                            <a href="{{ $project['link'] }}" target="_blank">{{ $project['link'] }}</a>
-                        </p>
+                        <a href="{{ $project['link'] }}" class="project-link" target="_blank">{{ $project['link'] }}</a>
                         @endif
                         @if (!empty($project['description']))
-                        <div class="description">
+                        <div class="project-description">
                             {!! nl2br(e($project['description'])) !!}
                         </div>
                         @endif
                     </div>
                     @endforeach
                     @else
-                    <p class="empty-message">Add projects you've worked on</p>
+                    <p>Add projects you've worked on</p>
                     @endif
                 </div>
-            </div>
 
-            <div class="@if ($currentStep == 7) active-section @endif">
                 <div class="section">
-                    <h2 class="section-title">CERTIFICATIONS</h2>
+                    <h2 class="section-title">Certifications</h2>
                     @if (!empty($certifications))
                     @foreach ($certifications as $certification)
-                    <div class="education-item">
-                        @if (!empty($certification['date_issued']))
-                        <p class="date">{{ $certification['date_issued'] }}</p>
-                        @endif
-                        @if (!empty($certification['name']))
-                        <p class="degree">{{ $certification['name'] }}</p>
-                        @endif
-                        @if (!empty($certification['issuer']))
-                        <p class="university">{{ $certification['issuer'] }}</p>
-                        @endif
+                    <div class="certification-item">
+                        <div class="date">{{ $certification['date_issued'] }}</div>
+                        <div class="certification-name">{{ $certification['name'] }}</div>
+                        <div class="certification-issuer">{{ $certification['issuer'] }}</div>
                     </div>
                     @endforeach
                     @else
-                    <p class="empty-message">Add your professional certifications</p>
+                    <p>Add your professional certifications</p>
                     @endif
                 </div>
             </div>
