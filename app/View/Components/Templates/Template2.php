@@ -18,6 +18,7 @@ class Template2 extends Component
     public $projects;
     public $languages;
     public $certifications;
+    public $photoPreview;
     // currentStep
     public $currentStep = null;
 
@@ -32,7 +33,8 @@ class Template2 extends Component
         $projects = [],
         $languages = [],
         $certifications = [],
-        $currentStep = null
+        $currentStep = null,
+        $photoPreview = null
     ) {
         $this->personal_info = $personalInfo;
         $this->experiences = $experiences;
@@ -42,6 +44,7 @@ class Template2 extends Component
         $this->languages = $languages;
         $this->certifications = $certifications;
         $this->currentStep = $currentStep;
+        $this->photoPreview = $photoPreview;
     }
 
     /**
@@ -58,6 +61,7 @@ class Template2 extends Component
             'languages' => $this->languages,
             'certifications' => $this->certifications,
             'currentStep' => $this->currentStep,
+            'photoPreview' => $this->photoPreview,
         ]);
     }
 }

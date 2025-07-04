@@ -21,6 +21,22 @@ class Index extends Component
     public $resume = null;
     public $isEditing   = false;
 
+    public $photo; // For file upload
+    public $photoPreview = null; // Stores temporary preview URL
+
+    // When a new photo is selected
+    public function updatedPhoto()
+    {
+        $this->validate(['photo' => 'image|max:2048']); // 2MB max
+        $this->photoPreview = $this->photo->temporaryUrl(); // Livewire handles temp URL
+    }
+
+    // Remove photo
+    public function removePhoto()
+    {
+        $this->reset('photo', 'photoPreview');
+        $this->personal_info['photo'] = null; // Clear stored photo if exists
+    }
 
     public function mount($template = null, $resume = null)
     {
@@ -303,10 +319,17 @@ class Index extends Component
             'slug' => 'required|string|max:255|unique:resumes,slug,' . ($this->isEditing ? $this->resume->id : 'NULL') . ',id',
         ]);
 
-        // Handle photo upload if exists
-        if (is_object($this->personal_info['photo'])) {
-            $photoPath = $this->personal_info['photo']->store('resume-photos', 'public');
-            $this->personal_info['photo'] = $photoPath;
+        // Store new photo if uploaded
+        // Handle photo upload (both new uploads and existing photos)
+        if ($this->photo) {
+            // Store new photo and save path
+            $this->personal_info['photo'] = $this->photo->store('resume-photos', 'public');
+        } elseif ($this->isEditing && isset($this->resume->personal_info['photo'])) {
+            // Keep existing photo if editing and no new photo was uploaded
+            $this->personal_info['photo'] = $this->resume->personal_info['photo'];
+        } else {
+            // No photo case
+            $this->personal_info['photo'] = null;
         }
 
         $data = [

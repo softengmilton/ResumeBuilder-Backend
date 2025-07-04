@@ -20,7 +20,7 @@
             grid-template-columns: 1fr 2fr;
             gap: 30px;
             max-width: 960px;
-            margin: 40px auto;
+            /* margin: 40px auto; */
             background: #ffffff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
             border-radius: 8px;
@@ -216,29 +216,21 @@
                     <h1 class="name">{{ $personal_info['name'] ?? 'Your Name' }}</h1>
                     <p class="occupation">{{ $personal_info['occupation'] ?? null }}</p>
                 </div>
-
                 <div class="photo-container">
-                    @if (!empty($personal_info['photo_tmp']))
-                    <!-- Debug output (remove after testing) -->
-                    <small style="color:red;display:block;">Debug: {{ gettype($personal_info['photo_tmp']) }} -
-                        {{ substr($personal_info['photo_tmp'], 0, 30) }}...</small>
-
-                    @if (strpos($personal_info['photo_tmp'], 'data:image') === 0)
-                    <!-- Base64 image -->
-                    <img src="{{ $personal_info['photo_tmp'] }}" alt="Preview"
-                        style="width:100%;height:100%;object-fit:cover;">
-                    @elseif(Storage::exists($personal_info['photo_tmp']))
-                    <!-- File in storage -->
-                    <img src="{{ asset('storage/' . $personal_info['photo_tmp']) }}" alt="Preview"
-                        style="width:100%;height:100%;object-fit:cover;">
+                    @if($photoPreview)
+                    <!-- New photo preview (temporary upload) -->
+                    <img
+                        src="{{ $photoPreview }}"
+                        alt="Profile Preview"
+                        class="w-full h-full object-cover">
+                    @elseif(!empty($personal_info['photo']))
+                    <!-- Existing stored photo -->
+                    <img
+                        src="{{ asset('storage/' . $personal_info['photo']) }}"
+                        alt="Profile Photo"
+                        class="w-full h-full object-cover">
                     @else
-                    <!-- Invalid path -->
-                    <small style="color:red;">Error: Image not found at
-                        {{ $personal_info['photo_tmp'] }}</small>
-                    <i class="fas fa-user" style="font-size:40px;color:#7f8c8d;"></i>
-                    @endif
-                    @else
-                    <!-- No photo -->
+                    <!-- Default placeholder when no photo exists -->
                     <i class="fas fa-user" style="font-size:40px;color:#7f8c8d;"></i>
                     @endif
                 </div>

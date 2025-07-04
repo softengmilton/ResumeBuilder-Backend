@@ -174,15 +174,24 @@
 <body>
     <div class="resume-container">
         <div class="header">
-            @if (!empty($personal_info['photo']))
-            <div class="photo">
-                <img src="{{ asset('storage/' . $personal_info['photo']) }}" alt="Profile Photo">
+            <div class="photo-container">
+                @if($photoPreview)
+                <!-- New photo preview (temporary upload) -->
+                <img
+                    src="{{ $photoPreview }}"
+                    alt="Profile Preview"
+                    class="w-full h-full object-cover">
+                @elseif(!empty($personal_info['photo']))
+                <!-- Existing stored photo -->
+                <img
+                    src="{{ asset('storage/' . $personal_info['photo']) }}"
+                    alt="Profile Photo"
+                    class="w-full h-full object-cover">
+                @else
+                <!-- Default placeholder when no photo exists -->
+                <i class="fas fa-user" style="font-size:40px;color:#7f8c8d;"></i>
+                @endif
             </div>
-            @else
-            <div class="photo" style="background-color:#ddd; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-user" style="font-size: 40px; color: #999;"></i>
-            </div>
-            @endif
             <h1 class="name">{{ $personal_info['name'] ?? 'Your Name' }}</h1>
             <p class="title">{{ $personal_info['summary'] ?? 'Professional Title' }}</p>
         </div>

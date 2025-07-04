@@ -173,15 +173,38 @@
                                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
                             </div>
 
-                            <!-- Photo Upload -->
-                            <div class="md:col-span-2">
-                                <label for="photo"
-                                    class="block text-sm font-medium text-gray-700 mb-1">Photo</label>
-                                <input type="file" wire:model="personal_info.photo" id="photo"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
-                                @error('personal_info.photo')
-                                <span class="text-red-500 text-xs">{{ $message }}</span>
-                                @enderror
+                            <!-- Photo Upload & Preview -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Profile Photo</label>
+
+                                <!-- Preview (New or Existing) -->
+                                @if($photoPreview ?? false)
+                                <div class="mt-2">
+                                    <img
+                                        src="{{ $photoPreview  }}"
+                                        alt="Profile Photo"
+                                        class="h-24 w-24 rounded-full object-cover border">
+                                    <button
+                                        wire:click="removePhoto"
+                                        type="button"
+                                        class="mt-2 text-sm text-red-500 hover:text-red-700">
+                                        Remove Photo
+                                    </button>
+                                </div>
+                                @else
+                                <!-- Default placeholder -->
+                                <div class="mt-2 flex items-center justify-center h-24 w-24 rounded-full bg-gray-200">
+                                    <i class="fas fa-user text-gray-400 text-2xl"></i>
+                                </div>
+                                @endif
+
+                                <!-- File Input -->
+                                <input
+                                    type="file"
+                                    wire:model="photo"
+                                    accept="image/*"
+                                    class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                                @error('photo') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
 
                             <!-- Summary -->
@@ -772,6 +795,7 @@
                                 :projects="$projects"
                                 :languages="$languages"
                                 :certifications="$certifications"
+                                :photoPreview="$photoPreview"
                                 :currentStep="$currentStep" />
                         </div>
                     </div>
@@ -804,6 +828,7 @@
                             :skills="$skills"
                             :projects="$projects"
                             :languages="$languages"
+                            :photoPreview="$photoPreview"
                             :certifications="$certifications" />
                     </div>
                 </div>
@@ -898,56 +923,81 @@
 
     <script>
         async function downloadPDF() {
-            const original = document.getElementById('pdf-content');
+            const element = document.getElementById('pdf-content');
 
-            // Clone the component's content to avoid scroll/crop issues
-            const clone = original.cloneNode(true);
-            clone.style.maxHeight = 'none';
-            clone.style.overflow = 'visible';
-            clone.style.position = 'absolute';
-            clone.style.top = '0';
-            clone.style.left = '0';
-            clone.style.zIndex = '-1'; // Hide visually but keep renderable
-            clone.style.width = original.offsetWidth + 'px';
+            // Temporarily adjust styles for PDF generation
+            const originalStyles = {
+                minWidth: element.style.minWidth,
+                overflow: element.style.overflow,
+                maxHeight: element.style.maxHeight
+            };
 
-            document.body.appendChild(clone);
+            element.style.minWidth = '210mm'; // A4 width
+            element.style.overflow = 'visible';
+            element.style.maxHeight = 'none';
 
-            // Wait for DOM reflow and rendering
-            await new Promise(resolve => setTimeout(resolve, 500));
+            // Wait for DOM update
+            await new Promise(resolve => setTimeout(resolve, 100));
 
-            const canvas = await html2canvas(clone, {
+            const options = {
                 scale: 2,
                 useCORS: true,
-                windowWidth: clone.scrollWidth,
-            });
+                scrollX: 0,
+                scrollY: 0,
+                windowWidth: element.scrollWidth,
+                windowHeight: element.scrollHeight,
+                allowTaint: true,
+                logging: true
+            };
 
-            document.body.removeChild(clone); // clean up
+            try {
+                const canvas = await html2canvas(element, options);
+                const imgData = canvas.toDataURL('image/png');
 
-            const imgData = canvas.toDataURL('image/png');
-            const {
-                jsPDF
-            } = window.jspdf;
-            const pdf = new jsPDF('p', 'mm', 'a4');
+                const {
+                    jsPDF
+                } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: [canvas.width * 0.264583, canvas.height * 0.264583] // Convert px to mm
+                });
 
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const imgProps = pdf.getImageProperties(imgData);
-            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-            // Check if content is taller than one page
-            if (pdfHeight <= pdf.internal.pageSize.getHeight()) {
-                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-            } else {
-                // Paginate
-                let position = 0;
-                const pageHeight = pdf.internal.pageSize.getHeight();
-                while (position < pdfHeight) {
-                    pdf.addImage(imgData, 'PNG', 0, -position, pdfWidth, pdfHeight);
-                    position += pageHeight;
-                    if (position < pdfHeight) pdf.addPage();
-                }
+                pdf.addImage(imgData, 'PNG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+                pdf.save('resume.pdf');
+            } catch (error) {
+                console.error('PDF generation error:', error);
+                alert('Error generating PDF. Please try again.');
+            } finally {
+                // Restore original styles
+                element.style.minWidth = originalStyles.minWidth;
+                element.style.overflow = originalStyles.overflow;
+                element.style.maxHeight = originalStyles.maxHeight;
             }
-
-            pdf.save('resume.pdf');
         }
     </script>
+    <style>
+        /* PDF-specific styles */
+        .pdf-version {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm;
+            margin: 0;
+            box-sizing: border-box;
+            overflow: visible !important;
+        }
+
+        /* Prevent page breaks in PDF */
+        .pdf-version * {
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            page-break-before: avoid;
+        }
+
+        /* Screen-specific styles */
+        .screen-version {
+            max-width: 100%;
+            overflow: auto;
+        }
+    </style>
 </div>
