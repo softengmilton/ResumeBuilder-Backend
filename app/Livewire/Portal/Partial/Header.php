@@ -6,8 +6,15 @@ use Livewire\Component;
 
 class Header extends Component
 {
+
+
     public function render()
     {
-        return view('livewire.portal.partial.header');
+        $setting = \App\Models\Setting::all()->pluck('value', 'key')->toArray();
+        // dd($setting);
+        return view(
+            'livewire.portal.partial.header',
+            compact('setting')
+        );
     }
 }

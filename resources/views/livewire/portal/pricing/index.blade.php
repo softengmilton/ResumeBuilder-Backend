@@ -7,13 +7,13 @@
                 fees, cancel anytime.</p>
 
             <!-- Toggle -->
-            <div class="flex justify-center mb-12">
+            <!-- <div class="flex justify-center mb-12">
                 <div class="bg-gray-200 rounded-full p-1 flex">
                     <button class="px-6 py-2 rounded-full font-medium bg-white shadow-sm text-gray-800">Monthly</button>
                     <button class="px-6 py-2 rounded-full font-medium text-gray-600 hover:text-gray-800">Yearly (Save
                         20%)</button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -111,8 +111,7 @@
                         <span class="text-gray-500">/Yearly</span>
                     </div>
                     <a href="{{route('checkout', ['plan' => 'Enterprise'])}}"
-                        class="block w-full py-3 px-4 border border-green-500 text-green-500 text-center font-medium rounded-md hover:bg-green-50 transition-colors mb-6">Start
-                        Free Trial</a>
+                        class="block w-full py-3 px-4 border border-green-500 text-green-500 text-center font-medium rounded-md hover:bg-green-50 transition-colors mb-6">Get Started</a>
 
                     <ul class="space-y-3">
                         <li class="flex items-start">

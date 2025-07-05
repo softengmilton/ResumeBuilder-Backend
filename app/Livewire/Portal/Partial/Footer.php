@@ -8,6 +8,7 @@ class Footer extends Component
 {
     public function render()
     {
-        return view('livewire.portal.partial.footer');
+        $setting = \App\Models\Setting::all()->pluck('value', 'key')->toArray();
+        return view('livewire.portal.partial.footer', compact('setting'));
     }
 }

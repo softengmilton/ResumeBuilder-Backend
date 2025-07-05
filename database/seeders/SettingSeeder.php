@@ -14,28 +14,27 @@ class SettingSeeder extends Seeder
      */
     public function run(): void
     {
-        $defaultLogo = 'images/logo.png';
+        $defaultLogo = 'images/logo.svg';
 
         // Copy default logo if it doesn't exist
         if (!Storage::disk('public')->exists($defaultLogo)) {
             Storage::disk('public')->put(
                 $defaultLogo,
-                file_get_contents(public_path('images/logo.png'))
+                file_get_contents(public_path('images/logo.svg'))
             );
         }
-
         $settings = [
             'logo_path' => $defaultLogo,
-            'site_title' => 'Shaadiya',
+            'site_title' => 'Enhance',
             'site_phone' => '+88 01850267268',
-            'site_description' => 'Welcome to Shaadiya, where relationships begin.',
-            'site_email' => 'info@shaadiya.com',
+            'site_description' => 'Pick a resume template and build your resume in minutes!',
+            'site_email' => 'info@enhance.com',
             'site_address' => '1234 Zindabazar St, Sylhet, Bangladesh',
-            'site_insta_link' => 'https://instagram.com/shaadiya',
-            'site_tiktok_link' => 'https://tiktok.com/@shaadiya',
-            'site_gmail_link' => 'mailto:contact@shaadiya.com',
+            'site_facebook_link' => 'https://facebook.com/enhance',
+            'site_twitter_link' => 'https://twitter.com/enhance',
+            'site_instagram_link' => 'https://instagram.com/enhance',
+            'site_linkedin_link' => 'https://linkedin.com/company/enhance',
         ];
-
         foreach ($settings as $key => $value) {
             Setting::updateOrCreate(['key' => $key], ['value' => $value]);
         }

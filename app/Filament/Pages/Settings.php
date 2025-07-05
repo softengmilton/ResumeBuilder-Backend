@@ -92,17 +92,22 @@ class Settings extends Page implements HasForms
 
                 Section::make('Social Links')
                     ->schema([
-                        TextInput::make('site_insta_link')
-                            ->label('Instagram Link')
-                            ->url(),
-
-                        TextInput::make('site_tiktok_link')
-                            ->label('TikTok Link')
-                            ->url(),
-
-                        TextInput::make('site_gmail_link')
-                            ->label('Gmail Link')
-                            ->url(),
+                        TextInput::make('site_facebook_link')
+                            ->label('Facebook URL')
+                            ->url()
+                            ->prefix('https://facebook.com/'),
+                        TextInput::make('site_twitter_link')
+                            ->label('Twitter URL')
+                            ->url()
+                            ->prefix('https://twitter.com/'),
+                        TextInput::make('site_instagram_link')
+                            ->label('Instagram URL')
+                            ->url()
+                            ->prefix('https://instagram.com/'),
+                        TextInput::make('site_linkedin_link')
+                            ->label('LinkedIn URL')
+                            ->url()
+                            ->prefix('https://linkedin.com/'),
                     ])
                     ->columns(2),
             ])
