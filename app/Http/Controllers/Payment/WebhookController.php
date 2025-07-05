@@ -60,18 +60,17 @@ class WebhookController extends Controller
         }
         // Add these additional event handlers
         switch ($payload['type']) {
-            case 'invoice.payment_succeeded':
-                return $this->handleInvoicePaymentSucceeded($payload);
-            case 'invoice.paid': // Add this to handle both event types
+            case 'invoice.paid':
+                // Only handle subscription payments here
                 return $this->handleInvoicePaymentSucceeded($payload);
             case 'payment_intent.succeeded':
                 return $this->handlePaymentIntentSucceeded($payload);
             case 'charge.succeeded':
-                return $this->handleChargeSucceeded($payload);
+                // Skip entirely - we'll handle all payments through invoice.paid or payment_intent.succeeded
+                return $this->successMethod();
             case 'invoice.payment_failed':
                 return $this->handleInvoicePaymentFailed($payload);
         }
-
         return $this->missingMethod($payload);
     }
 
@@ -414,7 +413,7 @@ class WebhookController extends Controller
                 'user_id' => $user->id,
                 'subscription_id' => $subscription->id ?? null,
                 'type' => 'subscription',
-                'amount' => $invoice['amount_paid'] ?? $invoice['amount_due'] ?? 0,
+                'amount' => ($invoice['amount_paid'] ?? $invoice['amount_due'] ?? 0) / 100,
                 'currency' => $invoice['currency'] ?? 'usd',
                 'status' => 'succeeded',
                 'payment_method' => $invoice['payment_method'] ?? null,
@@ -437,61 +436,61 @@ class WebhookController extends Controller
         }
     }
 
-    protected function handleChargeSucceeded(array $payload)
-    {
-        try {
-            $charge = $payload['data']['object'] ?? [];
+    // protected function handleChargeSucceeded(array $payload)
+    // {
+    //     try {
+    //         $charge = $payload['data']['object'] ?? [];
 
-            if (!isset($charge['customer'])) {
-                Log::warning('Charge succeeded but no customer found', ['charge' => $charge]);
-                return $this->successMethod();
-            }
+    //         if (!isset($charge['customer'])) {
+    //             Log::warning('Charge succeeded but no customer found', ['charge' => $charge]);
+    //             return $this->successMethod();
+    //         }
 
-            $user = $this->getUserByStripeId($charge['customer']);
+    //         $user = $this->getUserByStripeId($charge['customer']);
 
-            if (!$user) {
-                Log::warning('User not found for customer', ['customer' => $charge['customer']]);
-                return $this->successMethod();
-            }
+    //         if (!$user) {
+    //             Log::warning('User not found for customer', ['customer' => $charge['customer']]);
+    //             return $this->successMethod();
+    //         }
 
-            // Check if this is a subscription payment
-            $subscription = null;
-            if (isset($charge['invoice'])) {
-                try {
-                    $invoice = \Stripe\Invoice::retrieve($charge['invoice']);
-                    if (isset($invoice['subscription'])) {
-                        $subscription = Subscription::where('stripe_id', $invoice['subscription'])->first();
-                    }
-                } catch (\Exception $e) {
-                    Log::error('Failed to retrieve invoice:', ['error' => $e->getMessage()]);
-                }
-            }
+    //         // Check if this is a subscription payment
+    //         $subscription = null;
+    //         if (isset($charge['invoice'])) {
+    //             try {
+    //                 $invoice = \Stripe\Invoice::retrieve($charge['invoice']);
+    //                 if (isset($invoice['subscription'])) {
+    //                     $subscription = Subscription::where('stripe_id', $invoice['subscription'])->first();
+    //                 }
+    //             } catch (\Exception $e) {
+    //                 Log::error('Failed to retrieve invoice:', ['error' => $e->getMessage()]);
+    //             }
+    //         }
 
-            $transactionData = [
-                'stripe_id' => $charge['id'] ?? Str::uuid(),
-                'user_id' => $user->id,
-                'subscription_id' => $subscription->id ?? null,
-                'type' => isset($charge['invoice']) ? 'subscription' : 'charge',
-                'amount' => $charge['amount'] ?? 0,
-                'currency' => $charge['currency'] ?? 'usd',
-                'status' => $charge['status'] ?? 'succeeded',
-                'payment_method' => $charge['payment_method'] ?? $charge['source']['id'] ?? null,
-                'description' => $charge['description'] ?? null,
-                'receipt_url' => $charge['receipt_url'] ?? null,
-                'invoice_id' => $charge['invoice'] ?? null,
-                'metadata' => $charge['metadata'] ?? null,
-            ];
+    //         $transactionData = [
+    //             'stripe_id' => $charge['id'] ?? Str::uuid(),
+    //             'user_id' => $user->id,
+    //             'subscription_id' => $subscription->id ?? null,
+    //             'type' => isset($charge['invoice']) ? 'subscription' : 'charge',
+    //             'amount' => ($charge['amount'] ?? 0) / 100,
+    //             'currency' => $charge['currency'] ?? 'usd',
+    //             'status' => $charge['status'] ?? 'succeeded',
+    //             'payment_method' => $charge['payment_method'] ?? $charge['source']['id'] ?? null,
+    //             'description' => $charge['description'] ?? null,
+    //             'receipt_url' => $charge['receipt_url'] ?? null,
+    //             'invoice_id' => $charge['invoice'] ?? null,
+    //             'metadata' => $charge['metadata'] ?? null,
+    //         ];
 
-            $transaction = Transaction::create($transactionData);
-            Log::info('Transaction created from charge:', $transaction->toArray());
+    //         $transaction = Transaction::create($transactionData);
+    //         Log::info('Transaction created from charge:', $transaction->toArray());
 
-            return $this->successMethod();
-        } catch (\Exception $e) {
-            Log::error('Failed to handle charge succeeded:', [
-                'error' => $e->getMessage(),
-                'payload' => $payload
-            ]);
-            return $this->successMethod();
-        }
-    }
+    //         return $this->successMethod();
+    //     } catch (\Exception $e) {
+    //         Log::error('Failed to handle charge succeeded:', [
+    //             'error' => $e->getMessage(),
+    //             'payload' => $payload
+    //         ]);
+    //         return $this->successMethod();
+    //     }
+    // }
 }
