@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             TemplateSeeder::class,
             // ResumeSeeder::class,
             PricingSeeder::class,
+            SettingSeeder::class,
         ]);
     }
 }
