@@ -20,6 +20,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
+        User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'user_type' => 'admin',
+            'password' => bcrypt('password'),
+        ]);
+
         $this->call([
             TemplateSeeder::class,
             // ResumeSeeder::class,
