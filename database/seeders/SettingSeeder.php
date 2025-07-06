@@ -14,13 +14,13 @@ class SettingSeeder extends Seeder
      */
     public function run(): void
     {
-        $defaultLogo = 'images/logo.svg';
+        $defaultLogo = 'images/logo.png';
 
         // Copy default logo if it doesn't exist
         if (!Storage::disk('public')->exists($defaultLogo)) {
             Storage::disk('public')->put(
                 $defaultLogo,
-                file_get_contents(public_path('images/logo.svg'))
+                file_get_contents(public_path('images/logo.png'))
             );
         }
         $settings = [

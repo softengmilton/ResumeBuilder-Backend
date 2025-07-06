@@ -23,7 +23,7 @@
             background: #f8f5f2;
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            padding: 40px;
+            /* padding: 40px; */
             color: var(--dark);
         }
 
