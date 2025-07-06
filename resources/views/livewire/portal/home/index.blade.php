@@ -10,7 +10,7 @@
                 <div class="container HeroSection_container__Mj4me">
                     <div class="flex">
                         <div class="col-7 col-12-md col-12-xsm">
-                            <h1 class="h1 m-bottom-4 text-center-xsm">Enhancv&#x27;s <span
+                            <h1 class="h1 m-bottom-4 text-center-xsm">{{$setting['site_title']}}&#x27;s <span
                                     class="HeroSection_headerGradient__zJ_5v">Resume</span> <span
                                     class="HeroSection_headerGradient__zJ_5v">Builder</span> helps you get hired
                                 at top companies</h1>
@@ -51,8 +51,7 @@
                                         style="color:transparent;max-width:68px;padding-bottom:12px;width:100%;height:auto;filter:none" />
                                 </div>
                             </div>
-                            <h2 class="h4 m-top-12 m-bottom-8 m-bottom-4-xsm text-center-xsm">Pick a resume
-                                template and build your resume in minutes!</h2>
+                            <h2 class="h4 m-top-12 m-bottom-8 m-bottom-4-xsm text-center-xsm">{{$setting['site_description']}}</h2>
                         </div>
                         <!-- <div class="hidden-md hidden-lg hidden-xl"> -->
                         <div

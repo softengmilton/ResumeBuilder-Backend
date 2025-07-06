@@ -8,6 +8,7 @@ class Index extends Component
 {
     public function render()
     {
-        return view('livewire.portal.home.index');
+        $setting = \App\Models\Setting::all()->pluck('value', 'key')->toArray();
+        return view('livewire.portal.home.index', compact('setting'));
     }
 }
