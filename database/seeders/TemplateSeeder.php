@@ -19,7 +19,7 @@ class TemplateSeeder extends Seeder
             [
                 'uuid' => Str::uuid()->toString(),
                 'name' => 'Modern',
-                'preview_image' => 'assets/img/templates/template1.png',
+                'preview_image' => 'assets/img/templates/image1.png',
                 'category' => 'Modern',
                 'is_premium' => false,
                 'view_component' => 'templates.template1',
@@ -31,7 +31,7 @@ class TemplateSeeder extends Seeder
             [
                 'uuid' =>  Str::uuid()->toString(),
                 'name' => 'Classic',
-                'preview_image' => 'assets/img/templates/template2.png',
+                'preview_image' => 'assets/img/templates/image2.png',
                 'category' => 'Classic',
                 'is_premium' => false,
                 'view_component' => 'templates.template2',
@@ -43,7 +43,7 @@ class TemplateSeeder extends Seeder
             [
                 'uuid' => Str::uuid()->toString(),
                 'name' => 'Professional',
-                'preview_image' => 'assets/img/templates/template3.png',
+                'preview_image' => 'assets/img/templates/image3.png',
                 'category' => 'Professional',
                 'is_premium' => true,
                 'view_component' => 'templates.template3',
