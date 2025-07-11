@@ -1,0 +1,67 @@
+<?php
+
+namespace App\View\Components\templates;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class template4 extends Component
+{
+    /**
+     * Create a new component instance.
+     */
+    public $personal_info;
+    public $experiences;
+    public $educations;
+    public $skills;
+    public $projects;
+    public $languages;
+    public $certifications;
+    public $photoPreview;
+    // currentStep
+    public $currentStep = null;
+
+    /**
+     * Create a new component instance.
+     */
+    public function __construct(
+        $personalInfo = [],
+        $experiences = [],
+        $educations = [],
+        $skills = [],
+        $projects = [],
+        $languages = [],
+        $certifications = [],
+        $photoPreview = null,
+        $currentStep = null
+    ) {
+        $this->personal_info = $personalInfo;
+        $this->experiences = $experiences;
+        $this->educations = $educations;
+        $this->skills = $skills;
+        $this->projects = $projects;
+        $this->languages = $languages;
+        $this->certifications = $certifications;
+        $this->currentStep = $currentStep;
+        $this->photoPreview = $photoPreview;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.templates.template4', [
+            'personal_info' => $this->personal_info,
+            'experiences' => $this->experiences,
+            'educations' => $this->educations,
+            'skills' => $this->skills,
+            'projects' => $this->projects,
+            'languages' => $this->languages,
+            'certifications' => $this->certifications,
+            'currentStep' => $this->currentStep,
+            'photoPreview' => $this->photoPreview,
+        ]);
+    }
+}

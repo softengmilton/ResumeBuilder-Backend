@@ -322,13 +322,14 @@
                         @endforeach
 
                         <button type="button" wire:click="addExperience"
-                            class="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="mt-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-md hover:from-blue-600 hover:to-purple-600 flex items-center shadow-md transition duration-300 ease-in-out">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
                             Add Another Experience
                         </button>
+
                     </div>
                     @elseif($currentStep == 3)
                     <div class="space-y-8">
@@ -417,14 +418,15 @@
                         </div>
                         @endforeach
 
-                        <a href="#" wire:click.prevent="addEducation"
-                            class="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <button type="button" wire:click.prevent="addEducation"
+                            class="mt-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-md hover:from-blue-600 hover:to-purple-600 flex items-center shadow-md transition duration-300 ease-in-out">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
                             Add Another Education
-                        </a>
+                        </button>
+
 
                     </div>
                     @elseif($currentStep == 4)
@@ -484,13 +486,14 @@
                         @endforeach
 
                         <button type="button" wire:click="addSkill"
-                            class="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="mt-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-md hover:from-blue-600 hover:to-purple-600 flex items-center shadow-md transition duration-300 ease-in-out">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
                             Add Another Skill
                         </button>
+
                     </div>
                     @elseif($currentStep == 5)
                     <div class="space-y-6">
@@ -552,14 +555,18 @@
                         </div>
                         @endforeach
 
-                        <a href="#" wire:click.prevent="addProject"
-                            class="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <button type="button" wire:click.prevent="addProject"
+                            class="mt-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-md hover:from-blue-600 hover:to-purple-600 flex items-center shadow-md transition duration-300 ease-in-out">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    d="M3 7h4l2 3h11a1 1 0 011 1v7a1 1 0 01-1 1H5a2 2 0 01-2-2V7z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 11v6m3-3H9" />
                             </svg>
                             Add Another Project
-                        </a>
+                        </button>
+
+
                     </div>
                     @elseif($currentStep == 6)
                     <div class="space-y-6">
@@ -621,13 +628,16 @@
                         @endforeach
 
                         <button type="button" wire:click="addLanguage"
-                            class="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="mt-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-md hover:from-blue-600 hover:to-purple-600 flex items-center shadow-md transition duration-300 ease-in-out">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    d="M12 2a10 10 0 100 20 10 10 0 000-20z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M2 12h20M12 2c2.5 3 2.5 9 0 12M12 2c-2.5 3-2.5 9 0 12M2 12c2.5 3 7.5 3 10 0M22 12c-2.5 3-7.5 3-10 0" />
                             </svg>
                             Add Another Language
                         </button>
+
                     </div>
                     @elseif($currentStep == 7)
                     <div class="space-y-6">
@@ -694,14 +704,15 @@
                         </div>
                         @endforeach
 
-                        <a href="#" wire:click.prevent="addCertification"
-                            class="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <button type="button" wire:click.prevent="addCertification"
+                            class="mt-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-md hover:from-blue-600 hover:to-purple-600 flex items-center shadow-md transition duration-300 ease-in-out">
+                            <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    d="M9 12l2 2 4-4M7 3h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z" />
                             </svg>
                             Add Another Certification
-                        </a>
+                        </button>
+
                     </div>
                     @elseif($currentStep == 8)
                     <div class="space-y-6">
@@ -749,34 +760,35 @@
                     <!-- Navigation Buttons -->
                     <div class="flex flex-col sm:flex-row justify-end gap-3 mt-8 pt-6 border-t border-gray-200">
                         <a href="#" wire:click="newClick"
-                            class="px-4 sm:px-6 py-2 sm:py-3 border bg-red-400 text-white border-gray-300 rounded-lg font-medium hover:bg-red-500 transition-colors flex items-center justify-center">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 19l-7-7 7-7"></path>
+                            class="px-4 sm:px-6 py-2 sm:py-3 border border-gray-300 bg-red-500 text-white rounded-lg font-medium hover:bg-red-600 transition-colors flex items-center justify-center"
+                            aria-label="Preview">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                             </svg>
                             Preview
                         </a>
 
                         @if ($currentStep < count($steps))
                             <a href="#" wire:click.prevent="nextStep"
-                            class="px-4 sm:px-6 py-2 sm:py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center">
+                            class="px-4 sm:px-6 py-2 sm:py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center"
+                            aria-label="Continue to next step">
                             Continue
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7"></path>
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                             </svg>
                             </a>
                             @else
                             <button type="button" wire:click="submit"
-                                class="px-4 sm:px-6 py-2 sm:py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
+                                class="px-4 sm:px-6 py-2 sm:py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center"
+                                aria-label="Submit resume">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                                 Submit Resume
                             </button>
                             @endif
                     </div>
+
                 </div>
             </div>
 

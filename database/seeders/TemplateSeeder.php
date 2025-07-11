@@ -31,7 +31,7 @@ class TemplateSeeder extends Seeder
             [
                 'uuid' =>  Str::uuid()->toString(),
                 'name' => 'Classic',
-                'preview_image' => 'assets/img/templates/image2.png',
+                'preview_image' => 'assets/img/templates/image4.png',
                 'category' => 'Classic',
                 'is_premium' => false,
                 'view_component' => 'templates.template2',
@@ -51,7 +51,33 @@ class TemplateSeeder extends Seeder
                 // 'config_schema' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'uuid' =>  Str::uuid()->toString(),
+                'name' => 'Classic',
+                'preview_image' => 'assets/img/templates/image5.png',
+                'category' => 'Classic',
+                'is_premium' => false,
+                'view_component' => 'templates.template4',
+                'rating' => 'new',
+                // 'config_schema' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'uuid' => Str::uuid()->toString(),
+                'name' => 'Professional',
+                'preview_image' => 'assets/img/templates/image6.png',
+                'category' => 'Professional',
+                'is_premium' => true,
+                'view_component' => 'templates.template5',
+                'rating' => 'trending',
+                // 'config_schema' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
+
+
         ];
 
         foreach ($templates as $template) {

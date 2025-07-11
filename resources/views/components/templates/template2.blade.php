@@ -44,7 +44,7 @@
             left: 0;
             width: 5px;
             height: 100%;
-            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            /* background: linear-gradient(to bottom, var(--primary), var(--accent)); */
         }
 
         .header {

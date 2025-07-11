@@ -28,43 +28,45 @@
             </div>
         </section>
 
-        <!-- Template Grid Section -->
+        <!-- Template Grid -->
         <section class="py-12 bg-white">
             <div class="container mx-auto px-4">
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-[130rem] mx-auto">
                     @foreach ($templates as $template)
-                    <!-- Template 1 - Contemporary -->
-                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden">
-                        <!-- Image -->
-                        <img src="{{ asset($template->preview_image) }}" class="w-full h-full object-cover">
+                    <div class="relative group border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                        <!-- Template Image -->
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="{{ asset($template->preview_image) }}" alt="Resume Template Preview"
+                                class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105">
 
-                        <!-- Hover Overlay with Button -->
+                        </div>
+
+                        <!-- Hover CTA -->
                         <div
-                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
                             @auth
                             <a href="{{ route('builder', ['template' => $template->uuid]) }}"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
+                                class="px-6 py-3 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition">
                                 Use Template
                             </a>
                             @else
                             <a href="{{ route('login') }}"
-                                class="px-6 py-3 bg-green-500 text-white font-medium rounded-md hover:bg-green-600 transition-colors">
+                                class="px-6 py-3 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition">
                                 Use Template
                             </a>
                             @endauth
                         </div>
 
-                        <!-- Popular Badge -->
+                        <!-- Rating Badge -->
                         <div
-                            class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            {{ $template->rating }}
+                            class="absolute top-3 right-3 bg-green-500 text-white text-sm font-medium px-3 py-1 rounded-full">
+                            ★ {{ $template->rating }}
                         </div>
                     </div>
                     @endforeach
                 </div>
             </div>
         </section>
-
         <!-- Template Features Section -->
         <section class="py-16 bg-gray-50">
             <div class="container mx-auto lg:px-[29rem] max-w-5xl">
