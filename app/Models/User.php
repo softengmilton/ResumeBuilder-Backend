@@ -12,7 +12,7 @@ use Laravel\Cashier\Billable;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable  implements FilamentUser
+class User extends Authenticatable  implements FilamentUser, MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, Billable;
