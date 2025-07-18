@@ -11,11 +11,11 @@
                     <div class="flex">
                         <div class="col-7 col-12-md col-12-xsm">
                             <h1 class="h1 m-bottom-4 text-center-xsm">{{$setting['site_title']}}&#x27;s <span
-                                    class="HeroSection_headerGradient__zJ_5v">Resume</span> <span
+                                    class="HeroSection_headerGradient__zJ_5v"></span> <span
                                     class="HeroSection_headerGradient__zJ_5v">Builder</span> helps you get hired
                                 at top companies</h1>
                             <div class="flex gap-3 gap-4-xsm p-inline-4-xs p-inline-6-sm"><a
-                                    href="https://app.enhancv.com" data-amplitude-event="homepage - sign up"
+
                                     data-amplitude-prop-button_location="Fold"
                                     class="_7d9Ew3rdopoMTEUs4G1Anw== nh1o124RBbCY8z2D0sMLjg== VBydUq+aZiAcG1CHXLDDPw== s6uaHA305IeoqI4xywTdvA== col-12-xsm full-width-xsm">Build
                                     Your Resume</a><a href="javascript:void(0)"
@@ -60,12 +60,12 @@
                                 <div class="FoldImageAnimated_content__5n8A2">
                                     <div class="FoldImageAnimated_front__2BSzH">
                                         <div class="relative"><img alt="Resume Example"
-                                                src="https://enhancv.com/_next/static/images/resume1-041174df8af5a7c1cb31889766691714.webp"
+                                                src="https://www.resumetemplates.com/wp-content/uploads/2025/03/3590975-restaurant-server-job-description-resume-example.pdf.jpeg"
                                                 width="430" height="608" decoding="async" data-nimg="1"
                                                 class="FoldImageAnimated_resumeOne__D0ARv"
                                                 style="color:transparent;max-width:100%;height:auto;z-index:1" /><img
                                                 alt="Resume Example 3"
-                                                src="https://enhancv.com/_next/static/images/resume3-fdd7e3eafb8f16ef8e0aa6f5ef523dca.webp"
+                                                src="https://www.resumetemplates.com/wp-content/uploads/2025/03/3590975-restaurant-server-job-description-resume-example.pdf.jpeg"
                                                 width="507" height="563" decoding="async" data-nimg="1"
                                                 class="FoldImageAnimated_resumeThree__l_nL0" loading="lazy"
                                                 style="color:transparent;max-width:100%;height:auto;z-index:1" />
@@ -74,28 +74,28 @@
                                     <div class="FoldImageAnimated_back__STkbo">
                                         <div class="FoldImageAnimated_resumeTwoContainer__VRALz">
                                             <img alt="Resume Example 2"
-                                                src="https://enhancv.com/_next/static/images/resume2-b2965eb483a56527911b4e6161c678a9.webp"
+                                                src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/resume-curriculum-vitae-design-template-cd5136dd58591765d75125a12226d1cd_screen.jpg?ts=1741991422"
                                                 width="366" height="518" decoding="async" data-nimg="1"
                                                 class="FoldImageAnimated_resumeTwo__Yu6L5"
                                                 style="color:transparent" />
                                             <div
                                                 class="FoldImageAnimated_fontsTwo__aTPxa animation-slide-fade-in-left">
                                                 <img alt="Resume Fonts"
-                                                    src="https://enhancv.com/_next/static/images/fonts-e5631dfac5d3a9b1530cb1363ac57c3d.webp"
+                                                    src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/resume-curriculum-vitae-design-template-cd5136dd58591765d75125a12226d1cd_screen.jpg?ts=1741991422"
                                                     width="229" height="451" decoding="async" data-nimg="1"
                                                     loading="lazy" style="color:transparent;width:100%;height:auto" />
                                             </div>
                                             <div
                                                 class="FoldImageAnimated_newEntryTwo__7OuQ1 animation-slide-fade-in-right">
                                                 <img alt="Resume Text Decoration"
-                                                    src="https://enhancv.com/_next/static/images/new-entry-6305022632e4b14ae5714a49bb3af011.webp"
+                                                    src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/resume-curriculum-vitae-design-template-cd5136dd58591765d75125a12226d1cd_screen.jpg?ts=1741991422"
                                                     width="287" height="143" decoding="async" data-nimg="1"
                                                     loading="lazy" style="color:transparent;width:100%;height:auto" />
                                             </div>
                                             <div class="FoldImageAnimated_profileTwo__Cab1h"><img
                                                     alt="Real Resume Example"
-                                                    src="https://enhancv.com/_next/static/images/profile2-53d26c0032bd1e0aea0baaa821753a02.webp"
-                                                    width="228" height="228" decoding="async" data-nimg="1"
+                                                    src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/resume-curriculum-vitae-design-template-cd5136dd58591765d75125a12226d1cd_screen.jpg?ts=1741991422"
+                                                    width=" 228" height="228" decoding="async" data-nimg="1"
                                                     loading="lazy" style="color:transparent;width:100%;height:auto" />
                                             </div>
                                             <div
@@ -105,7 +105,7 @@
                                         <div class="FoldImageAnimated_resumeFourContainer__6itQd">
                                             <div class="FoldImageAnimated_resumeFour__Lx5d_"><img
                                                     alt="Resume Example 4"
-                                                    src="https://enhancv.com/_next/static/images/resume4-eb8e2bacc73eb143b714ffec42b44926.webp"
+                                                    src="https://cdn.sanity.io/images/tj19lfsm/production/dd4562249f9fbadf09e0e7ebe7a8ee4ce8b69182-2480x3508.webp"
                                                     width="594" height="612" decoding="async" data-nimg="1"
                                                     loading="lazy"
                                                     style="color:transparent;max-width:100%;height:auto;z-index:1" />
@@ -130,7 +130,7 @@
                                         data-amplitude-event="homepage - resume carousel click"
                                         data-amplitude-prop-button_location="Double Column">
                                         <img alt="Double Column Resume Template" sizes="100vw"
-                                            src="https://cdn.enhancv.com/images/1098/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vcHJlZGVmaW5lZC1leGFtcGxlcy9pSXNiWkRxTnpHSkhWUmVzdzltQjhhdlU5TnIxcW1QOGF1aGIzYXdJL2ltYWdlLnBuZw~~.png"
+                                            src="https://piktochart.com/wp-content/uploads/2023/02/large-10-600x848.jpg"
                                             width="549" height="778" decoding="async" data-nimg="1"
                                             class="FoldExamplesCarousel_exampleImage__7EYJj"
                                             style="color:transparent;width:100%;height:auto" />
@@ -148,7 +148,7 @@
                                         data-amplitude-event="homepage - resume carousel click"
                                         data-amplitude-prop-button_location="Ivy League">
                                         <img alt="Ivy League Resume Template" sizes="100vw"
-                                            src="https://cdn.enhancv.com/images/1098/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vcHJlZGVmaW5lZC1leGFtcGxlcy9EdUwwR3pyamhqWkhyMG13YndnUGl0TUozWjIwaFZtWUhRY2l6NnJtL2ltYWdlLnBuZw~~.png"
+                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-NHnTChVJTlVz94LRbF6cqnz4gS6IeGN6Ow&s"
                                             width="549" height="778" decoding="async" data-nimg="1"
                                             class="FoldExamplesCarousel_exampleImage__7EYJj"
                                             style="color:transparent;width:100%;height:auto" />
@@ -166,7 +166,7 @@
                                         data-amplitude-event="homepage - resume carousel click"
                                         data-amplitude-prop-button_location="Elegant">
                                         <img alt="Elegant Resume Template" sizes="100vw"
-                                            src="https://cdn.enhancv.com/images/1098/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vcHJlZGVmaW5lZC1leGFtcGxlcy8wakZ6ZHg4TnJRbTdVNHI3YTl3eWRxVnV1SkRGTzg2MTMyTkc5aVB6L2ltYWdlLnBuZw~~.png"
+                                            src="https://marketplace.canva.com/EAFzfwx_Qik/4/0/1131w/canva-blue-simple-professional-cv-resume-T9RPR4DPdiw.jpg"
                                             width="549" height="778" decoding="async" data-nimg="1"
                                             class="FoldExamplesCarousel_exampleImage__7EYJj"
                                             style="color:transparent;width:100%;height:auto" />
@@ -184,7 +184,7 @@
                                         data-amplitude-event="homepage - resume carousel click"
                                         data-amplitude-prop-button_location="Contemporary">
                                         <img alt="Contemporary Resume Template" sizes="100vw"
-                                            src="https://cdn.enhancv.com/images/1098/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vcHJlZGVmaW5lZC1leGFtcGxlcy91MGdNWVpUc1JkdjVqUDU4U3lVd3QyZEExMlhPVkttcUk0YXg0ZHdUL2ltYWdlLnBuZw~~.png"
+                                            src="https://images.template.net/wp-content/uploads/2018/11/Free-Medical-Student-Resume-Format2.jpg"
                                             width="549" height="778" decoding="async" data-nimg="1"
                                             class="FoldExamplesCarousel_exampleImage__7EYJj"
                                             style="color:transparent;width:100%;height:auto" />
@@ -202,7 +202,7 @@
                                         data-amplitude-event="homepage - resume carousel click"
                                         data-amplitude-prop-button_location="Modern">
                                         <img alt="Modern Resume Template" sizes="100vw"
-                                            src="https://cdn.enhancv.com/images/1098/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vcHJlZGVmaW5lZC1leGFtcGxlcy9zVWI0b3E3MDU5UUJpMzBMMnpqa0ZxOW8wdFdnUkJramtjcHFiMklhL2ltYWdlLnBuZw~~.png"
+                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcrnW_Kn3krHTVedOPGfMXJv1W9Vx_KUOdlg&s"
                                             width="549" height="778" decoding="async" data-nimg="1"
                                             class="FoldExamplesCarousel_exampleImage__7EYJj"
                                             style="color:transparent;width:100%;height:auto" />
@@ -221,7 +221,7 @@
                                         data-amplitude-event="homepage - resume carousel click"
                                         data-amplitude-prop-button_location="Minimal">
                                         <img alt="Minimal Resume Template" sizes="100vw"
-                                            src="https://cdn.enhancv.com/images/1098/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vcHJlZGVmaW5lZC1leGFtcGxlcy9MNXpGSXNITFNUcTF4VU9xN1hJUGZCOVhmZ0F3c2FGSG05UWV3aEYxL2ltYWdlLnBuZw~~.png"
+                                            src="https://cdn.venngage.com/template/thumbnail/small/95c69bac-001c-42d0-b192-3a2b0e786a06.webp"
                                             width="549" height="778" decoding="async" data-nimg="1"
                                             class="FoldExamplesCarousel_exampleImage__7EYJj"
                                             style="color:transparent;width:100%;height:auto" />
@@ -322,29 +322,30 @@
     </section>
     <section class="ats-section bg-heading p-top-9 p-bottom-12 p-bottom-5-xsm relative AtsSection_atsSection__7rvdM">
         <div class="mx-auto max-w-screen-xl">
-            <div class="AtsSection_lines__D3Kg0 animation-breath"><img alt="Background Lines Enhancv" sizes="100vw"
-                    src="https://cdn.enhancv.com/images/1260/i/L19uZXh0L3N0YXRpYy9pbWFnZXMvbGluZXMtNjNhODcxOThmOWM4YTYzNDNhNjUxMzg0NWVhNDc5ODUud2VicA~~.webp"
+            <div class="AtsSection_lines__D3Kg0 animation-breath"><img alt="Background Lines " sizes="100vw"
+                    src="{{asset('assets/img/in.webp')}}"
                     width="630" height="544" decoding="async" data-nimg="1" loading="lazy"
                     style="color:transparent;width:100%;height:auto" /></div>
             <div class="AtsSection_mobileCircle__yCb_D hidden-md hidden-lg hidden-xl"><img
-                    alt="Background Mobile Circles Enhancv" src="./assets/img/bg2.svg" decoding="async"
+                    alt="Background Mobile Circles " src="./assets/img/bg2.svg" decoding="async"
                     data-nimg="fill"
                     style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;object-fit:fill;object-position:bottom;color:transparent" />
             </div>
             <div class="container relative">
                 <div class="AtsSection_greenCircle__xnBQG animation-breath hidden-xs hidden-sm"><img
-                        alt="Background Circles Enhancv" src="./assets/img/bg3.svg" width="503" height="408"
+                        alt="Background Circles " src="./assets/img/bg3.svg" width="503" height="408"
                         decoding="async" data-nimg="1" style="color:transparent;width:100%;height:auto" /></div>
                 <div class="AtsSection_purpleCircle__KS5_7 animation-breath hidden-xs hidden-sm"><img
-                        alt="Background Circles Enhancv" src="./assets/img/bg4.svg" width="503" height="408"
+                        alt="Background Circles " src="./assets/img/bg4.svg" width="503" height="408"
                         decoding="async" data-nimg="1" style="color:transparent;width:100%;height:auto" /></div>
                 <div class="flex p-bottom-3 relative AtsSection_content__Fj7Yk">
                     <div class="col-6 col-12-xsm text-center-xsm">
                         <h3 class="text-surface m-no">Resumes optimized for applicant tracking systems (ATS)
                         </h3>
                         <p class="text-surface text-md m-top-4 m-bottom-8 m-top-2-xsm m-bottom-3-xsm">
-                            Enhancv resumes and cover letters are vigorously tested against major ATS
-                            systems to ensure complete parsability</p>
+                            {{$setting['site_title']}} and cover letters are vigorously tested against major ATS
+                            systems to ensure complete parsability
+                        </p>
                         <div class="flex"><a href="{{route('home')}}"
                                 data-amplitude-event="homepage - sign up"
                                 data-amplitude-prop-button_location="ATS Section"
@@ -419,7 +420,7 @@
                     <a href="{{route('resume')}}">
                         <div class="ResumePickerSection_exampleImageContainer__ihjtR m-auto">
                             <img alt="Business Analyst resume" sizes="100vw"
-                                src="https://cdn.enhancv.com/images/1098/i/aHR0cHM6Ly9jZG4uZW5oYW5jdi5jb20vcHJlZGVmaW5lZC1leGFtcGxlcy9CamhWdnRPN25DRnBRZUlVODM0VzA3UDlaS2NvZENKNFNtSHRVQUVjL2ltYWdlLnBuZw~~.png"
+                                src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/curriculum-vitae-lebenslauf-skills-card-cv-design-template-6ff7462f6a513728b1b6d2637f5bda7f_screen.jpg?ts=1735357218"
                                 width="549" height="778" decoding="async" data-nimg="1"
                                 class="ResumePickerSection_exampleImage__NOVrJ animation-fade-in" loading="lazy"
                                 style="color:transparent;width:100%;height:auto" />
@@ -452,21 +453,18 @@
             <div class="flex flex-align-center">
                 <div class="col-7 col-12-xsm p-top-4 p-right-10 p-right-no-xsm"><img
                         alt="The most powerful resume checker on the market" sizes="100vw"
-                        src="https://cdn.enhancv.com/images/1920/i/L19uZXh0L3N0YXRpYy9pbWFnZXMvY3RhLW9uZS05MTVjMWU3MTE5MTU2Mzg1NGM1OWE3MDAzNGMxYjdmMC53ZWJw.webp"
+                        src="https://oorwin.com/wp-content/uploads/2021/07/MicrosoftTeams-image-30.jpg"
                         width="1204" height="814" decoding="async" data-nimg="1" loading="lazy"
                         style="color:transparent;width:100%;height:auto" /></div>
                 <div class="col-5 col-12-xsm text-center-xsm order-first-xsm">
                     <div class="opacity-0 CtasSection_contentAnimation__PRn0G">
                         <h3 class="h3">The most powerful resume checker on the market</h3>
                         <p class="m-bottom-4">Get an understanding of how good your resume really is –
-                            Enhancv’s
+                            {{$setting['site_title']}}
                             AI-powered resume checker performs over 250 different checks and provides
                             you with actionable insights
                         </p>
-                        <a href="https://enhancv.com/resources/resume-checker/"
-                            class="lbDsKPVYdwKjE90OIGvw8g== RRxe1M+sUxFTRkUeo96NlQ=="><span
-                                class="EPEsshdJ5YWK9NnTS-vQ0g==">Get Your Resume Score</span><i
-                                class="icon icon-fi-arrow-right m-left-0 GqvX1-mq-WlbEFJ8tt+kHg== ugyeXRyVp1Kg8kYay3xMiA=="></i></a>
+
                     </div>
                 </div>
             </div>
@@ -474,7 +472,7 @@
                 <div class="col-5 col-12-xsm p-right-3-xl text-center-xsm">
                     <div class="opacity-0 CtasSection_contentAnimation__PRn0G">
                         <h3 class="h3 m-top-10-xsm">A feature-packed resume builder</h3>
-                        <p class="m-bottom-4">Easily edit your resume with Enhancv’s drag-and-drop resume
+                        <p class="m-bottom-4">Easily edit your resume with {{$setting['site_title']}} drag-and-drop resume
                             builder. Choose from different templates, various backgrounds and sections.</p>
                         <a href="{{route('home')}}" data-amplitude-event="homepage - sign up"
                             data-amplitude-prop-button_location="CTAs section"
@@ -485,8 +483,8 @@
                 </div>
                 <div class="col-7 col-12-xsm m-bottom-4 m-top-12 m-top-4-xsm p-left-10-xl relative">
                     <div class="relative">
-                        <img alt="Enhancv Resume Builder" sizes="100vw"
-                            src="https://cdn.enhancv.com/images/1920/i/L19uZXh0L3N0YXRpYy9pbWFnZXMvY3RhLXR3by1tb2JpbGUtYjE5NDA2YjRlYjc4YWZkODJlOTIxZmMxMjQxNWY0NTkud2VicA~~.webp"
+                        <img alt=" Resume Builder" sizes="100vw"
+                            src="https://techrseries.com/wp-content/uploads/2019/08/ATS-process.png"
                             width="1280" height="881" decoding="async" data-nimg="1" class="relative"
                             loading="lazy" style="color:transparent;width:100%;height:auto;z-index:2" />
                         <div class="CtasSection_videoBackground__5XHhe"><img alt="Background Resume Builder"
@@ -512,13 +510,13 @@
                             <div class="animation-fade-in QuoteCard_content__C2rjY">
                                 <img alt="quote left image" src="./assets/img/bg7.svg" width="14" height="9"
                                     decoding="async" data-nimg="1" style="color:transparent" />
-                                <h6 class="h6 m-no">Enhancv Executive has changed my life: One week &amp;
+                                <h6 class="h6 m-no">{{$setting['site_title']}} Executive has changed my life: One week &amp;
                                     four interviews later, I will be making 150% more doing the job I chose.
                                 </h6>
                                 <div class="flex flex-justify-end m-right-no m-bottom-2"><img alt="quote right image"
                                         src="./assets/img/bg7.svg" width="14" height="9" decoding="async"
                                         data-nimg="1" style="color:transparent" /></div>
-                                <div>JENICA</div>
+                                <div>Raisa</div>
                                 <div class="font-weight-700">SOLUTIONS ENGINEER</div>
                                 <hr />
                                 <div class="display-block relative" style="height:45px"><img alt="Company logo image"

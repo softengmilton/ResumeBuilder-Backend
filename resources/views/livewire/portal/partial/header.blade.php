@@ -150,6 +150,7 @@
 
             .mobile-menu-auth {
                 margin-top: 1rem;
+                gap: 10px;
             }
         }
     </style>

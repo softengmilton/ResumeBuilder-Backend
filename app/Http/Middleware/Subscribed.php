@@ -22,7 +22,7 @@ class Subscribed
             return redirect()->route('login');
         }
 
-        if ($user->resumes()->count() >= 3) {
+        if ($user->resumes()->count() >= 1) {
             if (! $request->user()?->subscribed()) {
                 // Redirect user to billing page and ask them to subscribe...
                 return redirect('/pricing');

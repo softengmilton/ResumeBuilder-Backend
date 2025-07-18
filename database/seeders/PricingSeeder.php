@@ -17,7 +17,7 @@ class PricingSeeder extends Seeder
             [
                 'name' => 'Basic',
                 'slug' => 'basic',
-                'price' => '20',
+                'price' => '15',
                 'plan_duration' => 'Monthly',
                 'stripe_plan_id' => 'prod_SWj5HQ0eilfPwn',
                 'stripe_price_id' => 'price_1RbfdRRtF6dA8BwN925c3bdG',
@@ -25,7 +25,7 @@ class PricingSeeder extends Seeder
             [
                 'name' => 'Pro',
                 'slug' => 'pro',
-                'price' => '59',
+                'price' => '54',
                 'plan_duration' => '6 Months',
                 'stripe_plan_id' => 'prod_SWj6ZSYVW7kR0h',
                 'stripe_price_id' => 'price_1RbfeTRtF6dA8BwNRvWkFgFo',
@@ -33,7 +33,7 @@ class PricingSeeder extends Seeder
             [
                 'name' => 'Enterprise',
                 'slug' => 'enterprise',
-                'price' => '99',
+                'price' => '94',
                 'plan_duration' => 'Yearly',
                 'stripe_plan_id' => 'prod_SWj8SmFFD2kvkk',
                 'stripe_price_id' => 'price_1RbffrRtF6dA8BwNwnh2Yx0o',

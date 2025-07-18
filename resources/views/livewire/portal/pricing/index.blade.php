@@ -26,7 +26,7 @@
                     <h3 class="text-2xl font-bold mb-4">Basic</h3>
                     <p class="text-gray-600 mb-6">Basic features to get started</p>
                     <div class="mb-8">
-                        <span class="text-4xl font-bold">$20</span>
+                        <span class="text-4xl font-bold">$15</span>
                         <span class="text-gray-500">/month</span>
                     </div>
                     <a href="{{route('checkout', ['plan' => 'Basic'])}}"
@@ -68,7 +68,7 @@
                     <h3 class="text-2xl font-bold mb-4">Pro</h3>
                     <p class="text-gray-600 mb-6">Everything you need for job search</p>
                     <div class="mb-8">
-                        <span class="text-4xl font-bold">$59</span>
+                        <span class="text-4xl font-bold">$54</span>
                         <span class="text-gray-500">/6 Months</span>
                     </div>
                     <a href="{{route('checkout', ['plan' => 'Pro'])}}"
@@ -107,7 +107,7 @@
                     <h3 class="text-2xl font-bold mb-4">Executive</h3>
                     <p class="text-gray-600 mb-6">Enterprise</p>
                     <div class="mb-8">
-                        <span class="text-4xl font-bold">$99</span>
+                        <span class="text-4xl font-bold">$94</span>
                         <span class="text-gray-500">/Yearly</span>
                     </div>
                     <a href="{{route('checkout', ['plan' => 'Enterprise'])}}"
